@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Contact | Farhan Sayyed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=Space+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#00d4ff","bg-dark":"#0d0d0d","bg-surface":"#151515","terminal-border":"#2a2a2a","terminal-bg":"#151515","terminal-input":"#1e1e1e","terminal-green":"#4ade80"},fontFamily:{display:["Inter","sans-serif"],mono:["Space Mono","monospace"],code:["Fira Code","monospace"],space:["Space Mono","monospace"]}}}}</script>
+<style>
+*{box-sizing:border-box;margin:0;scroll-behavior:smooth}
+body{background:#0d0d0d;color:#f0f0f0;font-family:Inter,sans-serif;overflow-x:hidden;padding-top:100px}
+@media(min-width:640px){body{padding-top:72px}}
+.window-card,.terminal-card{background:#151515;border:1px solid #2a2a2a;border-radius:8px;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
+.window-card:hover,.terminal-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,0.4);box-shadow:0 0 20px rgba(0,212,255,0.15)}
+input:focus,textarea:focus{outline:none;border-color:#00d4ff !important;box-shadow:0 0 0 2px rgba(0,212,255,0.15)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+</style>
+</head>
+<body class="dark">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;border-bottom:1px solid #2a2a2a;background:rgba(13,13,13,0.88);backdrop-filter:blur(14px)">
+  <a href="index.html" style="font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:#f0f0f0;text-decoration:none;display:flex;align-items:center;gap:6px;flex-shrink:0">
+    Farhan <span style="color:#00d4ff" class="hidden sm:inline">Sayyed </span><span style="color:#00d4ff">/&gt;</span>
+    <span style="width:7px;height:1em;background:#00d4ff;display:inline-block;animation:blink 1s step-end infinite"></span>
+  </a>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px md:gap:24px;flex:1 max-width:100%"><a href="about.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#8a8a8a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8a8a8a'">About</a><a href="skills.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#8a8a8a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8a8a8a'">Skills</a><a href="projects.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#8a8a8a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8a8a8a'">Projects</a><a href="resume.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#8a8a8a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8a8a8a'">Resume</a><a href="contact.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#00d4ff;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid #00d4ff;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#00d4ff'">Contact</a></div>
+  <a href="contact.html" class="hidden sm:inline-block" style="font-family:'Fira Code',monospace;font-size:.78rem;padding:6px 12px;border:1px solid #00d4ff;color:#00d4ff;border-radius:4px;text-decoration:none;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='rgba(0,212,255,0.08)'" onmouseout="this.style.background='transparent'">Hire Me →</a>
+</nav>
+<main style="max-width:1200px;margin:0 auto;padding:48px 40px 0">
+<section class="max-w-7xl mx-auto px-6 py-20 lg:py-32">
+<!-- Section Header -->
+<div class="mb-12">
+<h2 class="text-primary font-mono text-3xl md:text-4xl font-black tracking-tight mb-2">
+                // 05. Contact
+            </h2>
+<p class="text-slate-500 dark:text-slate-400 font-space text-lg">
+                Get In Touch
+            </p>
+</div>
+<!-- Terminal Windows Container -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+<!-- Left Column: send_message.exe -->
+<div class="flex flex-col bg-terminal-bg border border-terminal-border rounded-lg overflow-hidden shadow-2xl h-full">
+<!-- macOS Style Titlebar -->
+<div class="bg-terminal-border/50 px-4 py-3 flex items-center justify-between border-b border-terminal-border">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+</div>
+<span class="text-slate-500 font-mono text-xs uppercase tracking-widest">send_message.exe</span>
+<div class="w-12"></div>
+</div>
+<!-- Form Content -->
+<div class="p-6 md:p-8 flex-1 flex flex-col gap-6">
+<div class="space-y-4">
+<label class="block">
+<span class="text-terminal-green font-mono text-sm block mb-2">$ name</span>
+<input class="w-full bg-terminal-input border border-terminal-border rounded focus:border-primary focus:ring-1 focus:ring-primary text-slate-100 font-mono placeholder:text-slate-600 transition-all px-4 py-3" id="cn" placeholder="Enter your name..." type="text"/>
+</label>
+<label class="block">
+<span class="text-terminal-green font-mono text-sm block mb-2">$ email</span>
+<input class="w-full bg-terminal-input border border-terminal-border rounded focus:border-primary focus:ring-1 focus:ring-primary text-slate-100 font-mono placeholder:text-slate-600 transition-all px-4 py-3" id="ce" placeholder="Enter your email..." type="email"/>
+</label>
+<label class="block">
+<span class="text-terminal-green font-mono text-sm block mb-2">$ message</span>
+<textarea class="w-full bg-terminal-input border border-terminal-border rounded focus:border-primary focus:ring-1 focus:ring-primary text-slate-100 font-mono placeholder:text-slate-600 transition-all px-4 py-3 resize-none" id="cm" placeholder="Type your message..." rows="4"></textarea>
+</label>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-auto">
+<button id="send-btn" onclick="submitForm()" class="px-6 py-2 border border-primary text-primary font-mono hover:bg-primary/10 transition-colors rounded">[Send Message →]</button>
+<span id="msg-success" class="text-terminal-green font-mono text-sm" style="display:none">&gt; message sent successfully ✓</span>
+</div>
+</div>
+</div>
+<!-- Right Column: contact_info.json -->
+<div class="flex flex-col bg-terminal-bg border border-terminal-border rounded-lg overflow-hidden shadow-2xl h-full">
+<!-- macOS Style Titlebar -->
+<div class="bg-terminal-border/50 px-4 py-3 flex items-center justify-between border-b border-terminal-border">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+</div>
+<span class="text-slate-500 font-mono text-xs uppercase tracking-widest">contact_info.json</span>
+<div class="w-12"></div>
+</div>
+<!-- Terminal Content -->
+<div class="p-6 md:p-8 font-mono text-sm md:text-base leading-relaxed flex-1 flex flex-col">
+<div class="space-y-4">
+<div class="group">
+<span class="text-terminal-green">$ contact --email</span>
+<span class="text-slate-500 mx-2">→</span>
+<a class="text-primary hover:underline underline-offset-4" href="mailto:farhanedu1029@gmail.com">farhanedu1029@gmail.com</a>
+</div>
+<div class="group">
+<span class="text-terminal-green">$ contact --linkedin</span>
+<span class="text-slate-500 mx-2">→</span>
+<a class="text-primary hover:underline underline-offset-4" href="https://linkedin.com/in/farhansayyedd">linkedin.com/in/farhansayyedd</a>
+</div>
+<div class="group">
+<span class="text-terminal-green">$ contact --github</span>
+<span class="text-slate-500 mx-2">→</span>
+<a class="text-primary hover:underline underline-offset-4" href="https://github.com/farhansayyedd">github.com/farhansayyedd</a>
+</div>
+<div class="group">
+<span class="text-terminal-green">$ contact --location</span>
+<span class="text-slate-500 mx-2">→</span>
+<span class="text-slate-400">Pune, Maharashtra, India</span>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="mt-8 mb-4 flex-1 min-h-[160px] rounded border border-terminal-border overflow-hidden opacity-80 hover:opacity-100 transition-opacity">
+<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=73.7,18.45,74.0,18.65&amp;layer=mapnik&amp;marker=18.5204,73.8567" style="width:100%;height:100%;border:none;min-height:180px" loading="lazy" title="Pune Map"></iframe>
+</div>
+<div class="mt-auto flex items-center">
+<span class="text-primary animate-pulse font-bold">&gt;_</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Terminal Line -->
+<div class="mt-12 p-4 bg-primary/5 border border-primary/20 rounded-lg text-center font-mono text-xs text-slate-500 uppercase tracking-widest">
+            system status: listening for incoming connections...
+        </div>
+</section>
+</main>
+<footer style="background:#0d0d0d;border-top:1px solid #2a2a2a;padding:24px 40px;margin-top:60px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <p style="font-family:'Fira Code',monospace;font-size:.75rem;color:#8a8a8a">© 2025 Farhan Sayyed. Built with HTML, CSS &amp; JS</p>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="padding:8px 14px;border:1px solid #00d4ff;color:#00d4ff;background:transparent;border-radius:4px;font-family:'Fira Code',monospace;font-size:.75rem;cursor:pointer" onmouseover="this.style.background='rgba(0,212,255,0.08)'" onmouseout="this.style.background='transparent'">[ ↑ Top ]</button>
+  </div>
+</footer>
+<script>
+function submitForm(){
+  var n=document.getElementById("cn"),e=document.getElementById("ce"),m=document.getElementById("cm");
+  if(!n||!n.value.trim()||!e||!e.value.trim()||!m||!m.value.trim()){alert("Please fill in all fields.");return;}
+  var msgs=JSON.parse(localStorage.getItem("portfolio_messages")||"[]");
+  msgs.push({name:n.value.trim(),email:e.value.trim(),message:m.value.trim(),date:new Date().toISOString()});
+  localStorage.setItem("portfolio_messages",JSON.stringify(msgs));
+  document.getElementById("msg-success").style.display="inline";
+  n.value="";e.value="";m.value="";
+  setTimeout(function(){document.getElementById("msg-success").style.display="none";},4000);
+}
+</script>
+</body>
+</html>
