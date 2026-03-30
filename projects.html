@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Projects | Farhan Sayyed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=Space+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#00d4ff","bg-dark":"#0d0d0d","bg-surface":"#151515","terminal-border":"#2a2a2a","terminal-bg":"#151515","terminal-input":"#1e1e1e","terminal-green":"#4ade80"},fontFamily:{display:["Inter","sans-serif"],mono:["Space Mono","monospace"],code:["Fira Code","monospace"],space:["Space Mono","monospace"]}}}}</script>
+<style>
+*{box-sizing:border-box;margin:0;scroll-behavior:smooth}
+body{background:#0d0d0d;color:#f0f0f0;font-family:Inter,sans-serif;overflow-x:hidden;padding-top:100px}
+@media(min-width:640px){body{padding-top:72px}}
+.window-card,.terminal-card{background:#151515;border:1px solid #2a2a2a;border-radius:8px;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
+.window-card:hover,.terminal-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,0.4);box-shadow:0 0 20px rgba(0,212,255,0.15)}
+input:focus,textarea:focus{outline:none;border-color:#00d4ff !important;box-shadow:0 0 0 2px rgba(0,212,255,0.15)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+</style>
+</head>
+<body class="dark">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;border-bottom:1px solid #2a2a2a;background:rgba(13,13,13,0.88);backdrop-filter:blur(14px)">
+  <a href="index.html" style="font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:#f0f0f0;text-decoration:none;display:flex;align-items:center;gap:6px;flex-shrink:0">
+    Farhan <span style="color:#00d4ff" class="hidden sm:inline">Sayyed </span><span style="color:#00d4ff">/&gt;</span>
+    <span style="width:7px;height:1em;background:#00d4ff;display:inline-block;animation:blink 1s step-end infinite"></span>
+  </a>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px md:gap:24px;flex:1 max-width:100%"><a href="about.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#8a8a8a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8a8a8a'">About</a><a href="skills.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#8a8a8a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8a8a8a'">Skills</a><a href="projects.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#00d4ff;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid #00d4ff;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#00d4ff'">Projects</a><a href="resume.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#8a8a8a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8a8a8a'">Resume</a><a href="contact.html" style="font-family:'Fira Code',monospace;font-size:.8rem;color:#8a8a8a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;padding:4px 0;border-bottom:2px solid transparent;transition:color .2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8a8a8a'">Contact</a></div>
+  <a href="contact.html" class="hidden sm:inline-block" style="font-family:'Fira Code',monospace;font-size:.78rem;padding:6px 12px;border:1px solid #00d4ff;color:#00d4ff;border-radius:4px;text-decoration:none;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='rgba(0,212,255,0.08)'" onmouseout="this.style.background='transparent'">Hire Me →</a>
+</nav>
+<main style="max-width:1200px;margin:0 auto;padding:48px 40px 0">
+
+<div style="margin-bottom:40px">
+  <p style="color:#00d4ff;font-family:'Fira Code',monospace;font-size:.85rem;margin-bottom:8px">// 03. projects</p>
+  <h1 style="font-family:'Space Mono',monospace;font-size:2.5rem;font-weight:700;letter-spacing:-.02em">Things I've Built</h1>
+  <p style="color:#8a8a8a;margin-top:8px">A collection of real projects — web dev &amp; data science.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+
+  <div class="terminal-card" style="display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#1e1e1e;border-bottom:1px solid #2a2a2a">
+      <div style="display:flex;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#ff5f57"></div><div style="width:12px;height:12px;border-radius:50%;background:#febc2e"></div><div style="width:12px;height:12px;border-radius:50%;background:#28c840"></div></div>
+      <span style="font-family:'Fira Code',monospace;font-size:10px;color:#8a8a8a">weather-dashboard.exe</span>
+    </div>
+    <div style="padding:20px;flex:1;display:flex;flex-direction:column">
+      <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0f2027,#1a3a4a,#2c5364);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:2.5rem">⛅</div>
+      <h2 style="font-size:1.1rem;font-weight:600;color:#f0f0f0;margin-bottom:6px">Weather Dashboard</h2>
+      <p style="font-size:.85rem;color:#8a8a8a;line-height:1.6;margin-bottom:12px;flex:1">Real-time weather with 5-day forecast, geolocation, and city search. Uses wttr.in free API — no key needed.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">HTML5</span>
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">CSS3</span>
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">JavaScript</span>
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">wttr.in API</span>
+      </div>
+      <div style="display:flex;gap:20px;padding-top:12px;border-top:1px solid #2a2a2a">
+        <a href="https://farhansayyedd.github.io/weather-dashboard/" target="_blank" style="font-family:'Fira Code',monospace;font-size:.78rem;color:#00d4ff;text-decoration:none">Live Demo ↗</a>
+        <a href="https://github.com/farhansayyedd/weather-dashboard" target="_blank" style="font-family:'Fira Code',monospace;font-size:.78rem;color:#8a8a8a;text-decoration:none">GitHub →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="terminal-card" style="display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#1e1e1e;border-bottom:1px solid #2a2a2a">
+      <div style="display:flex;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#ff5f57"></div><div style="width:12px;height:12px;border-radius:50%;background:#febc2e"></div><div style="width:12px;height:12px;border-radius:50%;background:#28c840"></div></div>
+      <span style="font-family:'Fira Code',monospace;font-size:10px;color:#8a8a8a">sentiment-analyzer.js</span>
+    </div>
+    <div style="padding:20px;flex:1;display:flex;flex-direction:column">
+      <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:2.5rem">🧠</div>
+      <h2 style="font-size:1.1rem;font-weight:600;color:#f0f0f0;margin-bottom:6px">Sentiment Analyzer</h2>
+      <p style="font-size:.85rem;color:#8a8a8a;line-height:1.6;margin-bottom:12px;flex:1">NLP classifier (Positive/Negative/Neutral) with confidence score and keyword highlighting. Pure client-side JS.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">JavaScript</span>
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">NLP/VADER</span>
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">HTML/CSS</span>
+      </div>
+      <div style="display:flex;gap:20px;padding-top:12px;border-top:1px solid #2a2a2a">
+        <a href="https://farhansayyedd.github.io/sentiment-analyzer/" target="_blank" style="font-family:'Fira Code',monospace;font-size:.78rem;color:#00d4ff;text-decoration:none">Live Demo ↗</a>
+        <a href="https://github.com/farhansayyedd/sentiment-analyzer" target="_blank" style="font-family:'Fira Code',monospace;font-size:.78rem;color:#8a8a8a;text-decoration:none">GitHub →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="terminal-card" style="display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#1e1e1e;border-bottom:1px solid #2a2a2a">
+      <div style="display:flex;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#ff5f57"></div><div style="width:12px;height:12px;border-radius:50%;background:#febc2e"></div><div style="width:12px;height:12px;border-radius:50%;background:#28c840"></div></div>
+      <span style="font-family:'Fira Code',monospace;font-size:10px;color:#8a8a8a">grade-tracker.exe</span>
+    </div>
+    <div style="padding:20px;flex:1;display:flex;flex-direction:column">
+      <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0a1628,#1a2744,#0d3b6e);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:2.5rem">📊</div>
+      <h2 style="font-size:1.1rem;font-weight:600;color:#f0f0f0;margin-bottom:6px">Student Grade Tracker</h2>
+      <p style="font-size:.85rem;color:#8a8a8a;line-height:1.6;margin-bottom:12px;flex:1">CGPA calculator, subject-wise marks, progress charts (Chart.js), and grade distribution. Data persists in localStorage.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">HTML/CSS/JS</span>
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">Chart.js</span>
+        <span style="padding:3px 10px;font-size:.72rem;font-family:'Fira Code',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;border-radius:4px">localStorage</span>
+      </div>
+      <div style="display:flex;gap:20px;padding-top:12px;border-top:1px solid #2a2a2a">
+        <a href="https://farhansayyedd.github.io/student-grade-tracker/" target="_blank" style="font-family:'Fira Code',monospace;font-size:.78rem;color:#00d4ff;text-decoration:none">Live Demo ↗</a>
+        <a href="https://github.com/farhansayyedd/student-grade-tracker" target="_blank" style="font-family:'Fira Code',monospace;font-size:.78rem;color:#8a8a8a;text-decoration:none">GitHub →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer style="background:#0d0d0d;border-top:1px solid #2a2a2a;padding:24px 40px;margin-top:60px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <p style="font-family:'Fira Code',monospace;font-size:.75rem;color:#8a8a8a">© 2025 Farhan Sayyed. Built with HTML, CSS &amp; JS</p>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="padding:8px 14px;border:1px solid #00d4ff;color:#00d4ff;background:transparent;border-radius:4px;font-family:'Fira Code',monospace;font-size:.75rem;cursor:pointer" onmouseover="this.style.background='rgba(0,212,255,0.08)'" onmouseout="this.style.background='transparent'">[ ↑ Top ]</button>
+  </div>
+</footer>
+
+</body>
+</html>
