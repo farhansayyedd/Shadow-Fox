@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Royal Challengers Bengaluru Fan Website — #PlayBold. IPL 2025 Champions. Home of Virat Kohli and RCB.">
+  <meta name="theme-color" content="#050508">
+  <meta name="color-scheme" content="dark">
+  <title>RCB — Royal Challengers Bengaluru | #PlayBold | Fan Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    /* Home-specific styles */
+    .fixtures-home { padding: 80px 0; background: var(--bg-base); }
+    .fixtures-home-grid { display: flex; flex-direction: column; gap: 16px; max-width: 900px; margin: 0 auto; }
+    .rcbtv-section { padding: 80px 0; background: var(--bg-surface); }
+    .rcbtv-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+    .rcbtv-main { border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/9; background: var(--bg-card); border: 1px solid var(--border-card); }
+    .rcbtv-main iframe { width: 100%; height: 100%; border: 0; }
+    .rcbtv-list { display: flex; flex-direction: column; gap: 12px; }
+    .rcbtv-item { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all var(--transition-medium); }
+    .rcbtv-item:hover { border-color: var(--rcb-red); transform: translateX(4px); }
+    .rcbtv-item-thumb { width: 80px; height: 50px; background: var(--bg-elevated); border-radius: var(--radius-sm); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .rcbtv-item-title { font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: var(--text-secondary); line-height: 1.3; }
+    .fan-zone { padding: 80px 0; background: var(--bg-base); position: relative; overflow: hidden; }
+    .fan-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px; }
+    .fan-stat-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-lg); padding: 40px 24px; text-align: center; transition: all var(--transition-medium); position: relative; overflow: hidden; }
+    .fan-stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad-red); }
+    .fan-stat-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .fan-stat-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+    .fan-stat-number { font-family: var(--font-display); font-size: 48px; color: var(--rcb-gold); line-height: 1; }
+    .fan-stat-label { font-family: var(--font-heading); font-size: 12px; color: var(--text-muted); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 8px; }
+    @media (max-width: 1024px) { .rcbtv-grid { grid-template-columns: 1fr; } .fan-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .fan-stats-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loader-logo">RCB</div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="nav-top-bar">
+      <div class="nav-top-inner">
+        <div class="nav-top-tagline">🏆 IPL 2025 CHAMPIONS — DEFENDING THE TITLE</div>
+        <div class="nav-top-social">
+          <a href="https://twitter.com/RCBTweets" target="_blank">𝕏</a>
+          <a href="https://instagram.com/royalchallengersbangalore" target="_blank">📷</a>
+          <a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank">▶</a>
+          <a href="https://facebook.com/RCBTweets" target="_blank">f</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-main">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-emblem">RCB</div>
+          <div class="nav-logo-text">
+            <span class="nav-logo-name">ROYAL CHALLENGERS</span>
+            <span class="nav-logo-sub">BENGALURU • EST 2008</span>
+          </div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="fixtures.html">Fixtures</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="jerseys.html">Jerseys</a></li>
+          <li>
+            <a href="#">More <span class="nav-arrow">▼</span></a>
+            <div class="nav-dropdown">
+              <a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank">RCB TV</a>
+              <a href="https://royalchallengers.com/rcb-cricket-photos" target="_blank">Photos</a>
+              <a href="https://royalchallengers.com/about-us" target="_blank">About RCB</a>
+            </div>
+          </li>
+        </ul>
+        <div class="nav-hamburger" onclick="this.classList.toggle('open');document.querySelector('.nav-mobile').classList.toggle('open')">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="nav-mobile">
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="team.html">Team</a>
+        <a href="fixtures.html">Fixtures</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="jerseys.html">Jerseys</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-bg">
+        <div class="hero-particles"></div>
+        <div class="hero-stadium-lines"></div>
+        <div class="hero-field"></div>
+        <div class="hero-glow"></div>
+      </div>
+      <!-- Two-column hero layout -->
+      <div id="hero-inner" style="display:flex;align-items:center;justify-content:space-between;max-width:1440px;margin:0 auto;padding:0 60px 0 40px;height:100%;position:relative;z-index:5;">
+        <!-- LEFT: Text -->
+        <div class="hero-content" id="hero-text" style="flex:1;text-align:left;padding-right:60px;animation:hero-text-in 0.9s cubic-bezier(0.22,1,0.36,1) 1.65s both;">
+          <div class="hero-eyebrow"><span class="live-badge">LIVE</span> IPL 2026 • DEFENDING CHAMPIONS</div>
+          <h1 class="hero-title" style="text-align:left;font-size:clamp(61px,8.5vw,110px);line-height:0.9;letter-spacing:0.02em;">
+            <span class="red">ROYAL</span><br><span>CHALLENGERS</span>
+          </h1>
+          <div class="hero-title-sub" style="text-align:left;font-size:clamp(27px,4.3vw,54px);letter-spacing:0.25em;">BENGALURU</div>
+          <div class="hero-tagline" style="text-align:left;">#PlayBold</div>
+          <div class="hero-stats" style="justify-content:flex-start;">
+            <div class="hero-stat"><div class="hero-stat-num" data-count="1">0</div><div class="hero-stat-label">IPL Title</div></div>
+            <div class="hero-stat"><div class="hero-stat-num" data-count="19">0</div><div class="hero-stat-label">Seasons</div></div>
+            <div class="hero-stat"><div class="hero-stat-num" data-count="3">0</div><div class="hero-stat-label">Finals</div></div>
+            <div class="hero-stat"><div class="hero-stat-num" data-count="2008">0</div><div class="hero-stat-label">EST.</div></div>
+          </div>
+          <div class="hero-cta">
+            <a href="team.html" class="btn btn-primary">VIEW SQUAD →</a>
+            <a href="achievements.html" class="btn btn-outline-gold">🏆 TROPHY CABINET</a>
+          </div>
+        </div>
+        <!-- RIGHT: Logo arena -->
+        <div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;width:460px;height:460px;">
+          <!-- Shockwave rings -->
+          <div class="roar-ring" style="animation-delay:0.05s"></div>
+          <div class="roar-ring" style="animation-delay:0.25s"></div>
+          <div class="roar-ring" style="animation-delay:0.45s"></div>
+          <!-- Claw scratches -->
+          <div class="claw-wrap">
+            <div class="claw" style="--rot:-28deg;--tx:-40px;animation-delay:0.2s"></div>
+            <div class="claw" style="--rot:-9deg;--tx:-13px;animation-delay:0.25s"></div>
+            <div class="claw" style="--rot:9deg;--tx:13px;animation-delay:0.3s"></div>
+            <div class="claw" style="--rot:28deg;--tx:40px;animation-delay:0.35s"></div>
+          </div>
+          <!-- Logo -->
+          <img id="hero-logo" src="images/rcb-logo-hd.png" alt="Royal Challengers Bengaluru"
+               onerror="this.src='images/rcb-logo.png'"
+               style="width:440px;height:440px;object-fit:contain;position:relative;z-index:2;animation:logo-slam 1s cubic-bezier(0.22,0.61,0.36,1) 0.6s both;">
+        </div>
+      </div>
+      <style>
+        /* === LION ENTRANCE — PURE CSS, NO JS === */
+
+        /* Shockwave rings explode outward */
+        .roar-ring {
+          position:absolute; width:70px; height:70px; border-radius:50%;
+          border:4px solid var(--rcb-gold);
+          pointer-events:none; z-index:1;
+          animation: roar-ring 1.2s cubic-bezier(0.1,0.6,0.3,1) both;
+        }
+        @keyframes roar-ring {
+          0%   { transform:scale(0.1); opacity:1; border-color:var(--rcb-gold); }
+          40%  { opacity:0.7; border-color:var(--rcb-red); }
+          100% { transform:scale(10); opacity:0; }
+        }
+
+        /* Claw scratches flash */
+        .claw-wrap {
+          position:absolute; inset:0;
+          display:flex; align-items:center; justify-content:center;
+          pointer-events:none;
+          animation: claw-fade 0.6s ease 0.2s both;
+        }
+        @keyframes claw-fade {
+          0%  { opacity:0; }
+          25% { opacity:1; }
+          100%{ opacity:0; }
+        }
+        .claw {
+          position:absolute;
+          width:4px; height:200px;
+          background:linear-gradient(to bottom,transparent 0%,var(--rcb-gold) 20%,var(--rcb-red) 80%,transparent 100%);
+          border-radius:2px;
+          transform-origin:50% 0%;
+          animation: claw-slash 0.5s ease-out both;
+        }
+        @keyframes claw-slash {
+          0%  { transform:rotate(var(--rot)) translateX(var(--tx)) scaleY(0); opacity:1; }
+          60% { transform:rotate(var(--rot)) translateX(var(--tx)) scaleY(1.2); opacity:0.9; }
+          100%{ transform:rotate(var(--rot)) translateX(var(--tx)) scaleY(1.4); opacity:0; }
+        }
+
+        /* Logo crashes in from above */
+        @keyframes logo-slam {
+          0%   { opacity:0; transform:scale(3) translateY(-180px); filter:brightness(6) blur(10px); }
+          35%  { opacity:1; transform:scale(1.1) translateY(16px);  filter:brightness(1.5) blur(1px); }
+          52%  { transform:scale(0.95) translateY(-8px); filter:none; }
+          68%  { transform:scale(1.04) translateY(5px); }
+          82%  { transform:scale(0.99) translateY(-2px); }
+          100% { transform:scale(1) translateY(0); opacity:1; }
+        }
+
+        /* Text slides in from left */
+        @keyframes hero-text-in {
+          0%   { opacity:0; transform:translateX(-70px); }
+          100% { opacity:1; transform:translateX(0); }
+        }
+
+        /* Screen shake — applied to hero-inner via CSS animation */
+        @keyframes hero-shake {
+          0%,100%{ transform:translate(0,0); }
+          15%{ transform:translate(-10px, 6px) rotate(-0.5deg); }
+          30%{ transform:translate(10px, -6px) rotate(0.5deg); }
+          45%{ transform:translate(-7px, 3px); }
+          60%{ transform:translate(6px, -3px); }
+          75%{ transform:translate(-3px, 1px); }
+        }
+        #hero-inner { animation: hero-shake 0.6s ease-out 1.5s both; }
+
+        @media (max-width:900px) {
+          #hero-inner > div:last-child { display:none; }
+          #hero-text { text-align:center !important; padding-right:0 !important; }
+          .hero-title,.hero-title-sub,.hero-tagline { text-align:center !important; }
+          .hero-stats { justify-content:center !important; }
+        }
+      </style>
+
+      <div class="hero-scroll-indicator">
+        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+        <span>SCROLL DOWN</span>
+      </div>
+    </section>
+
+    <!-- THE SQUAD — Animated Player Carousel -->
+    <section id="squad-home">
+      <div class="squad-home-bg"></div>
+      <div class="squad-lights"><div class="squad-light"></div><div class="squad-light"></div><div class="squad-light"></div><div class="squad-light"></div></div>
+      <div class="container" style="position:relative;z-index:5">
+        <div class="section-header">
+          <div class="section-subtitle">IPL 2026 • Defending Champions</div>
+          <h2 class="section-title">THE SQUAD</h2>
+          <div class="section-line"></div>
+        </div>
+      </div>
+      <div class="squad-home-scroll">
+        <div class="squad-home-track" id="squad-track"></div>
+      </div>
+      <div class="container" style="position:relative;z-index:5;text-align:center;padding-top:30px;padding-bottom:40px">
+        <a href="team.html" class="btn btn-outline">VIEW ALL SQUADS (2008–2026) →</a>
+      </div>
+    </section>
+
+    <!-- FIXTURES PREVIEW -->
+    <section class="fixtures-home">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">IPL 2026</div>
+          <h2 class="section-title">FIXTURES</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="fixtures-home-grid" id="home-fixtures"></div>
+        <div style="text-align:center;margin-top:30px">
+          <a href="fixtures.html" class="btn btn-outline">VIEW ALL FIXTURES →</a>
+        </div>
+      </div>
+    </section>
+
+    </section>
+
+    <!-- PROMOTIONAL BANNER: HOUSE OF RCB 2026 -->
+    <section style="position:relative;width:100%;overflow:hidden;background:#000;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);">
+      <a href="https://www.royalchallengers.com" target="_blank" style="display:block;">
+        <img src="https://tg3.s3.ap-south-1.amazonaws.com/revents/banners/House-of-RCB-2026.webp" alt="House of RCB 2026" style="width:100%;max-height:360px;object-fit:cover;object-position:center;opacity:0.88;transition:opacity 0.35s,transform 5s;transform:scale(1.02);display:block;" onmouseover="this.style.opacity=1;this.style.transform='scale(1.06)'" onmouseout="this.style.opacity=0.88;this.style.transform='scale(1.02)'">
+      </a>
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,var(--bg-base) 0%,transparent 25%,transparent 75%,var(--bg-surface) 100%);pointer-events:none;"></div>
+    </section>
+
+    <!-- RCB TV -->
+    <section class="rcbtv-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Watch • Listen • Engage</div>
+          <h2 class="section-title">RCB TV</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="rcbtv-grid">
+          <div class="rcbtv-main reveal">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PLive-RCBTweets" title="RCB TV" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="rcbtv-list reveal">
+            <a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank" class="rcbtv-item"><div class="rcbtv-item-thumb">▶</div><div class="rcbtv-item-title">RCB vs SRH — IPL 2026 Highlights</div></a>
+            <a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank" class="rcbtv-item"><div class="rcbtv-item-thumb">▶</div><div class="rcbtv-item-title">Inside the Dugout — Pre-Season Camp</div></a>
+            <a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank" class="rcbtv-item"><div class="rcbtv-item-thumb">▶</div><div class="rcbtv-item-title">Virat Kohli Masterclass — IPL 2025</div></a>
+            <a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank" class="rcbtv-item"><div class="rcbtv-item-thumb">▶</div><div class="rcbtv-item-title">IPL 2025 Championship Celebrations</div></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAN ZONE -->
+    <section class="fan-zone">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">The 12th Man</div>
+          <h2 class="section-title">FAN ZONE</h2>
+          <div class="section-line gold"></div>
+        </div>
+        <div class="fan-stats-grid stagger">
+          <div class="fan-stat-card"><span class="fan-stat-icon">🏏</span><div class="fan-stat-number" data-count="19">0</div><div class="fan-stat-label">IPL Seasons</div></div>
+          <div class="fan-stat-card"><span class="fan-stat-icon">🏟️</span><div class="fan-stat-number" data-count="248">0</div><div class="fan-stat-label">Total Matches</div></div>
+          <div class="fan-stat-card"><span class="fan-stat-icon">🏆</span><div class="fan-stat-number" data-count="1">0</div><div class="fan-stat-label">IPL Titles</div></div>
+          <div class="fan-stat-card"><span class="fan-stat-icon">❤️</span><div class="fan-stat-number" data-count="2008">0</div><div class="fan-stat-label">Since Year</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-logo"><div class="footer-emblem">RCB</div><div><div class="footer-brand-name">ROYAL CHALLENGERS</div><div class="footer-brand-sub">BENGALURU • EST 2008</div></div></div>
+          <div class="footer-tagline">#PLAYBOLD</div>
+          <p class="footer-desc">A fan tribute website celebrating the legacy, passion, and glory of Royal Challengers Bengaluru. Not an official website.</p>
+          <div class="footer-social">
+            <a href="https://twitter.com/RCBTweets" target="_blank" class="footer-social-link">𝕏</a>
+            <a href="https://instagram.com/royalchallengersbangalore" target="_blank" class="footer-social-link">📷</a>
+            <a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank" class="footer-social-link">▶</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Navigate</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="team.html">Team Archive</a></li>
+            <li><a href="fixtures.html">Fixtures</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="jerseys.html">Jersey Gallery</a></li>
+            <li><a href="https://royalchallengers.com" target="_blank">Official Site</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Connect</h4>
+          <ul class="footer-links">
+            <li><a href="https://twitter.com/RCBTweets" target="_blank">Twitter / X</a></li>
+            <li><a href="https://instagram.com/royalchallengersbangalore" target="_blank">Instagram</a></li>
+            <li><a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <div class="footer-copyright">© 2026 <span>RCB Fan Zone</span> — Not affiliated with Royal Challengers Sports Pvt. Ltd.</div>
+        <div class="footer-disclaimer">Fan-made tribute. All trademarks belong to their respective owners.</div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" title="Back to Top">↑</button>
+
+  <script src="js/squad-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/news.js"></script>
+  <script src="js/fixtures.js"></script>
+  <script>
+    // Populate squad carousel
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.getElementById('squad-track');
+      if (track && typeof RCB_SQUADS !== 'undefined') {
+        const squad = RCB_SQUADS[2026];
+        const roleColors = { 'Batsman': '#CC0000', 'Bowler': '#00AA55', 'All-Rounder': '#0088CC', 'WK-Batsman': '#FFD700' };
+        const cards = squad.players.map((p, i) => {
+          const initials = p.name.split(' ').map(n => n[0]).join('');
+          const isOverseas = p.country !== 'India';
+          return `<div class="squad-player-card">
+            <div class="squad-player-num">${i + 1}</div>
+            <div style="width:200px;height:280px;background:linear-gradient(180deg,${roleColors[p.role] || '#CC0000'}15,var(--bg-card));display:flex;align-items:center;justify-content:center;overflow:hidden">
+              ${p.image && !p.image.includes('placeholder') && !p.image.includes('wikimedia') ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;object-position:top;filter:drop-shadow(0 10px 10px rgba(0,0,0,0.5));">` : `<div style="font-family:var(--font-display);font-size:64px;color:${roleColors[p.role] || '#CC0000'};opacity:0.25">${initials}</div>`}
+            </div>
+            <div class="squad-player-overlay">
+              ${p.captain ? '<span class="badge-captain">C</span> ' : ''}${isOverseas ? '<span class="badge-overseas">OS</span> ' : ''}
+              <div class="squad-player-name">${p.name}</div>
+              <div class="squad-player-role">${p.role}</div>
+            </div>
+          </div>`;
+        }).join('');
+        track.innerHTML = cards + cards; // Duplicate for infinite scroll
+      }
+
+      // Home fixtures (first 4)
+      if (typeof RCBFixtures !== 'undefined') {
+        RCBFixtures.renderFixtures('home-fixtures', 'all');
+        const container = document.getElementById('home-fixtures');
+        if (container) {
+          const cards = container.querySelectorAll('.fixture-card');
+          cards.forEach((c, i) => { if (i > 3) c.style.display = 'none'; });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

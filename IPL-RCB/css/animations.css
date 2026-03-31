@@ -1,0 +1,384 @@
+/* ============================================================
+   RCB FAN WEBSITE — ANIMATIONS CSS
+   Keyframes, transitions, particle effects
+   ============================================================ */
+
+/* ============================================================
+   FIRE PARTICLE EFFECT (Hero)
+   ============================================================ */
+@keyframes fire-rise {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(0.3) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+.fire-particle {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: fire-rise var(--duration, 2s) ease-out var(--delay, 0s) infinite;
+}
+
+/* ============================================================
+   STADIUM SPOTLIGHT SWEEP
+   ============================================================ */
+@keyframes spotlight-sweep {
+  0%, 100% { 
+    clip-path: polygon(0 0, 20% 0, 30% 100%, 0% 100%);
+    opacity: 0.06;
+  }
+  50% { 
+    clip-path: polygon(70% 0, 100% 0, 100% 100%, 60% 100%);
+    opacity: 0.1;
+  }
+}
+
+/* ============================================================
+   GLITCH EFFECT
+   ============================================================ */
+@keyframes glitch-1 {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+  20% { clip-path: inset(10% 0 80% 0); transform: translate(-3px, 2px); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(3px, -2px); }
+  60% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 1px); }
+  80% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); opacity: 0; }
+  20% { clip-path: inset(10% 0 80% 0); transform: translate(3px, -2px); opacity: 0.8; }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(-3px, 2px); opacity: 0.6; }
+  60% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -1px); opacity: 0.8; }
+  80% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 1px); opacity: 0.6; }
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  color: var(--rcb-red);
+  animation: glitch-1 5s infinite;
+}
+
+.glitch-text::after {
+  color: var(--rcb-gold);
+  animation: glitch-2 5s infinite;
+}
+
+/* ============================================================
+   COUNT UP ANIMATION
+   ============================================================ */
+.count-up {
+  display: inline-block;
+}
+
+/* ============================================================
+   SHIMMER / SKELETON LOADING
+   ============================================================ */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-elevated) 0%,
+    var(--bg-card-hover) 50%,
+    var(--bg-elevated) 100%
+  );
+  background-size: 2000px 100%;
+  animation: shimmer 2s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   TEXT REVEAL ANIMATION
+   ============================================================ */
+@keyframes text-reveal {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.text-reveal {
+  animation: text-reveal 0.8s ease forwards;
+}
+
+/* ============================================================
+   BORDER GLOW ANIMATION
+   ============================================================ */
+@keyframes border-glow {
+  0%, 100% { box-shadow: 0 0 10px var(--rcb-red-glow), inset 0 0 10px rgba(204, 0, 0, 0.05); }
+  50% { box-shadow: 0 0 30px var(--rcb-red-glow), inset 0 0 20px rgba(204, 0, 0, 0.1); }
+}
+
+.border-glow-red {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+@keyframes border-glow-gold {
+  0%, 100% { box-shadow: 0 0 10px var(--rcb-gold-glow); }
+  50% { box-shadow: 0 0 30px var(--rcb-gold-glow); }
+}
+
+.border-glow-gold {
+  animation: border-glow-gold 3s ease-in-out infinite;
+}
+
+/* ============================================================
+   FLOATING ANIMATION
+   ============================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.float { animation: float 4s ease-in-out infinite; }
+.float-delay-1 { animation: float 4s ease-in-out 1s infinite; }
+.float-delay-2 { animation: float 4s ease-in-out 2s infinite; }
+
+/* ============================================================
+   ROTATE ANIMATION
+   ============================================================ */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow { animation: spin-slow 20s linear infinite; }
+
+/* ============================================================
+   SCALE PULSE
+   ============================================================ */
+@keyframes scale-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.scale-pulse { animation: scale-pulse 2s ease-in-out infinite; }
+
+/* ============================================================
+   HERO FLAME PARTICLES
+   Generated dynamically by JS, these are the base styles
+   ============================================================ */
+.hero-ember {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ============================================================
+   TROPHY SHINE
+   ============================================================ */
+@keyframes trophy-shine {
+  0% { left: -100%; }
+  50%, 100% { left: 200%; }
+}
+
+.trophy-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.15),
+    transparent
+  );
+  animation: trophy-shine 4s ease-in-out infinite;
+}
+
+/* ============================================================
+   PAGE TRANSITION
+   ============================================================ */
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: page-fade-in 0.5s ease both;
+}
+
+/* ============================================================
+   BACKGROUND GRID PATTERN
+   ============================================================ */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ============================================================
+   NOISE TEXTURE OVERLAY
+   ============================================================ */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   STAT COUNTER ANIMATION
+   ============================================================ */
+@keyframes counter-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-counter {
+  animation: counter-up 0.6s ease both;
+}
+
+/* ============================================================
+   LINE DRAW ANIMATION
+   ============================================================ */
+@keyframes draw-line {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.line-draw {
+  animation: draw-line 1s ease forwards;
+}
+
+/* ============================================================
+   CARD FLIP (Player card flip for more info)
+   ============================================================ */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: var(--bg-card-hover);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ============================================================
+   UNDERLINE ANIMATION
+   ============================================================ */
+.animated-underline {
+  position: relative;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--rcb-red);
+  transition: width var(--transition-medium);
+}
+
+.animated-underline:hover::after,
+.animated-underline.active::after {
+  width: 100%;
+}
+
+/* ============================================================
+   PRELOADER ANIMATION
+   ============================================================ */
+@keyframes preloader-drop {
+  0% { transform: translateY(-100px); opacity: 0; }
+  60% { transform: translateY(8px); }
+  80% { transform: translateY(-4px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ============================================================
+   NEWS TICKER
+   ============================================================ */
+@keyframes ticker-scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.ticker-content {
+  animation: ticker-scroll 30s linear infinite;
+  white-space: nowrap;
+}
+
+.news-ticker {
+  overflow: hidden;
+  background: var(--rcb-red);
+  padding: 8px 0;
+  position: relative;
+}
+
+.news-ticker::before {
+  content: 'BREAKING';
+  background: var(--rcb-gold);
+  color: #000;
+  padding: 0 12px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RCB Jersey Gallery — Evolution of Royal Challengers Bengaluru kits from 2008 to 2026.">
+  <meta name="theme-color" content="#050508">
+  <meta name="color-scheme" content="dark">
+  <title>Jerseys — RCB Kit Evolution 2008–2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    .jersey-hero { padding: 160px 0 60px; background: var(--grad-hero); position: relative; }
+    .jersey-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:100px; background:linear-gradient(to top, var(--bg-base), transparent); }
+    .jersey-section { padding: 0 0 80px; background: var(--bg-base); }
+    .jersey-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    /* CSS Jersey shape */
+    .jersey-svg { width: 120px; height: 140px; position: relative; }
+    .jersey-svg-body { width: 80px; height: 100px; border-radius: 4px 4px 8px 8px; position: absolute; left: 50%; transform: translateX(-50%); top: 30px; }
+    .jersey-svg-collar { width: 30px; height: 14px; border-radius: 0 0 50% 50%; position: absolute; left: 50%; transform: translateX(-50%); top: 20px; }
+    .jersey-svg-sleeve-l { width: 25px; height: 50px; position: absolute; left: 8px; top: 32px; border-radius: 0 0 4px 8px; transform: rotate(-12deg); }
+    .jersey-svg-sleeve-r { width: 25px; height: 50px; position: absolute; right: 8px; top: 32px; border-radius: 0 0 8px 4px; transform: rotate(12deg); }
+    .jersey-svg-star { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 16px; color: var(--rcb-gold); }
+    .jersey-manufacturer { font-size: 11px; color: var(--text-muted); font-family: var(--font-heading); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 10px; }
+    .jersey-colors { display: flex; gap: 6px; margin-top: 12px; }
+    .jersey-color-dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+  <div id="loading-screen"><div class="loader-logo">RCB</div><div class="loader-bar"></div></div>
+  <nav id="navbar">
+    <div class="nav-top-bar"><div class="nav-top-inner"><div class="nav-top-tagline">🏆 IPL 2025 CHAMPIONS</div><div class="nav-top-social"><a href="https://twitter.com/RCBTweets" target="_blank">𝕏</a><a href="https://instagram.com/royalchallengersbangalore" target="_blank">📷</a><a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank">▶</a></div></div></div>
+    <div class="nav-main"><div class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-emblem">RCB</div><div class="nav-logo-text"><span class="nav-logo-name">ROYAL CHALLENGERS</span><span class="nav-logo-sub">BENGALURU</span></div></a>
+      <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="team.html">Team</a></li><li><a href="fixtures.html">Fixtures</a></li><li><a href="achievements.html">Achievements</a></li><li><a href="jerseys.html" class="active">Jerseys</a></li><li><a href="#"><span>More</span> <span class="nav-arrow">▼</span></a><div class="nav-dropdown"><a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank">RCB TV</a><a href="https://royalchallengers.com/about-us" target="_blank">About RCB</a></div></li></ul>
+      <div class="nav-hamburger" onclick="this.classList.toggle('open');document.querySelector('.nav-mobile').classList.toggle('open')"><span></span><span></span><span></span></div>
+    </div><div class="nav-mobile"><a href="index.html">Home</a><a href="news.html">News</a><a href="team.html">Team</a><a href="fixtures.html">Fixtures</a><a href="achievements.html">Achievements</a><a href="jerseys.html">Jerseys</a></div></div>
+  </nav>
+
+  <main id="main-content">
+    <section class="jersey-hero">
+      <div class="container" style="position:relative;z-index:2">
+        <div class="section-subtitle">EVOLUTION OF THE KIT</div>
+        <h1 class="section-title">JERSEY GALLERY</h1>
+        <p class="section-desc">19 seasons of iconic RCB kits — from the inaugural red & gold to the champion's star.</p>
+        <div class="section-line gold"></div>
+      </div>
+    </section>
+
+    <section class="jersey-section">
+      <div class="container">
+        <div class="jersey-grid" id="jersey-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <div class="footer-top"><div class="footer-grid">
+      <div><div class="footer-brand-logo"><div class="footer-emblem">RCB</div><div><div class="footer-brand-name">ROYAL CHALLENGERS</div><div class="footer-brand-sub">BENGALURU</div></div></div><div class="footer-tagline">#PLAYBOLD</div><p class="footer-desc">Fan tribute website.</p></div>
+      <div><h4 class="footer-col-title">Navigate</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="team.html">Team</a></li><li><a href="fixtures.html">Fixtures</a></li></ul></div>
+      <div><h4 class="footer-col-title">Explore</h4><ul class="footer-links"><li><a href="achievements.html">Achievements</a></li><li><a href="jerseys.html">Jerseys</a></li></ul></div>
+      <div><h4 class="footer-col-title">Connect</h4><ul class="footer-links"><li><a href="https://twitter.com/RCBTweets" target="_blank">Twitter / X</a></li><li><a href="https://instagram.com/royalchallengersbangalore" target="_blank">Instagram</a></li></ul></div>
+    </div></div>
+    <div class="footer-bottom"><div class="footer-bottom-inner"><div class="footer-copyright">© 2026 <span>RCB Fan Zone</span></div><div class="footer-disclaimer">Fan-made tribute.</div></div></div>
+  </footer>
+  <button id="back-to-top" title="Back to Top">↑</button>
+  <script src="js/squad-data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('jersey-grid');
+      if (!grid || typeof JERSEY_DATA === 'undefined') return;
+
+      grid.innerHTML = JERSEY_DATA.slice().reverse().map((j, i) => {
+        const c1 = j.colors[0] || '#CC0000';
+        const c2 = j.colors[1] || '#001F5B';
+        const c3 = j.colors[2] || '#FFD700';
+        const isChamp = j.year === 2025;
+        const hasStar = j.year >= 2026;
+
+        let imgContent = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:8px;">' +
+          '<div style="font-family:var(--font-display);font-size:80px;letter-spacing:0.1em;color:' + c1 + ';text-shadow:0 0 40px ' + c1 + '66;line-height:1;">RCB</div>' +
+          '<div style="font-family:var(--font-heading);font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:' + c2 + ';font-weight:700;">' + j.year + ' Kit</div>' +
+          '<div style="width:40px;height:2px;background:' + c2 + ';margin:4px auto;"></div>' +
+          '<div style="font-family:var(--font-heading);font-size:10px;letter-spacing:0.15em;color:var(--text-muted);text-transform:uppercase;">' + j.manufacturer + '</div>' +
+        '</div>';
+
+        return '<div class="jersey-card reveal" style="animation-delay:' + (i * 0.08) + 's">' +
+          '<div class="jersey-preview" style="background:#0F1218; display: flex; align-items: center; justify-content: center; overflow: hidden; height: 220px; box-shadow: inset 0 0 50px rgba(0,0,0,0.5);">' +
+            imgContent +
+          '</div>' +
+          '<div class="jersey-card-body">' +
+            '<div class="jersey-season">' + j.year + '</div>' +
+            '<div class="jersey-era">' + j.era + '</div>' +
+            '<p class="jersey-desc">' + j.desc + '</p>' +
+            '<div class="jersey-manufacturer">' + j.manufacturer + '</div>' +
+            '<div class="jersey-colors">' +
+              j.colors.map(c => '<div class="jersey-color-dot" style="background:' + c + '"></div>').join('') +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      initScrollAnimations();
+    });
+  </script>
+</body>
+</html>

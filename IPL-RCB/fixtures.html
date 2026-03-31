@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RCB Fixtures — IPL 2026 match schedule, results and upcoming matches.">
+  <meta name="theme-color" content="#050508">
+  <meta name="color-scheme" content="dark">
+  <title>Fixtures — RCB IPL 2026 Schedule</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    .fixtures-hero { padding: 160px 0 60px; background: var(--grad-hero); position: relative; }
+    .fixtures-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:100px; background:linear-gradient(to top,var(--bg-base),transparent); }
+    .fixtures-section { padding: 0 0 80px; background: var(--bg-base); }
+    .fixtures-list { display: flex; flex-direction: column; gap: 16px; max-width: 900px; margin: 0 auto; }
+    .fixtures-tab-nav { display: flex; gap: 4px; background: var(--bg-elevated); padding: 4px; border-radius: var(--radius-md); margin-bottom: 40px; max-width: 400px; }
+    .fixtures-tab { flex: 1; padding: 12px 20px; font-family: var(--font-heading); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); border-radius: var(--radius-sm); border: none; background: none; cursor: pointer; transition: all var(--transition-medium); text-align: center; }
+    .fixtures-tab:hover { color: var(--text-primary); }
+    .fixtures-tab.active { background: var(--rcb-red); color: #fff; box-shadow: 0 2px 10px var(--rcb-red-glow); }
+  </style>
+</head>
+<body>
+  <div id="loading-screen"><div class="loader-logo">RCB</div><div class="loader-bar"></div></div>
+  <nav id="navbar">
+    <div class="nav-top-bar"><div class="nav-top-inner"><div class="nav-top-tagline">🏆 IPL 2025 CHAMPIONS</div><div class="nav-top-social"><a href="https://twitter.com/RCBTweets" target="_blank">𝕏</a><a href="https://instagram.com/royalchallengersbangalore" target="_blank">📷</a><a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank">▶</a></div></div></div>
+    <div class="nav-main"><div class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-emblem">RCB</div><div class="nav-logo-text"><span class="nav-logo-name">ROYAL CHALLENGERS</span><span class="nav-logo-sub">BENGALURU</span></div></a>
+      <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="team.html">Team</a></li><li><a href="fixtures.html" class="active">Fixtures</a></li><li><a href="achievements.html">Achievements</a></li><li><a href="jerseys.html">Jerseys</a></li><li><a href="#"><span>More</span> <span class="nav-arrow">▼</span></a><div class="nav-dropdown"><a href="https://youtube.com/@RoyalChallengersBangalore" target="_blank">RCB TV</a><a href="https://royalchallengers.com/about-us" target="_blank">About RCB</a></div></li></ul>
+      <div class="nav-hamburger" onclick="this.classList.toggle('open');document.querySelector('.nav-mobile').classList.toggle('open')"><span></span><span></span><span></span></div>
+    </div><div class="nav-mobile"><a href="index.html">Home</a><a href="news.html">News</a><a href="team.html">Team</a><a href="fixtures.html">Fixtures</a><a href="achievements.html">Achievements</a><a href="jerseys.html">Jerseys</a></div></div>
+  </nav>
+
+  <main id="main-content">
+    <section class="fixtures-hero">
+      <div class="container" style="position:relative;z-index:2">
+        <div class="section-subtitle">IPL 2026 • DEFENDING CHAMPIONS</div>
+        <h1 class="section-title">FIXTURES & RESULTS</h1>
+        <p class="section-desc">Full match schedule for RCB in IPL 2026.</p>
+        <div class="section-line"></div>
+      </div>
+    </section>
+    <section class="fixtures-section">
+      <div class="container">
+        <div class="fixtures-tab-nav">
+          <button class="fixtures-tab active" onclick="filterFixtures('all',this)">All</button>
+          <button class="fixtures-tab" onclick="filterFixtures('upcoming',this)">Upcoming</button>
+          <button class="fixtures-tab" onclick="filterFixtures('results',this)">Results</button>
+        </div>
+        <div class="fixtures-list" id="fixtures-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <div class="footer-top"><div class="footer-grid">
+      <div><div class="footer-brand-logo"><div class="footer-emblem">RCB</div><div><div class="footer-brand-name">ROYAL CHALLENGERS</div><div class="footer-brand-sub">BENGALURU</div></div></div><div class="footer-tagline">#PLAYBOLD</div><p class="footer-desc">Fan tribute website.</p></div>
+      <div><h4 class="footer-col-title">Navigate</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="team.html">Team</a></li><li><a href="fixtures.html">Fixtures</a></li></ul></div>
+      <div><h4 class="footer-col-title">Explore</h4><ul class="footer-links"><li><a href="achievements.html">Achievements</a></li><li><a href="jerseys.html">Jerseys</a></li></ul></div>
+      <div><h4 class="footer-col-title">Connect</h4><ul class="footer-links"><li><a href="https://twitter.com/RCBTweets" target="_blank">Twitter / X</a></li><li><a href="https://instagram.com/royalchallengersbangalore" target="_blank">Instagram</a></li></ul></div>
+    </div></div>
+    <div class="footer-bottom"><div class="footer-bottom-inner"><div class="footer-copyright">© 2026 <span>RCB Fan Zone</span></div><div class="footer-disclaimer">Fan-made tribute.</div></div></div>
+  </footer>
+  <button id="back-to-top" title="Back to Top">↑</button>
+  <script src="js/squad-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/fixtures.js"></script>
+  <script>
+    function filterFixtures(type, btn) {
+      document.querySelectorAll('.fixtures-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      RCBFixtures.renderFixtures('fixtures-list', type);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      RCBFixtures.renderFixtures('fixtures-list', 'all');
+    });
+  </script>
+</body>
+</html>
