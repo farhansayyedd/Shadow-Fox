@@ -2,6 +2,8 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="images/rcb-logo.png">
+  <link rel="shortcut icon" href="images/rcb-logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Royal Challengers Bengaluru Fan Website — #PlayBold. IPL 2025 Champions. Home of Virat Kohli and RCB.">
   <meta name="theme-color" content="#050508">
@@ -61,7 +63,7 @@
     <div class="nav-main">
       <div class="nav-inner">
         <a href="index.html" class="nav-logo">
-          <div class="nav-logo-emblem">RCB</div>
+          <img src="images/rcb-logo-hd.png" alt="RCB" onerror="this.src='images/rcb-logo.png'" style="width:44px;height:44px;object-fit:contain;flex-shrink:0;">
           <div class="nav-logo-text">
             <span class="nav-logo-name">ROYAL CHALLENGERS</span>
             <span class="nav-logo-sub">BENGALURU • EST 2008</span>
@@ -369,6 +371,7 @@
   <script src="js/main.js"></script>
   <script src="js/news.js"></script>
   <script src="js/fixtures.js"></script>
+  <script src="js/scorecards.js"></script>
   <script>
     // Populate squad carousel
     document.addEventListener('DOMContentLoaded', () => {
@@ -394,14 +397,20 @@
         track.innerHTML = cards + cards; // Duplicate for infinite scroll
       }
 
-      // Home fixtures (first 4)
-      if (typeof RCBFixtures !== 'undefined') {
-        RCBFixtures.renderFixtures('home-fixtures', 'all');
-        const container = document.getElementById('home-fixtures');
-        if (container) {
-          const cards = container.querySelectorAll('.fixture-card');
-          cards.forEach((c, i) => { if (i > 3) c.style.display = 'none'; });
-        }
+      // Home fixtures — show last completed RCB + next upcoming RCB
+      if (typeof renderFixtures === 'function' && typeof ALL_IPL_2026 !== 'undefined') {
+        const now = new Date();
+        const rcbMatches = ALL_IPL_2026.filter(m => m.rcb);
+        const lastDone = [...rcbMatches].filter(m => m.result).slice(-1);
+        const nextTwo = rcbMatches.filter(m => !m.result && new Date(m.date+'T'+m.time+':00+05:30') > now).slice(0,2);
+        const preview = [...lastDone, ...nextTwo].slice(0,3);
+        // Temporarily render only those matches
+        const orig = ALL_IPL_2026.splice(0, ALL_IPL_2026.length, ...preview);
+        renderFixtures('home-fixtures','all','all');
+        ALL_IPL_2026.splice(0, ALL_IPL_2026.length, ...orig);
+        // Remove scorecard click hint from home cards
+        document.querySelectorAll('#home-fixtures .fx-card').forEach(c => c.style.cursor='default');
+        document.querySelectorAll('#home-fixtures .fx-click-hint').forEach(e => e.style.display='none');
       }
     });
   </script>
