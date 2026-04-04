@@ -31,7 +31,7 @@ function fetchOfficialData() {
     // In actual scraping, this builds from cheerio('.match-card') or JSON.parse(window.__NEXT_DATA__)
     const extractedPayload = [
       { 
-        id:1, date:"2024-05-18", time:"19:30", t1:"RCB", t2:"CSK", venue:"M. Chinnaswamy Stadium", city:"Bengaluru", 
+        id:1, date:"2026-03-25", time:"19:30", t1:"RCB", t2:"CSK", venue:"M. Chinnaswamy Stadium", city:"Bengaluru", 
         t1runs:"218/5", t1ovs:"20", t2runs:"191/7", t2ovs:"20", result:"RCB won by 27 runs", winner:"RCB", rcb:true,
         scorecard: {
           toss: "CSK won the toss and elected to field",
