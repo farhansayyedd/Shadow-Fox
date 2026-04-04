@@ -6,14 +6,14 @@
    ===================================================== */
 const ALL_IPL_2026 = [
   // ── COMPLETED ──────────────────────────────────────
-  { id:1,  date:"2026-03-28", time:"19:30", t1:"RCB",  t2:"SRH",  venue:"M. Chinnaswamy Stadium",  city:"Bengaluru",    t1runs:"203/4", t1ovs:"16.5", t2runs:"201/9", t2ovs:"20",   result:"RCB won by 6 wickets",   winner:"RCB",  rcb:true,
-    scorecard:{ toss:"SRH won the toss and elected to bat",
-      inn1:{ team:"SRH", score:"201/9 (20 Ov)",
-        bat:[ ["Travis Head","c Kohli b Hazlewood",67,34,6,4,"197.06"],["Abhishek Sharma","b Bethell",23,14,3,1,"164.29"],["Ishan Kishan","c Salt b Siraj",18,12,2,1,"150.00"],["Heinrich Klaasen","c Padikkal b Hazlewood",45,28,4,2,"160.71"],["Nitish Reddy","c Patidar b Krunal",19,11,2,1,"172.73"],["Pat Cummins","b Bethell",12,8,1,1,"150.00"],["Shahbaz Ahmed","c Patidar b Siraj",8,6,1,0,"133.33"],["Harshal Patel","b Dayal",3,4,0,0,"75.00"],["Mayank Dagar","lbw b Dayal",1,2,0,0,"50.00"],["Zeeshan Ansari","not out",0,1,0,0,"0.00"],["Extras","(b 1, lb 2, w 2)"," "," "," "," ","5"] ],
-        bowl:[ ["Josh Hazlewood","4","0","28","3","7.00"],["Mohammed Siraj","4","0","44","2","11.00"],["Jacob Bethell","4","0","35","2","8.75"],["Krunal Pandya","4","0","42","1","10.50"],["Yash Dayal","4","0","47","2","11.75"] ] },
-      inn2:{ team:"RCB", score:"203/4 (16.5 Ov)",
-        bat:[ ["Virat Kohli","c Head b Cummins",72,48,7,3,"150.00"],["Phil Salt","c Klaasen b Harshal",35,22,3,2,"159.09"],["Devdutt Padikkal","run out (Nitish)",68,42,6,4,"161.90"],["Rajat Patidar","not out",20,12,2,1,"166.67"],["Jacob Bethell","not out",8,5,1,0,"160.00"],["Extras","(lb 0, w 0)"," "," "," "," ","0"] ],
-        bowl:[ ["Pat Cummins","3.5","0","48","1","12.52"],["Harshal Patel","3","0","35","1","11.67"],["Shahbaz Ahmed","3","0","48","1","16.00"],["Nitish Reddy","3","0","30","0","10.00"],["Mayank Dagar","4","0","42","1","10.50"] ] } } },
+  { id:1,  date:"2024-05-18", time:"19:30", t1:"RCB",  t2:"CSK",  venue:"M. Chinnaswamy Stadium",  city:"Bengaluru",    t1runs:"218/5", t1ovs:"20", t2runs:"191/7", t2ovs:"20",   result:"RCB won by 27 runs",   winner:"RCB",  rcb:true,
+    scorecard:{ toss:"CSK won the toss and elected to field",
+      inn1:{ team:"RCB", score:"218/5 (20 Ov)",
+        bat:[ ["Virat Kohli","c Mitchell b Santner",47,29,3,4,"162.06"],["Faf du Plessis","run out (Santner)",54,39,3,3,"138.46"],["Rajat Patidar","c Mitchell b Thakur",41,23,2,4,"178.26"],["Cameron Green","not out",38,17,3,3,"223.52"],["Dinesh Karthik","c Dhoni b Deshpande",14,6,1,1,"233.33"],["Glenn Maxwell","c Dhoni b Thakur",16,5,2,1,"320.00"] ],
+        bowl:[ ["Tushar Deshpande","4","0","49","1","12.25"],["Shardul Thakur","4","0","61","2","15.25"],["Maheesh Theekshana","4","0","25","0","6.25"],["Mitchell Santner","3","0","23","1","7.66"],["Ravindra Jadeja","3","0","40","0","13.33"],["Simarjeet Singh","2","0","28","0","14.00"] ] },
+      inn2:{ team:"CSK", score:"191/7 (20 Ov)",
+        bat:[ ["Rachin Ravindra","run out (Lomror/Karthik)",61,37,5,3,"164.86"],["Ruturaj Gaikwad","c Green b Maxwell",0,1,0,0,"0.00"],["Daryl Mitchell","c Kohli b Dayal",11,6,1,1,"183.33"],["Ajinkya Rahane","c du Plessis b Ferguson",33,22,3,1,"150.00"],["Shivam Dube","c Ferguson b Green",7,15,0,0,"46.66"],["Ravindra Jadeja","not out",42,22,3,3,"190.90"],["MS Dhoni","c Swapnil b Dayal",25,13,3,1,"192.30"] ],
+        bowl:[ ["Swapnil Singh","2","0","13","0","6.50"],["Glenn Maxwell","4","0","25","1","6.25"],["Mohammed Siraj","4","0","35","1","8.75"],["Yash Dayal","4","0","42","2","10.50"],["Lockie Ferguson","3","0","39","1","13.00"],["Cameron Green","3","0","28","1","9.33"] ] } } },
 
   { id:2,  date:"2026-03-29", time:"19:30", t1:"MI",   t2:"KKR",  venue:"Wankhede Stadium",         city:"Mumbai",       t1runs:"224/4", t1ovs:"18.3", t2runs:"220/4", t2ovs:"20",   result:"MI won by 6 wickets",    winner:"MI",  rcb:false },
   { id:3,  date:"2026-03-30", time:"19:30", t1:"CSK",  t2:"RR",   venue:"MA Chidambaram Stadium",   city:"Chennai",      t1runs:"127/10",t1ovs:"16.1", t2runs:"128/2", t2ovs:"14.4", result:"RR won by 8 wickets",    winner:"RR",  rcb:false },
@@ -90,27 +90,42 @@ const ALL_IPL_2026 = [
 function startCountdown() {
   const now = new Date();
   const nextMatch = ALL_IPL_2026.find(m => m.rcb && !m.result && new Date(m.date + 'T' + m.time + ':00+05:30') > now);
-  if (!nextMatch) { document.getElementById('countdown-wrap') && (document.getElementById('countdown-wrap').style.display='none'); return; }
+  
+  const els = [document.getElementById('countdown-wrap'), document.getElementById('next-countdown-box')].filter(Boolean);
+  if (!nextMatch || els.length === 0) { 
+    els.forEach(el => el.style.display = 'none'); 
+    return; 
+  }
 
   const matchTime = new Date(nextMatch.date + 'T' + nextMatch.time + ':00+05:30');
   const vsText = nextMatch.t1 === 'RCB' ? `RCB vs ${nextMatch.t2}` : `${nextMatch.t1} vs RCB`;
   const dateStr = matchTime.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
 
-  const el = document.getElementById('countdown-wrap');
-  if (!el) return;
-  el.querySelector('.cdw-match').textContent = vsText;
-  el.querySelector('.cdw-venue').textContent = nextMatch.venue + ', ' + nextMatch.city;
-  el.querySelector('.cdw-date').textContent = dateStr + ' • ' + nextMatch.time + ' IST';
+  els.forEach(el => {
+    if (el.querySelector('.cdw-match')) el.querySelector('.cdw-match').textContent = vsText;
+    if (el.querySelector('.cdw-venue')) el.querySelector('.cdw-venue').textContent = nextMatch.venue + ', ' + nextMatch.city;
+    if (el.querySelector('.cdw-date'))  el.querySelector('.cdw-date').textContent = dateStr + ' • ' + nextMatch.time + ' IST';
+    if (el.querySelector('.countdown-label')) el.querySelector('.countdown-label').textContent = `NEXT MATCH: ${vsText}`;
+  });
 
   function tick() {
     const diff = matchTime - new Date();
-    if (diff <= 0) { el.querySelector('.cdw-timer').innerHTML = '<span class="cdw-live">● MATCH IS LIVE</span>'; return; }
+    if (diff <= 0) { 
+      els.forEach(el => {
+        const timer = el.querySelector('.cdw-timer') || el.querySelector('.countdown-timer');
+        if (timer) timer.innerHTML = '<span style="color:var(--rcb-gold);font-weight:700">● MATCH IS LIVE</span>'; 
+      });
+      return; 
+    }
     const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000),
           m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
-    el.querySelector('#cd-d').textContent = String(d).padStart(2,'0');
-    el.querySelector('#cd-h').textContent = String(h).padStart(2,'0');
-    el.querySelector('#cd-m').textContent = String(m).padStart(2,'0');
-    el.querySelector('#cd-s').textContent = String(s).padStart(2,'0');
+          
+    els.forEach(el => {
+      if (el.querySelector('#cd-d')) el.querySelector('#cd-d').textContent = String(d).padStart(2,'0');
+      if (el.querySelector('#cd-h')) el.querySelector('#cd-h').textContent = String(h).padStart(2,'0');
+      if (el.querySelector('#cd-m')) el.querySelector('#cd-m').textContent = String(m).padStart(2,'0');
+      if (el.querySelector('#cd-s')) el.querySelector('#cd-s').textContent = String(s).padStart(2,'0');
+    });
   }
   tick(); setInterval(tick, 1000);
 }
@@ -243,6 +258,53 @@ function applyFilters() {
   const team = document.getElementById('team-filter')?.value || 'all';
   renderFixtures('fixtures-list', status, team);
 }
+
+/* ── Render Home Premium Cards ── */
+function renderHomeCards(matches, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.className = 'hf-grid';
+  container.innerHTML = matches.map(m => {
+    const dt = new Date(m.date+'T'+m.time+':00+05:30');
+    const dateStr = dt.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+    const isDone = Boolean(m.result);
+    
+    let statusClass = 'upcoming';
+    let statusText = 'UPCOMING';
+    if (isDone) {
+      if (m.winner === 'RCB') { statusClass = 'won'; statusText = 'RCB WON'; }
+      else if (m.winner) { statusClass = 'lost'; statusText = 'RCB LOST'; }
+      else { statusClass = 'upcoming'; statusText = 'COMPLETED'; }
+    }
+
+    return `
+      <div class="hf-card" ${isDone ? `onclick="showScorecard(${m.id})"` : ''}>
+        <div class="hf-header">
+          <span class="hf-match-no">Match ${m.id}</span>
+          <span class="hf-date">${dateStr} • ${m.time}</span>
+        </div>
+        <div class="hf-teams">
+          <div class="hf-team">
+            <img class="hf-logo" src="${teamLogo(m.t1)}" alt="${m.t1}">
+            <div class="hf-name">${m.t1}</div>
+            ${isDone ? `<div style="font-family:var(--font-heading);font-weight:700;font-size:18px;color:${teamColor(m.t1)}">${m.t1runs||''}</div>` : ''}
+          </div>
+          <div class="hf-vs">VS</div>
+          <div class="hf-team">
+            <img class="hf-logo" src="${teamLogo(m.t2)}" alt="${m.t2}">
+            <div class="hf-name">${m.t2}</div>
+            ${isDone ? `<div style="font-family:var(--font-heading);font-weight:700;font-size:18px;color:${teamColor(m.t2)}">${m.t2runs||''}</div>` : ''}
+          </div>
+        </div>
+        <div class="hf-venue">📍 ${m.venue}, ${m.city}</div>
+        <div class="hf-footer">
+          ${isDone ? `<div class="hf-btn" style="background:var(--rcb-navy);border-color:var(--rcb-gold)">📊 SCORECARD</div>` : `<div class="hf-status ${statusClass}">${statusText}</div>`}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+window.renderHomeCards = renderHomeCards;
 
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {

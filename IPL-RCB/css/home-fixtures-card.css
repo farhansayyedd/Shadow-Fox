@@ -1,0 +1,225 @@
+/* Premium Home Fixture Cards */
+.hf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.hf-card {
+  background: var(--grad-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-medium);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.hf-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--border-card);
+  transition: all var(--transition-medium);
+}
+
+.hf-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(204, 0, 0, 0.2);
+  border-color: rgba(204, 0, 0, 0.4);
+}
+
+.hf-card:hover::before {
+  background: var(--grad-red);
+}
+
+.hf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+}
+
+.hf-match-no {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: var(--rcb-gold);
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hf-date {
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.05);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.hf-teams {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.hf-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 40%;
+}
+
+.hf-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+  transition: transform var(--transition-fast);
+}
+
+.hf-card:hover .hf-logo {
+  transform: scale(1.1);
+}
+
+.hf-vs {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--text-muted);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hf-name {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hf-venue {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.hf-footer {
+  text-align: center;
+}
+
+.hf-status {
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: var(--radius-md);
+}
+
+.hf-status.won {
+  color: #00e676;
+  background: rgba(0, 230, 118, 0.1);
+}
+
+.hf-status.lost {
+  color: var(--rcb-red);
+  background: rgba(204, 0, 0, 0.1);
+}
+
+.hf-status.upcoming {
+  color: var(--rcb-gold);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.hf-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-card);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all var(--transition-fast);
+}
+
+.hf-card:hover .hf-btn {
+  background: var(--rcb-red);
+  border-color: var(--rcb-red);
+}
+
+/* Next Match Countdown */
+.next-match-countdown {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.countdown-label {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--rcb-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.countdown-timer {
+  display: flex;
+  gap: 20px;
+}
+
+.cd-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  padding: 10px 15px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.1);
+  min-width: 70px;
+}
+
+.cd-box span {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+  color: #fff;
+}
+
+.cd-box small {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .next-match-countdown {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+}

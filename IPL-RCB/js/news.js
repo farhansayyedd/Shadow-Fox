@@ -178,11 +178,22 @@ function renderNewsGrid(containerId, limit = 12) {
   const items = newsData.length ? newsData : defaultNews;
   const displayItems = items.slice(0, limit);
 
+  const fallbackImages = [
+    "images/rcb-squad-hero.webp",
+    "images/stadium-1.webp",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Virat_Kohli_in_ICC_World_cup_2023.jpg/440px-Virat_Kohli_in_ICC_World_cup_2023.jpg",
+    "https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_Logo.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Josh_Hazlewood_2016.jpg/440px-Josh_Hazlewood_2016.jpg"
+  ];
+
   container.innerHTML = displayItems.map((item, i) => {
-    const hasThumb = item.thumbnail && item.thumbnail.length > 10;
-    const thumbHtml = hasThumb
-      ? `<img src="${item.thumbnail}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<div class=\\'news-card-img-placeholder\\'><span style=\\'font-family:var(--font-display);font-size:32px;color:var(--rcb-red);\\'>RCB</span></div>'">`
-      : `<div class="news-card-img-placeholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:linear-gradient(135deg,#12121C,#1A0005);"><span style="font-family:var(--font-display);font-size:40px;color:var(--rcb-red);text-shadow:0 0 20px rgba(204,0,0,0.5);letter-spacing:0.1em;">RCB</span><span style="font-family:var(--font-heading);font-size:9px;color:var(--rcb-gold);letter-spacing:0.2em;">#PLAYBOLD</span></div>`;
+    let thumbStr = item.thumbnail;
+    // Replace with fallback array if no thumbnail exists or is too short
+    if (!thumbStr || thumbStr.length < 10) {
+      thumbStr = fallbackImages[i % fallbackImages.length];
+    }
+
+    const thumbHtml = `<img src="${thumbStr}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='images/rcb-logo.png'">`;
     return `
     <a href="${item.link}" target="_blank" rel="noopener" class="news-card ${i === 0 ? 'news-card-featured' : ''} reveal" style="animation-delay: ${i * 0.08}s">
       <div class="news-card-img">

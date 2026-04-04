@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/home-fixtures-card.css">
   <style>
     /* Home-specific styles */
     .fixtures-home { padding: 80px 0; background: var(--bg-base); }
@@ -259,6 +260,18 @@
           <h2 class="section-title">FIXTURES</h2>
           <div class="section-line"></div>
         </div>
+        
+        <!-- NEXT MATCH COUNTDOWN -->
+        <div class="next-match-countdown" id="next-countdown-box">
+          <div class="countdown-label">NEXT RCB MATCH IN</div>
+          <div class="countdown-timer" id="countdown-timer">
+            <div class="cd-box"><span id="cd-d">00</span><small>DAYS</small></div>
+            <div class="cd-box"><span id="cd-h">00</span><small>HRS</small></div>
+            <div class="cd-box"><span id="cd-m">00</span><small>MINS</small></div>
+            <div class="cd-box"><span id="cd-s">00</span><small>SECS</small></div>
+          </div>
+        </div>
+
         <div class="fixtures-home-grid" id="home-fixtures"></div>
         <div style="text-align:center;margin-top:30px">
           <a href="fixtures.html" class="btn btn-outline">VIEW ALL FIXTURES →</a>
@@ -404,13 +417,9 @@
         const lastDone = [...rcbMatches].filter(m => m.result).slice(-1);
         const nextTwo = rcbMatches.filter(m => !m.result && new Date(m.date+'T'+m.time+':00+05:30') > now).slice(0,2);
         const preview = [...lastDone, ...nextTwo].slice(0,3);
-        // Temporarily render only those matches
-        const orig = ALL_IPL_2026.splice(0, ALL_IPL_2026.length, ...preview);
-        renderFixtures('home-fixtures','all','all');
-        ALL_IPL_2026.splice(0, ALL_IPL_2026.length, ...orig);
-        // Remove scorecard click hint from home cards
-        document.querySelectorAll('#home-fixtures .fx-card').forEach(c => c.style.cursor='default');
-        document.querySelectorAll('#home-fixtures .fx-click-hint').forEach(e => e.style.display='none');
+        if (typeof renderHomeCards === 'function') {
+          renderHomeCards(preview, 'home-fixtures');
+        }
       }
     });
   </script>
