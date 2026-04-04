@@ -1,0 +1,33 @@
+name: Automated Official RCB Sync
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # Runs every 30 minutes
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  sync_official_data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install Dependencies
+        run: npm install axios cheerio || echo "Continuing without extra deps if not configured"
+        
+      - name: Execute RCB Data Sync Script
+        run: node scripts/sync-rcb-official.js
+        
+      - name: Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add js/official-data.js
+          git commit -m "chore(data): synced latest official match scorecards/fixtures [skip ci]" || echo "No changes to commit"
+          git push
