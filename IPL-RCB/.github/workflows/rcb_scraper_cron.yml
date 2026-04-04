@@ -19,10 +19,10 @@ jobs:
           node-version: '20'
           
       - name: Install Dependencies
-        run: npm install axios cheerio || echo "Continuing without extra deps if not configured"
+        run: npm install axios cheerio
         
       - name: Execute RCB Data Sync Script
-        run: node scripts/sync-rcb-official.js
+        run: node scripts/sync-live.js
         
       - name: Commit & Push Changes
         run: |
