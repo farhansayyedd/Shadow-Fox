@@ -47,42 +47,46 @@ async function buildVerifiedDataset() {
         inn1: {
           team: "SRH", score: "201/9 (20 Ov)",
           bat: [
-            ["Ishan Kishan (c)", "c Salt b Duffy", 80, 38, 8, 5, "210.53"],
-            ["Aniket Verma", "c Patidar b Shepherd", 43, 18, 3, 4, "238.89"],
-            ["Heinrich Klaasen", "c Salt b Abhinandan", 31, 22, 2, 2, "140.91"],
-            ["Nitish Kumar Reddy", "b Shepherd", 18, 14, 1, 1, "128.57"],
-            ["Pat Cummins", "c Padikkal b Suyash", 10, 8, 1, 0, "125.00"],
-            ["Shahbaz Ahmed", "run out (Kohli)", 7, 5, 1, 0, "140.00"],
-            ["Harsh Dubey", "c Kohli b Krunal", 4, 3, 0, 0, "133.33"],
-            ["Zeeshan Ansari", "b Shepherd", 2, 2, 0, 0, "100.00"],
-            ["David Payne", "not out", 0, 1, 0, 0, "0.00"],
-            ["Extras", "(b 2, lb 3, w 3)", " ", " ", " ", " ", "8"]
+            ["Travis Head",          "c Salt b Duffy",               11,  9, 2, 0, "122.22"],
+            ["Abhishek Sharma",      "c Salt b Duffy",                7,  8, 0, 1,  "87.50"],
+            ["Ishan Kishan (c)",     "c Salt b Abhinandan Singh",    80, 38, 8, 5, "210.52"],
+            ["Nitish Kumar Reddy",   "c Abhinandan Singh b Duffy",    1,  6, 0, 0,  "16.66"],
+            ["Heinrich Klaasen",     "c Salt b Shepherd",            31, 22, 2, 1, "140.90"],
+            ["Salil Arora",          "c Padikkal b Suyash Sharma",    9,  6, 0, 1, "150.00"],
+            ["Aniket Verma",         "c Kohli b Shepherd",           43, 18, 3, 4, "238.88"],
+            ["Harsh Dubey",          "c Padikkal b Shepherd",         3,  3, 0, 0, "100.00"],
+            ["Harshal Patel",        "c Padikkal b Kumar",            0,  2, 0, 0,   "0.00"],
+            ["David Payne",          "not out",                       6,  5, 0, 0, "120.00"],
+            ["Jaydev Unadkat",       "not out",                       4,  3, 0, 0, "133.33"],
+            ["Extras",               "(lb 2, w 4)",                 " "," "," "," ",    "6"]
           ],
           bowl: [
-            ["Jacob Duffy", "4", "0", "22", "3", "5.50"],
-            ["Bhuvneshwar Kumar", "4", "0", "31", "1", "7.75"],
-            ["Romario Shepherd", "4", "0", "54", "3", "13.50"],
-            ["Abhinandan Singh", "3", "0", "38", "1", "12.67"],
-            ["Suyash Sharma", "3", "0", "28", "1", "9.33"],
-            ["Krunal Pandya", "2", "0", "26", "0", "13.00"]
+            ["Jacob Duffy",         "4",   "0", "22", "3",  "5.50"],
+            ["Bhuvneshwar Kumar",   "4",   "0", "31", "1",  "7.75"],
+            ["Abhinandan Singh",    "3",   "0", "38", "1", "12.66"],
+            ["Romario Shepherd",    "4",   "0", "54", "3", "13.50"],
+            ["Suyash Sharma",       "3",   "0", "28", "1",  "9.33"],
+            ["Krunal Pandya",       "2",   "0", "26", "0", "13.00"]
           ]
         },
         inn2: {
           team: "RCB", score: "203/4 (15.4 Ov)",
           bat: [
-            ["Virat Kohli", "not out", 69, 38, 5, 4, "181.58"],
-            ["Devdutt Padikkal", "c Klaasen b Cummins", 61, 26, 5, 5, "234.62"],
-            ["Rajat Patidar (c)", "c Kishan b Payne", 31, 12, 2, 3, "258.33"],
-            ["Phil Salt (wk)", "b Unadkat", 24, 16, 2, 2, "150.00"],
-            ["Romario Shepherd", "not out", 11, 5, 1, 1, "220.00"],
-            ["Extras", "(lb 1, w 6)", " ", " ", " ", " ", "7"]
+            ["Phil Salt",           "c Klaasen b Unadkat",            8,  7, 2, 0, "114.28"],
+            ["Virat Kohli",         "not out",                        69, 38, 5, 5, "181.57"],
+            ["Devdutt Padikkal",    "c Klaasen b Dubey",              61, 26, 7, 4, "234.61"],
+            ["Rajat Patidar (c)",   "c Dubey b Payne",                31, 12, 2, 3, "258.33"],
+            ["Jitesh Sharma",       "c Unadkat b Payne",               0,  1, 0, 0,   "0.00"],
+            ["Tim David",           "not out",                        16, 10, 1, 1, "160.00"],
+            ["Extras",              "(b 8, lb 3, w 7)",              " "," "," "," ",   "18"]
           ],
           bowl: [
-            ["David Payne", "4", "0", "35", "2", "8.75"],
-            ["Jaydev Unadkat", "3", "0", "29", "1", "9.67"],
-            ["Harsh Dubey", "3", "0", "35", "1", "11.67"],
-            ["Pat Cummins", "3", "0", "51", "1", "17.00"],
-            ["Shahbaz Ahmed", "2.4", "0", "46", "0", "17.25"]
+            ["Nitish Kumar Reddy", "2",   "0", "19", "0",  "9.50"],
+            ["Jaydev Unadkat",     "3",   "0", "29", "1",  "9.66"],
+            ["David Payne",        "3",   "0", "35", "2", "11.66"],
+            ["Harsh Dubey",        "3",   "0", "35", "1", "11.66"],
+            ["Eshan Malinga",      "2",   "0", "35", "0", "17.50"],
+            ["Harshal Patel",      "2.4", "0", "39", "0", "14.62"]
           ]
         }
       }
