@@ -1,8 +1,15 @@
 /* RCB News Feed — Live from official website + Google News fallback */
 'use strict';
 
+// Reliable fallback images (local or guaranteed working URLs)
+const FALLBACK_IMAGES = [
+  "images/rcb-logo-hd.png",
+  "images/rcb-logo.png",
+  "images/stadium-1.webp",
+  "images/rcb-squad-hero.webp"
+];
+
 // Multiple proxy methods to fetch RCB news
-// rss2json requires proper URL encoding and may block file:// origin
 const NEWS_SOURCES = [
   // Method 1: Google News RSS for RCB via rss2json (properly encoded)
   'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://news.google.com/rss/search?q=Royal+Challengers+Bengaluru+RCB+IPL&hl=en-IN&gl=IN&ceid=IN:en'),
@@ -24,20 +31,20 @@ const REFRESH_INTERVAL = 30 * 60 * 1000; // 30 minutes
 let newsData = [];
 let lastFetchTime = null;
 
-// Fallback news with reliable Wikimedia-hosted images (no hotlink restrictions)
+// Fallback news with reliable local images
 const defaultNews = [
-  { title: "RCB beat SRH by 6 wickets in IPL 2026 opener — Kohli & Padikkal star", description: "Virat Kohli scored 72 and Devdutt Padikkal smashed 68 as RCB chased down 202 with ease at Chinnaswamy.", pubDate: "2026-03-28", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_Logo.svg" },
-  { title: "Krunal Pandya: 'Winning the IPL 2025 was the biggest moment of my life'", description: "Krunal Pandya opens up on his feelings after winning the IPL title with RCB in 2025.", pubDate: "2026-03-27", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Krunal_pandya.jpg/220px-Krunal_pandya.jpg" },
-  { title: "Virat Kohli: 'I'm not coming back underprepared' — RCB star on IPL 2026 prep", description: "Former India captain Virat Kohli reveals his meticulous preparation routine ahead of IPL 2026.", pubDate: "2026-03-25", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Virat_Kohli_in_ICC_World_cup_2023.jpg/220px-Virat_Kohli_in_ICC_World_cup_2023.jpg" },
-  { title: "Rajat Patidar on leading RCB: 'The team is hungry to defend the title'", description: "RCB skipper Rajat Patidar speaks on the mood in camp ahead of the 2026 title defence.", pubDate: "2026-03-24", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/IPL_2024_Logo.svg/220px-IPL_2024_Logo.svg.png" },
-  { title: "Phil Salt ready to open for RCB — 'Chinnaswamy is a special ground'", description: "English wicket-keeper batter Phil Salt speaks ahead of his first full IPL season with RCB.", pubDate: "2026-03-22", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Phil_Salt_2023.jpg/220px-Phil_Salt_2023.jpg" },
-  { title: "Josh Hazlewood aims to be RCB's lead pace weapon in IPL 2026", description: "Australia fast bowler Josh Hazlewood discusses his role in the RCB bowling attack for 2026.", pubDate: "2026-03-20", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Josh_Hazlewood_2016.jpg/220px-Josh_Hazlewood_2016.jpg" },
-  { title: "Jacob Bethell: England's rising star set to light up IPL 2026 for RCB", description: "Jacob Bethell speaks on his ambitions for IPL 2026 after a stunning World Cup semi-final century.", pubDate: "2026-03-19", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Jacob_Bethell_2024.jpg/220px-Jacob_Bethell_2024.jpg" },
-  { title: "Devdutt Padikkal: 'Having Kohli at the other end gives you so much confidence'", description: "Devdutt Padikkal reflects on his extraordinary partnership with Virat Kohli in the season opener.", pubDate: "2026-03-28", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Devdutt_Padikkal_%28cropped%29.jpg/220px-Devdutt_Padikkal_%28cropped%29.jpg" },
-  { title: "Andy Flower: 'RCB have the batting depth to win back-to-back titles'", description: "RCB head coach Andy Flower backs his team to defend the IPL title in 2026.", pubDate: "2026-03-18", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Andy_Flower_2009.jpg/220px-Andy_Flower_2009.jpg" },
-  { title: "Bhuvneshwar Kumar brings experience and craft to RCB's 2026 attack", description: "Veteran seamer Bhuvneshwar Kumar joins RCB and talks about his role in the bowling unit.", pubDate: "2026-03-17", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Bhuvneshwar_Kumar_April_2019.jpg/220px-Bhuvneshwar_Kumar_April_2019.jpg" },
-  { title: "RCB clinch IPL 2025 title — A look back at the historic triumph", description: "Reliving the magical IPL 2025 final as RCB lifted their maiden IPL trophy at Chinnaswamy.", pubDate: "2026-03-15", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_Logo.svg" },
-  { title: "IPL 2026 Season Preview — Can RCB defend their title successfully?", description: "An in-depth look at whether the Royal Challengers Bengaluru have what it takes to retain the IPL trophy.", pubDate: "2026-03-10", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/IPL_2024_Logo.svg/220px-IPL_2024_Logo.svg.png" }
+  { title: "RCB beat SRH by 6 wickets in IPL 2026 opener — Kohli & Padikkal star", description: "Virat Kohli scored 72 and Devdutt Padikkal smashed 68 as RCB chased down 202 with ease at Chinnaswamy.", pubDate: "2026-03-28", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo-hd.png" },
+  { title: "Krunal Pandya: 'Winning the IPL 2025 was the biggest moment of my life'", description: "Krunal Pandya opens up on his feelings after winning the IPL title with RCB in 2025.", pubDate: "2026-03-27", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo.png" },
+  { title: "Virat Kohli: 'I'm not coming back underprepared' — RCB star on IPL 2026 prep", description: "Former India captain Virat Kohli reveals his meticulous preparation routine ahead of IPL 2026.", pubDate: "2026-03-25", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo-hd.png" },
+  { title: "Rajat Patidar on leading RCB: 'The team is hungry to defend the title'", description: "RCB skipper Rajat Patidar speaks on the mood in camp ahead of the 2026 title defence.", pubDate: "2026-03-24", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo.png" },
+  { title: "Phil Salt ready to open for RCB — 'Chinnaswamy is a special ground'", description: "English wicket-keeper batter Phil Salt speaks ahead of his first full IPL season with RCB.", pubDate: "2026-03-22", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo-hd.png" },
+  { title: "Josh Hazlewood aims to be RCB's lead pace weapon in IPL 2026", description: "Australia fast bowler Josh Hazlewood discusses his role in the RCB bowling attack for 2026.", pubDate: "2026-03-20", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo.png" },
+  { title: "Jacob Bethell: England's rising star set to light up IPL 2026 for RCB", description: "Jacob Bethell speaks on his ambitions for IPL 2026 after a stunning World Cup semi-final century.", pubDate: "2026-03-19", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo-hd.png" },
+  { title: "Devdutt Padikkal: 'Having Kohli at the other end gives you so much confidence'", description: "Devdutt Padikkal reflects on his extraordinary partnership with Virat Kohli in the season opener.", pubDate: "2026-03-28", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo.png" },
+  { title: "Andy Flower: 'RCB have the batting depth to win back-to-back titles'", description: "RCB head coach Andy Flower backs his team to defend the IPL title in 2026.", pubDate: "2026-03-18", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo-hd.png" },
+  { title: "Bhuvneshwar Kumar brings experience and craft to RCB's 2026 attack", description: "Veteran seamer Bhuvneshwar Kumar joins RCB and talks about his role in the bowling unit.", pubDate: "2026-03-17", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo.png" },
+  { title: "RCB clinch IPL 2025 title — A look back at the historic triumph", description: "Reliving the magical IPL 2025 final as RCB lifted their maiden IPL trophy at Chinnaswamy.", pubDate: "2026-03-15", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo-hd.png" },
+  { title: "IPL 2026 Season Preview — Can RCB defend their title successfully?", description: "An in-depth look at whether the Royal Challengers Bengaluru have what it takes to retain the IPL trophy.", pubDate: "2026-03-10", link: "https://royalchallengers.com/rcb-cricket-news", thumbnail: "images/rcb-logo.png" }
 ];
 
 // Filter keywords to ensure RCB-relevant results
@@ -49,6 +56,23 @@ function isRCBRelevant(text) {
   if (!text) return false;
   const lower = text.toLowerCase();
   return RCB_KEYWORDS.some(kw => lower.includes(kw));
+}
+
+// Get a random fallback image
+function getFallbackImage(index) {
+  return FALLBACK_IMAGES[index % FALLBACK_IMAGES.length];
+}
+
+// Extract image from HTML content
+function extractImageFromHtml(html) {
+  if (!html) return '';
+  // Try to find img src
+  const imgMatch = html.match(/<img[^>]+src=["']([^"'>]+)["']/i);
+  if (imgMatch) return imgMatch[1];
+  // Try to find any URL that looks like an image
+  const urlMatch = html.match(/https?:\/\/[^\s"'<>]+\.(?:jpg|jpeg|png|webp|gif)/i);
+  if (urlMatch) return urlMatch[0];
+  return '';
 }
 
 async function fetchFromSource(url) {
@@ -103,31 +127,32 @@ async function fetchNews() {
       );
       if (sourceUrl === NEWS_SOURCES[0]) rcbItems = items; // Google News — take all
       if (rcbItems.length >= 3) {
-        newsData = rcbItems.map(item => {
+        newsData = rcbItems.map((item, index) => {
           // Try every possible thumbnail location
           let thumb = item.thumbnail || item.enclosure?.link || item.enclosure?.url || '';
+          
           // Also parse raw description HTML for <img src=...>
           const rawDesc = item.description || item.content || '';
-          if (!thumb && rawDesc.includes('<img')) {
-            const m = rawDesc.match(/<img[^>]+src=["']([^"'>]+)["']/);
-            if (m) thumb = m[1];
+          if (!thumb && rawDesc) {
+            thumb = extractImageFromHtml(rawDesc);
           }
-          // Google News wraps article images in <figure> sometimes
-          if (!thumb && rawDesc.includes('figure')) {
-            const m = rawDesc.match(/https?:\/\/[^"'\s<>]+\.(?:jpg|jpeg|png|webp|gif)[^"'\s<>]*/);
-            if (m) thumb = m[0];
+          
+          // Use fallback if no thumbnail found
+          if (!thumb || thumb.length < 10) {
+            thumb = getFallbackImage(index);
           }
+          
           const cleanDesc = rawDesc.replace(/<[^>]*>/g, '').substring(0, 250);
           return {
             title: item.title || '',
             description: cleanDesc,
             pubDate: item.pubDate || new Date().toISOString(),
             link: item.link || '#',
-            thumbnail: thumb || ''
+            thumbnail: thumb
           };
         });
         lastFetchTime = new Date();
-        console.log(`[RCB News] ✅ Fetched ${newsData.length} articles, ${newsData.filter(n=>n.thumbnail).length} with thumbnails`);
+        console.log(`[RCB News] Fetched ${newsData.length} articles, ${newsData.filter(n=>n.thumbnail).length} with thumbnails`);
         return newsData;
       }
     } catch (e) {
@@ -143,22 +168,25 @@ async function fetchNews() {
     let rcbItems = items.filter(item => isRCBRelevant(item.title) || isRCBRelevant(item.description));
     if (rcbItems.length < 3) rcbItems = items; // Take all if not enough
     if (rcbItems.length >= 1) {
-      newsData = rcbItems.map(item => {
+      newsData = rcbItems.map((item, index) => {
         let thumb = item.thumbnail;
-        if (!thumb && item.description && item.description.includes('<img')) {
-          const match = item.description.match(/<img[^>]+src="([^">]+)"/);
-          if (match) thumb = match[1];
+        if (!thumb && item.description) {
+          thumb = extractImageFromHtml(item.description);
+        }
+        // Use fallback if no thumbnail
+        if (!thumb || thumb.length < 10) {
+          thumb = getFallbackImage(index);
         }
         return {
           title: item.title || '',
           description: item.description ? item.description.replace(/<[^>]*>/g, '').substring(0, 250) : '',
           pubDate: item.pubDate || new Date().toISOString(),
           link: item.link || '#',
-          thumbnail: thumb || ''
+          thumbnail: thumb
         };
       });
       lastFetchTime = new Date();
-      console.log(`[RCB News] ✅ Fetched ${newsData.length} articles via CORS proxy`);
+      console.log(`[RCB News] Fetched ${newsData.length} articles via CORS proxy`);
       return newsData;
     }
   } catch (e) {
@@ -166,7 +194,7 @@ async function fetchNews() {
   }
 
   // All sources failed — use defaults
-  console.log('[RCB News] ⚠️ All live sources failed. Using cached/default news.');
+  console.log('[RCB News] All live sources failed. Using cached/default news.');
   newsData = defaultNews;
   lastFetchTime = new Date();
   return newsData;
@@ -178,22 +206,14 @@ function renderNewsGrid(containerId, limit = 12) {
   const items = newsData.length ? newsData : defaultNews;
   const displayItems = items.slice(0, limit);
 
-  const fallbackImages = [
-    "images/rcb-squad-hero.webp",
-    "images/stadium-1.webp",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Virat_Kohli_in_ICC_World_cup_2023.jpg/440px-Virat_Kohli_in_ICC_World_cup_2023.jpg",
-    "https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_Logo.svg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Josh_Hazlewood_2016.jpg/440px-Josh_Hazlewood_2016.jpg"
-  ];
-
   container.innerHTML = displayItems.map((item, i) => {
     let thumbStr = item.thumbnail;
-    // Replace with fallback array if no thumbnail exists or is too short
+    // Ensure we always have a valid image
     if (!thumbStr || thumbStr.length < 10) {
-      thumbStr = fallbackImages[i % fallbackImages.length];
+      thumbStr = getFallbackImage(i);
     }
 
-    const thumbHtml = `<img src="${thumbStr}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='images/rcb-logo.png'">`;
+    const thumbHtml = `<img src="${thumbStr}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='images/rcb-logo.png';">`;
     return `
     <a href="${item.link}" target="_blank" rel="noopener" class="news-card ${i === 0 ? 'news-card-featured' : ''} reveal" style="animation-delay: ${i * 0.08}s">
       <div class="news-card-img">
