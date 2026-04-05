@@ -77,12 +77,14 @@ function renderFixtures(containerId, statusFilter, teamFilter) {
     const isRCB = m.rcb;
     const won = m.result && m.winner === 'RCB';
     const lost = m.result && m.winner && m.winner !== 'RCB' && isRCB;
+    const isLive = m.isLive || (m.t1runs && !m.result && new Date(m.date+'T'+m.time+':00+05:30') < now);
 
     return `
-    <div class="fx-card ${isRCB?'fx-rcb':''} ${m.result?'fx-done':'fx-upcoming'} ${won?'fx-win':lost?'fx-loss':''}"
-         ${m.result?`onclick="showScorecard(${m.id})" style="cursor:pointer" title="View Scorecard"`:''}
+    <div class="fx-card ${isRCB?'fx-rcb':''} ${m.result?'fx-done':isLive?'fx-live':'fx-upcoming'} ${won?'fx-win':lost?'fx-loss':''}"
+         ${m.result || isLive ?`onclick="showScorecard(${m.id})" style="cursor:pointer" title="${m.result?'View Scorecard':'View Live Score'}"`:''}
          >
       ${isRCB?`<div class="fx-rcb-badge">RCB MATCH</div>`:''}
+      ${isLive?`<div class="fx-rcb-badge" style="background:#00C864">● LIVE</div>`:''}
       <div class="fx-match-num">MATCH ${m.id}</div>
       <div class="fx-body">
         <div class="fx-team">
@@ -91,19 +93,22 @@ function renderFixtures(containerId, statusFilter, teamFilter) {
             <span style="display:none;color:${teamColor(m.t1)};font-weight:800;font-size:12px">${m.t1}</span>
           </div>
           <div class="fx-tname">${m.t1}</div>
-          ${m.result?`<div class="fx-score">${m.t1runs||''}</div>`:''}
+          ${m.result||isLive?`<div class="fx-score">${m.t1runs||'0/0 (0 Ov)'}</div>`:''}
         </div>
         <div class="fx-center">
           ${m.result
-            ? `<div class="fx-badge ${won?'fx-badge-win':lost?'fx-badge-loss':'fx-badge-done'}">${won?'✓ WIN':lost?'✗ LOSS':'RESULT'}</div>
+            ? `<div class="fx-badge ${won?'fx-badge-win':lost?'fx-badge-loss':'fx-badge-done'}">${won?'✓ RCB WON':lost?'✗ RCB LOST':m.winner===m.t1?m.t1+' WON':m.t2+' WON'}</div>
                <div class="fx-result-text">${m.result}</div>`
-            : `<div class="fx-vs">VS</div>`}
+            : isLive
+              ? `<div class="fx-badge fx-badge-live">● LIVE NOW</div>
+                 <div class="fx-live-score">${m.t1runs||'0/0'} vs ${m.t2runs||'0/0'}</div>`
+              : `<div class="fx-vs">VS</div>`}
           <div class="fx-info">
             <div class="fx-datetime">📅 ${dateStr}</div>
             <div class="fx-datetime">🕐 ${m.time} IST</div>
             <div class="fx-datetime">📍 ${m.venue}, ${m.city}</div>
           </div>
-          ${m.result?`<div class="fx-click-hint">📊 Tap for scorecard</div>`:`<div class="fx-upcoming-tag">UPCOMING</div>`}
+          ${m.result?`<div class="fx-click-hint">📊 Tap for full scorecard</div>`:isLive?`<div class="fx-click-hint">📊 Tap for live scorecard</div>`:`<div class="fx-upcoming-tag">UPCOMING</div>`}
         </div>
         <div class="fx-team fx-team-r">
           <div class="fx-logo" style="border-color:${teamColor(m.t2)}">
@@ -111,7 +116,7 @@ function renderFixtures(containerId, statusFilter, teamFilter) {
             <span style="display:none;color:${teamColor(m.t2)};font-weight:800;font-size:12px">${m.t2}</span>
           </div>
           <div class="fx-tname">${m.t2}</div>
-          ${m.result?`<div class="fx-score">${m.t2runs||''}</div>`:''}
+          ${m.result||isLive?`<div class="fx-score">${m.t2runs||'0/0 (0 Ov)'}</div>`:''}
         </div>
       </div>
     </div>`;
@@ -121,9 +126,10 @@ function renderFixtures(containerId, statusFilter, teamFilter) {
 /* ── Scorecard Modal ── */
 function showScorecard(id) {
   const m = ALL_IPL_2026.find(x => x.id === id);
-  if (!m || !m.result) return;
+  if (!m) return;
 
   const link = `https://www.espncricinfo.com/series/indian-premier-league-2026/`;
+  const isLive = m.isLive || (m.t1runs && !m.result);
 
   let body = '';
   if (m.scorecard) {
@@ -139,19 +145,29 @@ function showScorecard(id) {
         <tbody>${inn.bowl.map(r=>`<tr><td class="sc-name">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="sc-bold">${r[4]}</td><td>${r[5]}</td></tr>`).join('')}</tbody>
       </table>`;
     body = `<div class="sc-toss">🪙 Toss: ${sc.toss}</div>${battingTable(sc.inn1)}${battingTable(sc.inn2)}`;
+  } else if (isLive) {
+    body = `<div class="sc-no-data" style="padding:40px;text-align:center">
+      <div style="font-size:48px;margin-bottom:16px">🏏</div>
+      <div style="font-family:var(--font-display);font-size:24px;color:var(--rcb-red);margin-bottom:8px">MATCH IS LIVE</div>
+      <div style="font-family:var(--font-heading);font-size:18px;color:#fff;margin-bottom:16px">${m.t1runs||'0/0'} vs ${m.t2runs||'0/0'}</div>
+      <div style="font-size:14px;color:var(--text-muted);margin-bottom:24px">Live score updates from CricAPI</div>
+      <a href="${link}" target="_blank" class="sc-ext-link">Watch Live on ESPNCricinfo →</a>
+    </div>`;
   } else {
     body = `<div class="sc-no-data">
-      Full scorecard available on ESPNCricinfo.
-      <a href="${link}" target="_blank" class="sc-ext-link">View Full Scorecard →</a>
+      Full scorecard will be available once match is completed.
+      <a href="${link}" target="_blank" class="sc-ext-link">View Match Page →</a>
     </div>`;
   }
 
-  const winnerColor = m.winner === 'RCB' ? '#00C864' : '#CC0000';
+  const winnerColor = m.winner === 'RCB' ? '#00C864' : m.winner ? '#CC0000' : isLive ? '#FF4444' : '#888';
+  const statusText = isLive ? '● LIVE NOW' : m.result || 'UPCOMING';
+  
   document.getElementById('sc-modal-inner').innerHTML = `
     <div class="sc-header">
       <div class="sc-teams">${m.t1} vs ${m.t2}</div>
       <div class="sc-meta">${new Date(m.date+'T'+m.time+':00+05:30').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} • ${m.venue}, ${m.city}</div>
-      <div class="sc-result" style="color:${winnerColor}">${m.result}</div>
+      <div class="sc-result" style="color:${winnerColor}">${statusText}</div>
     </div>
     <div class="sc-body">${body}</div>
     <div class="sc-footer"><a href="${link}" target="_blank" class="sc-ext-link">Full Scorecard on ESPNCricinfo ↗</a></div>

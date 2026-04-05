@@ -297,13 +297,7 @@ window.ALL_IPL_2026 = [
     "t2": "KKR",
     "venue": "Wankhede Stadium",
     "city": "Mumbai",
-    "rcb": false,
-    "t1runs": "174/8",
-    "t1ovs": "20",
-    "t2runs": "176/4",
-    "t2ovs": "17.2",
-    "result": "KKR won by 6 wickets",
-    "winner": "KKR"
+    "rcb": false
   },
   {
     "id": 3,
@@ -313,13 +307,7 @@ window.ALL_IPL_2026 = [
     "t2": "CSK",
     "venue": "Sawai Mansingh Stadium",
     "city": "Jaipur",
-    "rcb": false,
-    "t1runs": "189/6",
-    "t1ovs": "20",
-    "t2runs": "190/5",
-    "t2ovs": "19.1",
-    "result": "CSK won by 5 wickets",
-    "winner": "CSK"
+    "rcb": false
   },
   {
     "id": 4,
@@ -329,13 +317,7 @@ window.ALL_IPL_2026 = [
     "t2": "GT",
     "venue": "New PCA Stadium",
     "city": "Mullanpur",
-    "rcb": false,
-    "t1runs": "201/5",
-    "t1ovs": "20",
-    "t2runs": "202/4",
-    "t2ovs": "19.3",
-    "result": "GT won by 6 wickets",
-    "winner": "GT"
+    "rcb": false
   },
   {
     "id": 5,
@@ -345,13 +327,7 @@ window.ALL_IPL_2026 = [
     "t2": "DC",
     "venue": "Ekana Cricket Stadium",
     "city": "Lucknow",
-    "rcb": false,
-    "t1runs": "178/7",
-    "t1ovs": "20",
-    "t2runs": "180/4",
-    "t2ovs": "18.2",
-    "result": "DC won by 6 wickets",
-    "winner": "DC"
+    "rcb": false
   },
   {
     "id": 6,
@@ -361,13 +337,7 @@ window.ALL_IPL_2026 = [
     "t2": "SRH",
     "venue": "Eden Gardens",
     "city": "Kolkata",
-    "rcb": false,
-    "t1runs": "187/5",
-    "t1ovs": "20",
-    "t2runs": "188/4",
-    "t2ovs": "18.5",
-    "result": "SRH won by 6 wickets",
-    "winner": "SRH"
+    "rcb": false
   },
   {
     "id": 7,
@@ -377,13 +347,7 @@ window.ALL_IPL_2026 = [
     "t2": "PBKS",
     "venue": "MA Chidambaram Stadium",
     "city": "Chennai",
-    "rcb": false,
-    "t1runs": "196/6",
-    "t1ovs": "20",
-    "t2runs": "189/8",
-    "t2ovs": "20",
-    "result": "CSK won by 7 runs",
-    "winner": "CSK"
+    "rcb": false
   },
   {
     "id": 8,
@@ -393,13 +357,7 @@ window.ALL_IPL_2026 = [
     "t2": "MI",
     "venue": "Arun Jaitley Stadium",
     "city": "Delhi",
-    "rcb": false,
-    "t1runs": "205/6",
-    "t1ovs": "20",
-    "t2runs": "208/5",
-    "t2ovs": "19.4",
-    "result": "MI won by 5 wickets",
-    "winner": "MI"
+    "rcb": false
   },
   {
     "id": 9,
@@ -409,13 +367,7 @@ window.ALL_IPL_2026 = [
     "t2": "RR",
     "venue": "Narendra Modi Stadium",
     "city": "Ahmedabad",
-    "rcb": false,
-    "t1runs": "182/7",
-    "t1ovs": "20",
-    "t2runs": "183/5",
-    "t2ovs": "19.2",
-    "result": "RR won by 5 wickets",
-    "winner": "RR"
+    "rcb": false
   },
   {
     "id": 10,
@@ -425,13 +377,7 @@ window.ALL_IPL_2026 = [
     "t2": "LSG",
     "venue": "Rajiv Gandhi Intl. Cricket Stadium",
     "city": "Hyderabad",
-    "rcb": false,
-    "t1runs": "198/6",
-    "t1ovs": "20",
-    "t2runs": "199/4",
-    "t2ovs": "18.3",
-    "result": "LSG won by 6 wickets",
-    "winner": "LSG"
+    "rcb": false
   },
   {
     "id": 11,
