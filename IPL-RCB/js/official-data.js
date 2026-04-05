@@ -426,12 +426,9 @@ window.ALL_IPL_2026 = [
     "venue": "Rajiv Gandhi Intl. Cricket Stadium",
     "city": "Hyderabad",
     "rcb": false,
-    "t1runs": "215/6",
-    "t1ovs": "20",
-    "t2runs": "218/5",
-    "t2ovs": "19.4",
-    "result": "LSG won by 5 wickets",
-    "winner": "LSG"
+    "isLive": true,
+    "t1runs": "215/6 (20)",
+    "t2runs": "180/4 (16.2)"
   },
   {
     "id": 11,
