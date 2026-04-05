@@ -465,6 +465,22 @@ function handleRCBMatchComplete(completedMatch) {
    6. CACHING & PERSISTENCE
    ============================================================ */
 
+const CACHE_VERSION = 'v2'; // Increment to clear old caches
+
+function clearOldCache() {
+  try {
+    const storedVersion = localStorage.getItem('ipl2026_cache_version');
+    if (storedVersion !== CACHE_VERSION) {
+      localStorage.removeItem('ipl2026_live_cache');
+      localStorage.removeItem('ipl2026results');
+      localStorage.setItem('ipl2026_cache_version', CACHE_VERSION);
+      console.log('[LiveData] Cleared old cache');
+    }
+  } catch (e) {
+    console.error('[LiveData] Error clearing cache:', e.message);
+  }
+}
+
 function cacheMatchResult(match) {
   try {
     const cache = JSON.parse(localStorage.getItem('ipl2026_live_cache') || '{}');
@@ -510,7 +526,10 @@ function loadCachedResults() {
 function initLiveDataSystem() {
   console.log('[LiveData] Initializing Live Data System...');
   
-  // Load cached results first
+  // Clear old cache first
+  clearOldCache();
+  
+  // Load cached results
   loadCachedResults();
   
   // Initial fetch
