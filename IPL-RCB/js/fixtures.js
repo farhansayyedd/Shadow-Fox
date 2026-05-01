@@ -60,24 +60,29 @@ function isUpcoming(m) {
 
 /* ── Data fetch ── */
 async function fetchData() {
-  // Try JSON fetch first (works on GitHub Pages, gets fresh data)
+  // Try JSON fetch (works on GitHub Pages / HTTP, gets fresh data)
   try {
-    const r = await fetch(`${DATA_URL}?t=${Date.now()}`);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const r = await fetch(`${DATA_URL}?t=${Date.now()}`, { signal: controller.signal });
+    clearTimeout(timeout);
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const json = await r.json();
-    _matches = json.matches || [];
-    updateLastUpdated(json.generatedAt);
-    return true;
-  } catch (e) {
-    // Fallback: use the window global from ipl-data.js script tag (works on file://)
-    if (window.IPL_2026_DATA && window.IPL_2026_DATA.matches) {
-      _matches = window.IPL_2026_DATA.matches;
-      updateLastUpdated(window.IPL_2026_DATA.generatedAt);
+    if (json.matches && json.matches.length) {
+      _matches = json.matches;
+      updateLastUpdated(json.generatedAt);
       return true;
     }
-    console.warn('No data available:', e.message);
-    return false;
+  } catch (e) {
+    // Silently fall through to window global
   }
+  // Fallback: window global from ipl-data.js script tag (always works)
+  if (window.IPL_2026_DATA && window.IPL_2026_DATA.matches) {
+    _matches = window.IPL_2026_DATA.matches;
+    updateLastUpdated(window.IPL_2026_DATA.generatedAt);
+    return true;
+  }
+  return false;
 }
 
 function updateLastUpdated(ts) {
@@ -94,10 +99,14 @@ function updateLastUpdated(ts) {
 
 /* ── Full refresh cycle ── */
 async function refreshData(showLoader = false) {
-  if (showLoader) {
-    const list = document.getElementById('fixtures-list');
-    if (list && !_matches.length) list.innerHTML = '<div class="fx-empty">Loading...</div>';
+  // FIRST: load synchronously from the embedded JS global (works on file://)
+  if (window.IPL_2026_DATA && window.IPL_2026_DATA.matches && !_matches.length) {
+    _matches = window.IPL_2026_DATA.matches;
+    updateLastUpdated(window.IPL_2026_DATA.generatedAt);
+    render();
+    updateCountdown();
   }
+  // THEN: try async fetch for fresh data (works on GitHub Pages / HTTP server)
   await fetchData();
   render();
   updateCountdown();
