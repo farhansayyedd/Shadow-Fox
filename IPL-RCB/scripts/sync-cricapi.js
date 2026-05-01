@@ -115,23 +115,38 @@ async function main() {
     const dtIST = new Date(dtGMT.getTime() + 5.5 * 3600000);
     const timeIST = dtIST.toTimeString().slice(0, 5);
 
-    // Parse score from matchList
+    // Parse score from matchList (series_info sometimes omits scores)
     let t1runs = '', t1ovs = '', t2runs = '', t2ovs = '';
     if (m.score && m.score.length) {
-      const s1 = m.score[0];
-      const s2 = m.score[1];
-      if (s1) { t1runs = `${s1.r}/${s1.w}`; t1ovs = String(s1.o); }
-      if (s2) { t2runs = `${s2.r}/${s2.w}`; t2ovs = String(s2.o); }
+      // API returns scores in batting-order; map by inning name
+      for (const s of m.score) {
+        const inn = (s.inning || '').toLowerCase();
+        if (inn.includes(t1Full.toLowerCase().split(' ')[0])) {
+          t1runs = `${s.r}/${s.w}`; t1ovs = String(s.o);
+        } else if (inn.includes(t2Full.toLowerCase().split(' ')[0])) {
+          t2runs = `${s.r}/${s.w}`; t2ovs = String(s.o);
+        } else if (!t1runs) {
+          t1runs = `${s.r}/${s.w}`; t1ovs = String(s.o);
+        } else {
+          t2runs = `${s.r}/${s.w}`; t2ovs = String(s.o);
+        }
+      }
     }
 
-    // Determine winner
+    // Determine winner from status text
     let winner = '';
     const status = m.status || '';
     if (m.matchEnded) {
-      if (status.toLowerCase().includes('royal challengers')) winner = 'RCB';
+      const stL = status.toLowerCase();
+      if (stL.includes('royal challengers')) winner = 'RCB';
       else {
-        const winTeam = teams.find(t => status.toLowerCase().startsWith(t.toLowerCase()));
+        const winTeam = teams.find(t => stL.startsWith(t.toLowerCase()));
         if (winTeam) winner = shortName(winTeam);
+        else {
+          // Try partial match
+          const winTeam2 = teams.find(t => stL.includes(t.toLowerCase().split(' ')[0]));
+          if (winTeam2) winner = shortName(winTeam2);
+        }
       }
     }
 
@@ -151,41 +166,42 @@ async function main() {
       winner,
     };
 
-    // Fetch scorecard for completed RCB matches
-    if (rcb && m.matchEnded && hitsUsed < 90) {
-      console.log(`  📊 Fetching scorecard: Match ${matchNum} (${t1} vs ${t2})...`);
-      await sleep(500);
+    // Fetch scorecard for ALL completed matches (to get scores) — RCB matches get full bat/bowl data
+    if (m.matchEnded && hitsUsed < 88) {
+      await sleep(400);
       const sc = await api('match_scorecard', { id: m.id });
       hitsUsed += 2;
 
-      if (sc && sc.scorecard && sc.scorecard.length >= 2) {
-        const inn1 = parseInnings(sc.scorecard[0]);
-        const inn2 = parseInnings(sc.scorecard[1]);
-        // Fix score from scorecard
-        const s1 = sc.score?.[0], s2 = sc.score?.[1];
-        if (s1) { inn1.score = `${s1.r}/${s1.w} (${s1.o} Ov)`; }
-        if (s2) { inn2.score = `${s2.r}/${s2.w} (${s2.o} Ov)`; }
-        const toss = sc.tossWinner
-          ? `${sc.tossWinner.charAt(0).toUpperCase() + sc.tossWinner.slice(1)} won the toss and elected to ${sc.tossChoice}`
-          : '';
-        matchObj.scorecard = { toss, inn1, inn2 };
-        // Update scores from scorecard
-        matchObj.t1runs = s1 ? `${s1.r}/${s1.w}` : t1runs;
-        matchObj.t1ovs = s1 ? String(s1.o) : t1ovs;
-        matchObj.t2runs = s2 ? `${s2.r}/${s2.w}` : t2runs;
-        matchObj.t2ovs = s2 ? String(s2.o) : t2ovs;
-        // Fix winner from API
+      if (sc && sc.score && sc.score.length) {
+        // Always update scores from scorecard (accurate for all matches)
+        const s1 = sc.score[0], s2 = sc.score[1];
+        if (s1) { matchObj.t1runs = `${s1.r}/${s1.w}`; matchObj.t1ovs = String(s1.o); }
+        if (s2) { matchObj.t2runs = `${s2.r}/${s2.w}`; matchObj.t2ovs = String(s2.o); }
         if (sc.matchWinner) {
           matchObj.winner = isRCBTeam(sc.matchWinner) ? 'RCB' : shortName(sc.matchWinner);
         }
-        console.log(`     ✅ ${inn1.team} ${inn1.score} | ${inn2.team} ${inn2.score}`);
+
+        // For RCB matches: also store full batting/bowling scorecard
+        if (rcb && sc.scorecard && sc.scorecard.length >= 2) {
+          const inn1 = parseInnings(sc.scorecard[0]);
+          const inn2 = parseInnings(sc.scorecard[1]);
+          if (s1) inn1.score = `${s1.r}/${s1.w} (${s1.o} Ov)`;
+          if (s2) inn2.score = `${s2.r}/${s2.w} (${s2.o} Ov)`;
+          const toss = sc.tossWinner
+            ? `${sc.tossWinner.charAt(0).toUpperCase() + sc.tossWinner.slice(1)} won the toss and elected to ${sc.tossChoice}`
+            : '';
+          matchObj.scorecard = { toss, inn1, inn2 };
+          console.log(`  ✅ Match ${matchNum} (${t1} vs ${t2}): ${inn1.team} ${inn1.score} | ${inn2.team} ${inn2.score}`);
+        } else {
+          console.log(`  ✅ Match ${matchNum} (${t1} vs ${t2}): ${matchObj.t1runs} | ${matchObj.t2runs}`);
+        }
       } else {
-        console.log(`     ⚠ No scorecard data`);
+        console.log(`  ⚠ Match ${matchNum} (${t1} vs ${t2}): no scorecard`);
       }
-    } else if (rcb && !m.matchEnded && m.matchStarted && hitsUsed < 90) {
-      // Live match — fetch current scores
-      console.log(`  🔴 Live match: Match ${matchNum} (${t1} vs ${t2})`);
-      await sleep(500);
+    } else if (!m.matchEnded && m.matchStarted && rcb && hitsUsed < 90) {
+      // Live RCB match — fetch current scores
+      console.log(`  🔴 LIVE: Match ${matchNum} (${t1} vs ${t2})`);
+      await sleep(400);
       const liveData = await api('match_info', { id: m.id });
       hitsUsed += 1;
       if (liveData && liveData.score) {

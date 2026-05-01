@@ -113,9 +113,13 @@ function buildCard(m) {
   if (m.rcb)  badges += '<span class="fx-badge-rcb">RCB</span>';
   if (live)   badges += '<span class="fx-badge-live">&#9679; LIVE</span>';
 
-  // Scores
-  var s1 = (done || live) && m.t1runs ? m.t1runs + (m.t1ovs ? '<small> (' + m.t1ovs + ' Ov)</small>' : '') : '';
-  var s2 = (done || live) && m.t2runs ? m.t2runs + (m.t2ovs ? '<small> (' + m.t2ovs + ' Ov)</small>' : '') : '';
+  // Scores — show actual scores if available, else show result stub for completed matches
+  var s1 = '';
+  var s2 = '';
+  if (done || live) {
+    s1 = m.t1runs ? m.t1runs + (m.t1ovs ? '<small> (' + m.t1ovs + ' Ov)</small>' : '') : (done && m.winner === m.t1 ? '<span style="color:#00C864;font-size:11px">★ WINNER</span>' : (done ? '<span style="color:#888;font-size:11px">&mdash;</span>' : ''));
+    s2 = m.t2runs ? m.t2runs + (m.t2ovs ? '<small> (' + m.t2ovs + ' Ov)</small>' : '') : (done && m.winner === m.t2 ? '<span style="color:#00C864;font-size:11px">★ WINNER</span>' : (done ? '<span style="color:#888;font-size:11px">&mdash;</span>' : ''));
+  }
 
   // Center
   var center = '';
