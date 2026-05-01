@@ -2,12 +2,18 @@ name: IPL 2026 Live Data Sync
 
 on:
   schedule:
-    # Run every 15 minutes during IPL match hours (11:00–18:00 UTC = 16:30–23:30 IST)
-    - cron: '*/15 11-18 * * *'
-    # Also run every 30 minutes at other times to catch results
-    - cron: '*/30 0-10 * * *'
-    - cron: '*/30 19-23 * * *'
+    # During IPL match hours (14:00-20:00 UTC = 7:30 PM-1:30 AM IST): every 30 min
+    - cron: '*/30 14-20 * * *'
+    # Rest of day: every 3 hours (keeps hits low on non-match days)
+    - cron: '0 */3 * * *'
   workflow_dispatch:
+
+# Budget analysis (100 hits/day):
+#   Match hours: 7 runs × 1 hit (series_info) = 7 hits
+#   + 2 hits for each newly completed match (max 1/day) = 2 hits
+#   + Off-hours: 8 runs × 1 hit = 8 hits
+#   TOTAL per day: ~17-20 hits (well within 100 limit)
+#   Live match day: 7 runs × 2 hits = 14 hits (still fine)
 
 permissions:
   contents: write
@@ -24,13 +30,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch IPL 2026 Data from CricAPI
+      - name: Sync IPL 2026 Data (Smart Cache)
         run: node scripts/sync-cricapi.js
 
-      - name: Commit & Push
+      - name: Commit & Push if changed
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/ipl2026.json js/ipl-data.js
-          git diff --staged --quiet || git commit -m "sync: IPL 2026 live data [skip ci]"
+          git diff --staged --quiet || git commit -m "sync: IPL 2026 data update [skip ci]"
           git push
