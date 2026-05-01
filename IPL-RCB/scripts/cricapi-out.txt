@@ -1,0 +1,31 @@
+﻿≡ƒÅÅ RCB Fan Zone ΓÇö CricAPI Sync
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+
+≡ƒôí Fetching series match list...
+Γ£à Found 70 matches
+
+  ≡ƒôè Fetching scorecard: Match 1 (RCB vs SRH)...
+     Γ£à SRH 201/9 (20 Ov) | RCB 203/4 (15.4 Ov)
+  ≡ƒôè Fetching scorecard: Match 11 (RCB vs CSK)...
+     Γ£à RCB 250/3 (20 Ov) | CSK 207/10 (19.4 Ov)
+  ≡ƒôè Fetching scorecard: Match 16 (RR vs RCB)...
+     Γ£à RCB 201/8 (20 Ov) | RR 202/4 (18 Ov)
+  ≡ƒôè Fetching scorecard: Match 20 (MI vs RCB)...
+     Γ£à RCB 240/4 (20 Ov) | MI 222/5 (20 Ov)
+  ≡ƒôè Fetching scorecard: Match 23 (RCB vs LSG)...
+     Γ£à LSG 146/10 (20 Ov) | RCB 149/5 (15.1 Ov)
+  ≡ƒôè Fetching scorecard: Match 26 (RCB vs DC)...
+     Γ£à RCB 175/8 (20 Ov) | DC 179/4 (19.5 Ov)
+  ≡ƒôè Fetching scorecard: Match 34 (RCB vs GT)...
+     Γ£à GT 205/3 (20 Ov) | RCB 206/5 (18.5 Ov)
+  ≡ƒôè Fetching scorecard: Match 39 (DC vs RCB)...
+     Γ£à DC 75/10 (16.3 Ov) | RCB 77/1 (6.3 Ov)
+
+Γ£à Done!
+   Total: 70 matches
+   Completed: 39
+   RCB: 14 matches (8 played)
+   Scorecards: 8
+   API hits used: 17/100
+
+≡ƒô¥ Written: data/ipl2026.json

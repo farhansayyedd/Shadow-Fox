@@ -1,33 +1,36 @@
-name: Automated Official RCB Sync
+name: IPL 2026 Live Data Sync
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Runs every 30 minutes
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+    # Run every 15 minutes during IPL match hours (11:00–18:00 UTC = 16:30–23:30 IST)
+    - cron: '*/15 11-18 * * *'
+    # Also run every 30 minutes at other times to catch results
+    - cron: '*/30 0-10 * * *'
+    - cron: '*/30 19-23 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  sync_official_data:
+  sync:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          
-      - name: Install Dependencies
-        run: npm install axios cheerio
-        
-      - name: Execute RCB Data Sync Script
-        run: node scripts/sync-live.js
-        
-      - name: Commit & Push Changes
+
+      - name: Fetch IPL 2026 Data from CricAPI
+        run: node scripts/sync-cricapi.js
+
+      - name: Commit & Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add js/official-data.js
-          git commit -m "chore(data): synced latest official match scorecards/fixtures [skip ci]" || echo "No changes to commit"
+          git add data/ipl2026.json js/ipl-data.js
+          git diff --staged --quiet || git commit -m "sync: IPL 2026 live data [skip ci]"
           git push

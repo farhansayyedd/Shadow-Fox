@@ -1,272 +1,499 @@
 'use strict';
+/**
+ * RCB Fan Zone — Fixtures Engine
+ * Fetches data/ipl2026.json every 30 seconds
+ * Shows real IPL 2026 fixtures, live scores, results, countdown & scorecards
+ */
 
-/* =====================================================
-   IPL 2026 — All Matches (Verified from official sources)
-   Last updated: Apr 5, 2026
-   ===================================================== */
-/* Team Data & Fixtures Render Logic */
+const CRICAPI_KEY = '3812d023-8576-4422-bc75-9cd9c7160d14';
+const DATA_URL    = 'data/ipl2026.json';
+const REFRESH_MS  = 30000; // 30 seconds
 
-/* ── Countdown to next RCB match ── */
-function startCountdown() {
+let _matches     = [];
+let _activeFilter = 'all';
+let _teamFilter   = 'all';
+let _countdownTimer = null;
+let _refreshTimer   = null;
+let _currentScorecardId = null;
+
+/* ── Team helpers ── */
+const LOGOS = {
+  RCB:'images/rcb-logo.png', CSK:'images/csk.png', MI:'images/mi.png',
+  KKR:'images/kkr.png', SRH:'images/srh.png', RR:'images/rr.png',
+  DC:'images/dc.png', PBKS:'images/pbks.png', GT:'images/gt.png', LSG:'images/lsg.png'
+};
+const COLORS = {
+  RCB:'#CC0000', CSK:'#F9CD05', MI:'#004BA0', KKR:'#3A225D',
+  SRH:'#F7A721', RR:'#254AA5', DC:'#0078BC', PBKS:'#ED1C24',
+  GT:'#1B2133', LSG:'#A2EDFC'
+};
+const FULL_NAMES = {
+  RCB:'Royal Challengers Bengaluru', CSK:'Chennai Super Kings',
+  MI:'Mumbai Indians', KKR:'Kolkata Knight Riders',
+  SRH:'Sunrisers Hyderabad', RR:'Rajasthan Royals',
+  DC:'Delhi Capitals', PBKS:'Punjab Kings',
+  GT:'Gujarat Titans', LSG:'Lucknow Super Giants'
+};
+
+function logo(t) { return LOGOS[t] || ''; }
+function color(t) { return COLORS[t] || '#888'; }
+
+/* ── Match time ── */
+function matchDateTime(m) {
+  // dateTimeGMT from API is UTC, stored as IST in our JSON time field
+  // date = "2026-04-27", time = "19:30" (IST)
+  return new Date(`${m.date}T${m.time}:00+05:30`);
+}
+
+function isLive(m) {
+  if (m.ended) return false;
+  if (m.isLive) return true;
+  const dt = matchDateTime(m);
   const now = new Date();
-  const nextMatch = ALL_IPL_2026.find(m => m.rcb && !m.result && new Date(m.date + 'T' + m.time + ':00+05:30') > now);
-  
-  const els = [document.getElementById('countdown-wrap'), document.getElementById('next-countdown-box')].filter(Boolean);
-  if (!nextMatch || els.length === 0) { 
-    els.forEach(el => el.style.display = 'none'); 
-    return; 
+  const elapsed = now - dt;
+  return m.started && !m.ended && elapsed > 0;
+}
+
+function isUpcoming(m) {
+  return !m.ended && !isLive(m) && matchDateTime(m) > new Date();
+}
+
+/* ── Data fetch ── */
+async function fetchData() {
+  // Try JSON fetch first (works on GitHub Pages, gets fresh data)
+  try {
+    const r = await fetch(`${DATA_URL}?t=${Date.now()}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const json = await r.json();
+    _matches = json.matches || [];
+    updateLastUpdated(json.generatedAt);
+    return true;
+  } catch (e) {
+    // Fallback: use the window global from ipl-data.js script tag (works on file://)
+    if (window.IPL_2026_DATA && window.IPL_2026_DATA.matches) {
+      _matches = window.IPL_2026_DATA.matches;
+      updateLastUpdated(window.IPL_2026_DATA.generatedAt);
+      return true;
+    }
+    console.warn('No data available:', e.message);
+    return false;
+  }
+}
+
+function updateLastUpdated(ts) {
+  const el = document.getElementById('last-updated');
+  if (!el) return;
+  if (ts) {
+    const d = new Date(ts);
+    const mins = Math.floor((Date.now() - d) / 60000);
+    el.textContent = mins < 1 ? '• Updated just now'
+      : mins < 60 ? `• Updated ${mins}m ago`
+      : `• Updated ${Math.floor(mins/60)}h ago`;
+  }
+}
+
+/* ── Full refresh cycle ── */
+async function refreshData(showLoader = false) {
+  if (showLoader) {
+    const list = document.getElementById('fixtures-list');
+    if (list && !_matches.length) list.innerHTML = '<div class="fx-empty">Loading...</div>';
+  }
+  await fetchData();
+  render();
+  updateCountdown();
+}
+
+/* ── Countdown ── */
+function updateCountdown() {
+  // Clear old timer
+  if (_countdownTimer) { clearInterval(_countdownTimer); _countdownTimer = null; }
+
+  const now = new Date();
+  // Check if any RCB match is live right now
+  const liveMatch = _matches.find(m => m.rcb && isLive(m));
+  if (liveMatch) {
+    showLiveBanner(liveMatch);
+    return;
   }
 
-  const matchTime = new Date(nextMatch.date + 'T' + nextMatch.time + ':00+05:30');
-  const vsText = nextMatch.t1 === 'RCB' ? `RCB vs ${nextMatch.t2}` : `${nextMatch.t1} vs RCB`;
-  const dateStr = matchTime.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
+  // Find next upcoming RCB match
+  const next = _matches
+    .filter(m => m.rcb && !m.ended && matchDateTime(m) > now)
+    .sort((a, b) => matchDateTime(a) - matchDateTime(b))[0];
 
-  els.forEach(el => {
-    if (el.querySelector('.cdw-match')) el.querySelector('.cdw-match').textContent = vsText;
-    if (el.querySelector('.cdw-venue')) el.querySelector('.cdw-venue').textContent = nextMatch.venue + ', ' + nextMatch.city;
-    if (el.querySelector('.cdw-date'))  el.querySelector('.cdw-date').textContent = dateStr + ' • ' + nextMatch.time + ' IST';
-    if (el.querySelector('.countdown-label')) el.querySelector('.countdown-label').textContent = `NEXT MATCH: ${vsText}`;
-  });
+  if (!next) {
+    // All done
+    const wrap = document.getElementById('countdown-wrap');
+    if (wrap) wrap.innerHTML = `<div class="cdw-label">🏆 IPL 2026 SEASON</div><div class="cdw-match">All RCB Matches Completed</div>`;
+    return;
+  }
+
+  const dt = matchDateTime(next);
+  const opp = next.t1 === 'RCB' ? next.t2 : next.t1;
+  const vsText = `RCB VS ${opp}`;
+  const dateStr = dt.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  const timeStr = next.time + ' IST';
+
+  document.getElementById('cdw-label').textContent = '⚡ Next RCB Match In';
+  document.getElementById('cdw-match').textContent = vsText;
+  document.getElementById('cdw-venue').textContent = `${next.venue}${next.city ? ', ' + next.city : ''}`;
+  document.getElementById('cdw-date').textContent = `${dateStr} • ${timeStr}`;
+  document.getElementById('cdw-timer').style.display = 'flex';
 
   function tick() {
-    const diff = matchTime - new Date();
-    if (diff <= 0) { 
-      els.forEach(el => {
-        const timer = el.querySelector('.cdw-timer') || el.querySelector('.countdown-timer');
-        if (timer) timer.innerHTML = '<span style="color:var(--rcb-gold);font-weight:700">● MATCH IS LIVE</span>'; 
-      });
-      return; 
+    const diff = dt - new Date();
+    if (diff <= 0) {
+      clearInterval(_countdownTimer);
+      _countdownTimer = null;
+      // Show live banner
+      document.getElementById('cdw-label').textContent = '🔴 MATCH IS LIVE';
+      document.getElementById('cdw-timer').innerHTML = `<div class="cdw-live-banner">● ${vsText} IS LIVE NOW</div>`;
+      return;
     }
-    const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000),
-          m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
-          
-    els.forEach(el => {
-      if (el.querySelector('#cd-d')) el.querySelector('#cd-d').textContent = String(d).padStart(2,'0');
-      if (el.querySelector('#cd-h')) el.querySelector('#cd-h').textContent = String(h).padStart(2,'0');
-      if (el.querySelector('#cd-m')) el.querySelector('#cd-m').textContent = String(m).padStart(2,'0');
-      if (el.querySelector('#cd-s')) el.querySelector('#cd-s').textContent = String(s).padStart(2,'0');
-    });
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = String(v).padStart(2, '0'); };
+    set('cd-d', d); set('cd-h', h); set('cd-m', m); set('cd-s', s);
   }
-  tick(); setInterval(tick, 1000);
+  tick();
+  _countdownTimer = setInterval(tick, 1000);
 }
 
-/* ── Team meta ── */
-function teamLogo(short) {
-  const logos = { RCB:'images/rcb-logo.png', CSK:'images/csk.png', MI:'images/mi.png', KKR:'images/kkr.png', SRH:'images/srh.png', RR:'images/rr.png', DC:'images/dc.png', PBKS:'images/pbks.png', GT:'images/gt.png', LSG:'images/lsg.png' };
-  return logos[short] || 'images/rcb-logo.png';
+function showLiveBanner(m) {
+  const opp = m.t1 === 'RCB' ? m.t2 : m.t1;
+  document.getElementById('cdw-label').textContent = '🔴 MATCH LIVE NOW';
+  document.getElementById('cdw-match').textContent = `RCB VS ${opp}`;
+  document.getElementById('cdw-venue').textContent = `${m.venue}, ${m.city}`;
+  document.getElementById('cdw-date').textContent = 'Live score updates every 30 seconds';
+  const score1 = m.t1runs ? `${m.t1}: ${m.t1runs}` : '';
+  const score2 = m.t2runs ? `${m.t2}: ${m.t2runs}` : '';
+  document.getElementById('cdw-timer').innerHTML = `<div class="cdw-live-banner">● LIVE${score1 ? ' — ' + score1 + (score2 ? ' | ' + score2 : '') : ''}</div>`;
 }
-function teamColor(short) {
-  const c = { RCB:'#CC0000', CSK:'#F9CD05', MI:'#004BA0', KKR:'#3A225D', SRH:'#F7A721', RR:'#254AA5', DC:'#0078BC', PBKS:'#ED1C24', GT:'#1B2133', LSG:'#A2EDFC' };
-  return c[short] || '#888';
+
+/* ── Filter helpers ── */
+function getFilteredMatches() {
+  let list = [..._matches];
+  if (_activeFilter === 'rcb')      list = list.filter(m => m.rcb);
+  if (_activeFilter === 'results')  list = list.filter(m => m.ended);
+  if (_activeFilter === 'upcoming') list = list.filter(m => !m.ended);
+  if (_teamFilter && _teamFilter !== 'all') list = list.filter(m => m.t1 === _teamFilter || m.t2 === _teamFilter);
+  return list;
 }
 
-/* ── Render fixture cards ── */
-function renderFixtures(containerId, statusFilter, teamFilter) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  let list = ALL_IPL_2026;
-  const now = new Date();
-  if (statusFilter === 'results')  list = list.filter(m => m.result);
-  if (statusFilter === 'upcoming') list = list.filter(m => !m.result);
-  if (teamFilter && teamFilter !== 'all') list = list.filter(m => m.t1===teamFilter||m.t2===teamFilter);
-  if (!list.length) { container.innerHTML = `<div class="fx-empty">No matches found.</div>`; return; }
+/* ── Build match card HTML ── */
+function cardHTML(m) {
+  const live   = isLive(m);
+  const done   = m.ended;
+  const rcb    = m.rcb;
+  const won    = done && m.winner === 'RCB';
+  const lost   = done && m.winner && m.winner !== 'RCB' && rcb;
+  const canClick = done || live;
 
-  container.innerHTML = list.map(m => {
-    const dt = new Date(m.date+'T'+m.time+':00+05:30');
-    const dateStr = dt.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
-    const isRCB = m.rcb;
-    const won = m.result && m.winner === 'RCB';
-    const lost = m.result && m.winner && m.winner !== 'RCB' && isRCB;
-    const isLive = m.isLive || (m.t1runs && !m.result && new Date(m.date+'T'+m.time+':00+05:30') < now);
+  const dt = matchDateTime(m);
+  const dateStr = dt.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short' });
+  const t1c = color(m.t1), t2c = color(m.t2);
+  const t1l = logo(m.t1), t2l = logo(m.t2);
 
-    return `
-    <div class="fx-card ${isRCB?'fx-rcb':''} ${m.result?'fx-done':isLive?'fx-live':'fx-upcoming'} ${won?'fx-win':lost?'fx-loss':''}"
-         ${m.result || isLive ?`onclick="showScorecard(${m.id})" style="cursor:pointer" title="${m.result?'View Scorecard':'View Live Score'}"`:''}
-         >
-      ${isRCB?`<div class="fx-rcb-badge">RCB MATCH</div>`:''}
-      ${isLive?`<div class="fx-rcb-badge" style="background:#00C864">● LIVE</div>`:''}
-      <div class="fx-match-num">MATCH ${m.id}</div>
-      <div class="fx-body">
-        <div class="fx-team">
-          <div class="fx-logo" style="border-color:${teamColor(m.t1)}">
-            <img src="${teamLogo(m.t1)}" alt="${m.t1}" onerror="this.style.display='none';this.nextSibling.style.display='block'">
-            <span style="display:none;color:${teamColor(m.t1)};font-weight:800;font-size:12px">${m.t1}</span>
-          </div>
-          <div class="fx-tname">${m.t1}</div>
-          ${m.result||isLive?`<div class="fx-score">${m.t1runs||'0/0 (0 Ov)'}</div>`:''}
+  // Card classes
+  let cls = 'fx-card';
+  if (rcb)  cls += ' fx-rcb';
+  if (won)  cls += ' fx-win';
+  if (lost) cls += ' fx-loss';
+  if (live) cls += ' fx-live-card';
+  if (canClick) cls += ' fx-clickable';
+
+  // Badges
+  let badges = '';
+  if (rcb)  badges += `<span class="fx-badge-rcb">RCB MATCH</span>`;
+  if (live) badges += `<span class="fx-badge-live">● LIVE</span>`;
+
+  // Center content
+  let centerContent = '';
+  if (live) {
+    const s = m.t1runs ? `${m.t1} ${m.t1runs}${m.t1ovs ? ' ('+m.t1ovs+' Ov)' : ''}` : '';
+    const s2 = m.t2runs ? `${m.t2} ${m.t2runs}${m.t2ovs ? ' ('+m.t2ovs+' Ov)' : ''}` : '';
+    centerContent = `
+      <div class="fx-result-wrap">
+        <div class="fx-result-badge" style="background:rgba(0,200,100,.18);color:#00C864;border:1px solid rgba(0,200,100,.4);animation:pulse 1.5s infinite">● LIVE</div>
+        ${s || s2 ? `<div class="fx-live-score">${s}${s && s2 ? '<br>' : ''}${s2}</div>` : ''}
+        <div class="fx-hint">TAP FOR LIVE SCORE</div>
+      </div>`;
+  } else if (done) {
+    const badgeCls = won ? 'fx-badge-win-style' : lost ? 'fx-badge-loss-style' : 'fx-badge-neutral';
+    const badgeTxt = won ? '✓ RCB WON' : lost ? '✗ RCB LOST'
+      : m.winner ? `${m.winner} WON` : 'COMPLETED';
+    centerContent = `
+      <div class="fx-result-wrap">
+        <div class="fx-result-badge ${badgeCls}">${badgeTxt}</div>
+        <div class="fx-result-text">${m.result || ''}</div>
+        <div class="fx-hint">📊 TAP FOR SCORECARD</div>
+      </div>`;
+  } else {
+    centerContent = `
+      <div class="fx-vs">VS</div>
+      <div class="fx-upcoming-pill">UPCOMING</div>`;
+  }
+
+  // Scores under team names (only if match started)
+  const t1score = (done || live) && m.t1runs ? `<div class="fx-score">${m.t1runs}${m.t1ovs ? ' <small style="font-size:11px;opacity:.7">('+m.t1ovs+' Ov)</small>' : ''}</div>` : '';
+  const t2score = (done || live) && m.t2runs ? `<div class="fx-score">${m.t2runs}${m.t2ovs ? ' <small style="font-size:11px;opacity:.7">('+m.t2ovs+' Ov)</small>' : ''}</div>` : '';
+
+  return `
+  <div class="${cls}" ${canClick ? `onclick="showScorecard('${m.apiId}', ${m.id})"` : ''}>
+    <div class="fx-top-row">
+      <div class="fx-match-num">MATCH ${m.id} — IPL 2026</div>
+      <div class="fx-badges">${badges}</div>
+    </div>
+    <div class="fx-body">
+      <div class="fx-team">
+        <div class="fx-logo" style="border-color:${t1c}">
+          ${t1l ? `<img src="${t1l}" alt="${m.t1}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">` : ''}
+          <span style="display:none;color:${t1c};font-weight:800;font-size:11px">${m.t1}</span>
         </div>
-        <div class="fx-center">
-          ${m.result
-            ? `<div class="fx-badge ${won?'fx-badge-win':lost?'fx-badge-loss':'fx-badge-done'}">${won?'✓ RCB WON':lost?'✗ RCB LOST':m.winner===m.t1?m.t1+' WON':m.t2+' WON'}</div>
-               <div class="fx-result-text">${m.result}</div>`
-            : isLive
-              ? `<div class="fx-badge fx-badge-live">● LIVE NOW</div>
-                 <div class="fx-live-score">${m.t1runs||'0/0'} vs ${m.t2runs||'0/0'}</div>`
-              : `<div class="fx-vs">VS</div>`}
-          <div class="fx-info">
-            <div class="fx-datetime">📅 ${dateStr}</div>
-            <div class="fx-datetime">🕐 ${m.time} IST</div>
-            <div class="fx-datetime">📍 ${m.venue}, ${m.city}</div>
-          </div>
-          ${m.result?`<div class="fx-click-hint">📊 Tap for full scorecard</div>`:isLive?`<div class="fx-click-hint">📊 Tap for live scorecard</div>`:`<div class="fx-upcoming-tag">UPCOMING</div>`}
-        </div>
-        <div class="fx-team fx-team-r">
-          <div class="fx-logo" style="border-color:${teamColor(m.t2)}">
-            <img src="${teamLogo(m.t2)}" alt="${m.t2}" onerror="this.style.display='none';this.nextSibling.style.display='block'">
-            <span style="display:none;color:${teamColor(m.t2)};font-weight:800;font-size:12px">${m.t2}</span>
-          </div>
-          <div class="fx-tname">${m.t2}</div>
-          ${m.result||isLive?`<div class="fx-score">${m.t2runs||'0/0 (0 Ov)'}</div>`:''}
+        <div class="fx-tname">${m.t1}</div>
+        ${t1score}
+      </div>
+      <div class="fx-center">
+        ${centerContent}
+        <div class="fx-meta">
+          <div class="fx-meta-line">📅 ${dateStr} • ${m.time} IST</div>
+          <div class="fx-meta-line">📍 ${m.venue}${m.city ? ', ' + m.city : ''}</div>
         </div>
       </div>
-    </div>`;
-  }).join('');
+      <div class="fx-team">
+        <div class="fx-logo" style="border-color:${t2c}">
+          ${t2l ? `<img src="${t2l}" alt="${m.t2}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">` : ''}
+          <span style="display:none;color:${t2c};font-weight:800;font-size:11px">${m.t2}</span>
+        </div>
+        <div class="fx-tname">${m.t2}</div>
+        ${t2score}
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ── Render list ── */
+function render() {
+  const list = document.getElementById('fixtures-list');
+  if (!list) return;
+
+  const filtered = getFilteredMatches();
+  const countEl  = document.getElementById('fx-count');
+  if (countEl) countEl.textContent = `${filtered.length} MATCH${filtered.length !== 1 ? 'ES' : ''}`;
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="fx-empty">No matches found for this filter.</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(cardHTML).join('');
 }
 
 /* ── Scorecard Modal ── */
-function showScorecard(id) {
-  const m = ALL_IPL_2026.find(x => x.id === id);
-  if (!m) return;
+async function showScorecard(apiId, matchId) {
+  const modal = document.getElementById('sc-modal');
+  const inner = document.getElementById('sc-modal-inner');
+  if (!modal || !inner) return;
 
-  const link = `https://www.espncricinfo.com/series/indian-premier-league-2026/`;
-  const isLive = m.isLive || (m.t1runs && !m.result);
+  _currentScorecardId = apiId;
+  inner.innerHTML = `<div class="sc-loading"><div class="sc-spinner"></div><br>Loading scorecard...</div>`;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
 
-  let body = '';
+  // Find local match data
+  const m = _matches.find(x => x.id === matchId || x.apiId === apiId);
+  if (!m) { inner.innerHTML = '<div class="sc-no-data">Match not found.</div>'; return; }
+
+  // If we already have the scorecard locally, use it
   if (m.scorecard) {
-    const sc = m.scorecard;
-    const battingTable = (inn) => `
-      <div class="sc-inn-header"><span class="sc-team">${inn.team}</span><span class="sc-score">${inn.score}</span></div>
-      <table class="sc-table">
-        <thead><tr><th>Batter</th><th>Dismissal</th><th>R</th><th>B</th><th>4s</th><th>6s</th><th>SR</th></tr></thead>
-        <tbody>${inn.bat.map(r=>`<tr><td class="sc-name">${r[0]}</td><td class="sc-dim">${r[1]}</td><td class="sc-bold">${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td></tr>`).join('')}</tbody>
-      </table>
-      <table class="sc-table sc-bowl-table">
-        <thead><tr><th>Bowler</th><th>O</th><th>M</th><th>R</th><th>W</th><th>Econ</th></tr></thead>
-        <tbody>${inn.bowl.map(r=>`<tr><td class="sc-name">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="sc-bold">${r[4]}</td><td>${r[5]}</td></tr>`).join('')}</tbody>
-      </table>`;
-    body = `<div class="sc-toss">🪙 Toss: ${sc.toss}</div>${battingTable(sc.inn1)}${battingTable(sc.inn2)}`;
-  } else if (isLive) {
-    body = `<div class="sc-no-data" style="padding:40px;text-align:center">
-      <div style="font-size:48px;margin-bottom:16px">🏏</div>
-      <div style="font-family:var(--font-display);font-size:24px;color:var(--rcb-red);margin-bottom:8px">MATCH IS LIVE</div>
-      <div style="font-family:var(--font-heading);font-size:18px;color:#fff;margin-bottom:16px">${m.t1runs||'0/0'} vs ${m.t2runs||'0/0'}</div>
-      <div style="font-size:14px;color:var(--text-muted);margin-bottom:24px">Live score updates from CricAPI</div>
-      <a href="${link}" target="_blank" class="sc-ext-link">Watch Live on ESPNCricinfo →</a>
-    </div>`;
-  } else {
-    body = `<div class="sc-no-data">
-      Full scorecard will be available once match is completed.
-      <a href="${link}" target="_blank" class="sc-ext-link">View Match Page →</a>
-    </div>`;
+    renderScorecard(m);
+    return;
   }
 
-  const winnerColor = m.winner === 'RCB' ? '#00C864' : m.winner ? '#CC0000' : isLive ? '#FF4444' : '#888';
-  const statusText = isLive ? '● LIVE NOW' : m.result || 'UPCOMING';
-  
-  document.getElementById('sc-modal-inner').innerHTML = `
+  // Otherwise fetch from CricAPI
+  try {
+    const url = `https://api.cricapi.com/v1/match_scorecard?apikey=${CRICAPI_KEY}&id=${apiId}`;
+    const r = await fetch(url);
+    const json = await r.json();
+    if (json.status !== 'success' || !json.data) throw new Error('No data');
+    renderScorecardFromAPI(json.data, m);
+  } catch (e) {
+    // Fallback — show what we have
+    inner.innerHTML = `
+      <div class="sc-header">
+        <div class="sc-teams">${m.t1} vs ${m.t2}</div>
+        <div class="sc-meta">Match ${m.id} — ${m.date} • ${m.venue}</div>
+        <div class="sc-result sc-res-other">${m.result || 'Score unavailable'}</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-no-data">
+          Detailed scorecard unavailable at the moment.<br>
+          <a href="https://www.espncricinfo.com" target="_blank" class="sc-ext-link">View on ESPNcricinfo →</a>
+        </div>
+      </div>`;
+  }
+}
+
+function renderScorecard(m) {
+  const inner = document.getElementById('sc-modal-inner');
+  if (!inner) return;
+  const sc = m.scorecard;
+  const won = m.winner === 'RCB';
+  const lost = m.winner && m.winner !== 'RCB' && m.rcb;
+  const resCls = won ? 'sc-res-win' : lost ? 'sc-res-loss' : 'sc-res-other';
+  inner.innerHTML = `
     <div class="sc-header">
       <div class="sc-teams">${m.t1} vs ${m.t2}</div>
-      <div class="sc-meta">${new Date(m.date+'T'+m.time+':00+05:30').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} • ${m.venue}, ${m.city}</div>
-      <div class="sc-result" style="color:${winnerColor}">${statusText}</div>
+      <div class="sc-meta">Match ${m.id} • ${new Date(m.date+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} • ${m.venue}${m.city ? ', '+m.city : ''}</div>
+      <div class="sc-result ${resCls}">${m.result || 'Completed'}</div>
     </div>
-    <div class="sc-body">${body}</div>
-    <div class="sc-footer"><a href="${link}" target="_blank" class="sc-ext-link">Full Scorecard on ESPNCricinfo ↗</a></div>
-  `;
-  document.getElementById('sc-modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+    ${sc.toss ? `<div class="sc-toss">🪙 Toss: ${sc.toss}</div>` : ''}
+    <div class="sc-body">
+      ${sc.inn1 ? innHTML(sc.inn1) : ''}
+      ${sc.inn2 ? innHTML(sc.inn2) : ''}
+    </div>
+    <div class="sc-footer">
+      <a href="https://www.espncricinfo.com/series/indian-premier-league-2026-1449924" target="_blank" class="sc-ext-link">Full details on ESPNCricinfo ↗</a>
+    </div>`;
+}
+
+function renderScorecardFromAPI(data, m) {
+  const inner = document.getElementById('sc-modal-inner');
+  if (!inner) return;
+
+  const innings = data.scorecard || [];
+  const score   = data.score || [];
+  const won     = data.matchWinner && (data.matchWinner.toLowerCase().includes('royal challengers') || data.matchWinner === 'RCB');
+  const rcb     = m && m.rcb;
+  const resCls  = (won && rcb) ? 'sc-res-win' : (!won && rcb) ? 'sc-res-loss' : 'sc-res-other';
+  const toss    = data.tossWinner
+    ? `${data.tossWinner.charAt(0).toUpperCase() + data.tossWinner.slice(1)} won the toss and elected to ${data.tossChoice || 'bat'}`
+    : '';
+
+  const innSections = innings.map((inn, idx) => {
+    const sc_obj = score[idx];
+    const scoreStr = sc_obj ? `${sc_obj.r}/${sc_obj.w} (${sc_obj.o} Ov)` : '';
+    const teamShort = inn.inning.replace(/ Inning \d+/i, '').trim();
+    const bat = (inn.batting || []).map(b => [
+      b.batsman?.name || '',
+      b['dismissal-text'] || 'not out',
+      b.r ?? 0, b.b ?? 0, b['4s'] ?? 0, b['6s'] ?? 0,
+      (b.sr ?? 0).toFixed(2)
+    ]);
+    const bowl = (inn.bowling || []).map(b => [
+      b.bowler?.name || '',
+      String(b.o ?? 0), String(b.m ?? 0),
+      String(b.r ?? 0), String(b.w ?? 0),
+      (b.eco ?? 0).toFixed(2)
+    ]);
+    return innHTML({ team: teamShort, score: scoreStr, bat, bowl });
+  }).join('');
+
+  inner.innerHTML = `
+    <div class="sc-header">
+      <div class="sc-teams">${data.teams?.[0] || (m?.t1 || '')} vs ${data.teams?.[1] || (m?.t2 || '')}</div>
+      <div class="sc-meta">Match ${m?.id || ''} • ${data.date ? new Date(data.date+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'}) : ''} • ${data.venue || ''}</div>
+      <div class="sc-result ${resCls}">${data.status || 'Completed'}</div>
+    </div>
+    ${toss ? `<div class="sc-toss">🪙 Toss: ${toss}</div>` : ''}
+    <div class="sc-body">${innSections || '<div class="sc-no-data">Scorecard not available yet.</div>'}</div>
+    <div class="sc-footer">
+      <a href="https://www.espncricinfo.com/series/indian-premier-league-2026-1449924" target="_blank" class="sc-ext-link">Full details on ESPNCricinfo ↗</a>
+    </div>`;
+}
+
+function innHTML(inn) {
+  const batRows = (inn.bat || []).map(r =>
+    `<tr>
+      <td class="sc-name">${r[0]}</td>
+      <td class="sc-dim">${r[1]}</td>
+      <td class="sc-bold">${r[2]}</td>
+      <td>${r[3]}</td>
+      <td>${r[4]}</td>
+      <td>${r[5]}</td>
+      <td>${r[6]}</td>
+    </tr>`).join('');
+  const bowlRows = (inn.bowl || []).map(r =>
+    `<tr>
+      <td class="sc-name">${r[0]}</td>
+      <td>${r[1]}</td>
+      <td>${r[2]}</td>
+      <td>${r[3]}</td>
+      <td class="sc-bold">${r[4]}</td>
+      <td>${r[5]}</td>
+    </tr>`).join('');
+  return `
+    <div class="sc-inn-header">
+      <span class="sc-team">${inn.team}</span>
+      <span class="sc-score">${inn.score || ''}</span>
+    </div>
+    ${batRows ? `
+    <table class="sc-table">
+      <thead><tr><th>Batter</th><th>Dismissal</th><th>R</th><th>B</th><th>4s</th><th>6s</th><th>SR</th></tr></thead>
+      <tbody>${batRows}</tbody>
+    </table>` : ''}
+    ${bowlRows ? `
+    <table class="sc-table" style="margin-bottom:24px">
+      <thead><tr><th>Bowler</th><th>O</th><th>M</th><th>R</th><th>W</th><th>Econ</th></tr></thead>
+      <tbody>${bowlRows}</tbody>
+    </table>` : ''}`;
 }
 
 function closeScorecard() {
-  document.getElementById('sc-modal').classList.remove('open');
+  document.getElementById('sc-modal')?.classList.remove('open');
   document.body.style.overflow = '';
+  _currentScorecardId = null;
 }
 
-/* ── Populate team filter dropdown ── */
+/* ── Team filter population ── */
 function populateTeamFilter() {
   const sel = document.getElementById('team-filter');
   if (!sel) return;
   const teams = ['RCB','CSK','MI','KKR','SRH','RR','DC','PBKS','GT','LSG'];
-  sel.innerHTML = `<option value="all">All Teams</option>` + teams.map(t=>`<option value="${t}">${t}</option>`).join('');
+  sel.innerHTML = `<option value="all">All Teams</option>`
+    + teams.map(t => `<option value="${t}">${t}</option>`).join('');
 }
-
-function applyFilters() {
-  const status = document.querySelector('.fx-tab.active')?.dataset.filter || 'all';
-  const team = document.getElementById('team-filter')?.value || 'all';
-  renderFixtures('fixtures-list', status, team);
-}
-
-/* ── Render Home Premium Cards ── */
-function renderHomeCards(matches, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.className = 'hf-grid';
-  container.innerHTML = matches.map(m => {
-    const dt = new Date(m.date+'T'+m.time+':00+05:30');
-    const dateStr = dt.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
-    const isDone = Boolean(m.result);
-    
-    let statusClass = 'upcoming';
-    let statusText = 'UPCOMING';
-    if (isDone) {
-      if (m.winner === 'RCB') { statusClass = 'won'; statusText = 'RCB WON'; }
-      else if (m.winner) { statusClass = 'lost'; statusText = 'RCB LOST'; }
-      else { statusClass = 'upcoming'; statusText = 'COMPLETED'; }
-    }
-
-    return `
-      <div class="hf-card" ${isDone ? `onclick="showScorecard(${m.id})"` : ''}>
-        <div class="hf-header">
-          <span class="hf-match-no">Match ${m.id}</span>
-          <span class="hf-date">${dateStr} • ${m.time}</span>
-        </div>
-        <div class="hf-teams">
-          <div class="hf-team">
-            <img class="hf-logo" src="${teamLogo(m.t1)}" alt="${m.t1}">
-            <div class="hf-name">${m.t1}</div>
-            ${isDone ? `<div style="font-family:var(--font-heading);font-weight:700;font-size:18px;color:${teamColor(m.t1)}">${m.t1runs||''}</div>` : ''}
-          </div>
-          <div class="hf-vs">VS</div>
-          <div class="hf-team">
-            <img class="hf-logo" src="${teamLogo(m.t2)}" alt="${m.t2}">
-            <div class="hf-name">${m.t2}</div>
-            ${isDone ? `<div style="font-family:var(--font-heading);font-weight:700;font-size:18px;color:${teamColor(m.t2)}">${m.t2runs||''}</div>` : ''}
-          </div>
-        </div>
-        <div class="hf-venue">📍 ${m.venue}, ${m.city}</div>
-        <div class="hf-footer">
-          ${isDone ? `<div class="hf-btn" style="background:var(--rcb-navy);border-color:var(--rcb-gold)">📊 SCORECARD</div>` : `<div class="hf-status ${statusClass}">${statusText}</div>`}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-window.renderHomeCards = renderHomeCards;
 
 /* ── Init ── */
-document.addEventListener('DOMContentLoaded', () => {
-  startCountdown();
+document.addEventListener('DOMContentLoaded', async () => {
   populateTeamFilter();
-  renderFixtures('fixtures-list','all','all');
 
-  // Tab click
+  // Tab filter
   document.querySelectorAll('.fx-tab').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.fx-tab').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.fx-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      applyFilters();
+      _activeFilter = btn.dataset.filter || 'all';
+      render();
     });
   });
 
-  // Team filter change
-  document.getElementById('team-filter')?.addEventListener('change', applyFilters);
+  // Team filter
+  document.getElementById('team-filter')?.addEventListener('change', e => {
+    _teamFilter = e.target.value;
+    render();
+  });
 
-  // Close modal on backdrop click
+  // Close modal
   document.getElementById('sc-modal')?.addEventListener('click', e => {
     if (e.target.id === 'sc-modal') closeScorecard();
   });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeScorecard(); });
 
-  // Close on Escape
-  document.addEventListener('keydown', e => { if(e.key==='Escape') closeScorecard(); });
+  // Initial load
+  await refreshData(true);
+
+  // Auto-refresh every 30 seconds
+  _refreshTimer = setInterval(async () => {
+    await fetchData();
+    render();
+    updateCountdown();
+  }, REFRESH_MS);
 });
 
-window.RCBFixtures = { renderFixtures, showScorecard, closeScorecard, ALL_IPL_2026 };
+/* ── Global exports ── */
+window.showScorecard = showScorecard;
+window.closeScorecard = closeScorecard;
+window.refreshData = () => refreshData(false);

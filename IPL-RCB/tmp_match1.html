@@ -1,0 +1,1643 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <!-- TTL 9.0024 ms -->
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="keywords" content="Cricket Live matches,Cricket live score API,live matches,live cricket,cricket score,scorecard,CricAPI" /><meta name="description" content="Cricket Live Matches list with live cricket score ticker. Match scorecard, squad and player details are also provided. Get your cricket api to see all this in JSON REST API format" /><link rel="icon" href="/img/icon.png" /><link rel="apple-touch-icon" href="/img/icon512.png" /><meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" /><meta name="theme-color" content="#FC0203" />
+    
+
+    <script src="https://cdorg.b-cdn.net/js/jquery-3.6.0.min.js"></script>
+    <script>
+        // Passive event listeners
+        jQuery.event.special.touchstart = {
+            setup: function (_, ns, handle) {
+                this.addEventListener("touchstart", handle, { passive: !ns.includes("noPreventDefault") });
+            }
+        };
+        jQuery.event.special.touchmove = {
+            setup: function (_, ns, handle) {
+                this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
+            }
+        };
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script defer="defer" onload="setTimeout(() => { if(typeof window.bootReady=='function') window.bootReady();}, 50);" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        * {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased !important;
+            -moz-font-smoothing: antialiased !important;
+            text-rendering: optimizelegibility !important;
+        }
+
+        .fiv-viv {
+            font-size: 1.1em;
+            float: left;
+            margin-right: 5px;
+            line-height: inherit;
+        }
+
+        .text-yellow {
+            color: gold;
+        }
+
+        .text-brown {
+            color: brown;
+        }
+    </style>
+    <title>
+	Cricket Data List of Current, Recent and Upcoming Matches
+</title>
+
+
+    <style>
+        body.loading > *:not(#loading) {
+            display: none;
+        }
+
+        body:not(.loading) #loading {
+            display: none;
+        }
+
+        body.unloading > *:not(#loading) {
+            transition: opacity .25s linear;
+            opacity: 0;
+        }
+
+        body.unloading #loading {
+            display: block !important;
+            background: rgba(255,255,255,0.5) !important;
+        }
+
+        BODY > DIV#loading {
+            position: fixed;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+        }
+    </style>
+
+    <link rel ='canonical' href='https://cricketdata.org/cricket-data-formats/matches/royal-challengers-bengaluru-vs-sunrisers-hyderabad-1st-match-indian-premier-league-2026-55fe0f15-6eb0-4ad5-835b-5564be4f6a21' /></head>
+<body style="background: #efefef;" class="loading">
+    <script>
+        window.bootReady = function bootReady() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        }
+        window.addEventListener('load', (event) => {
+            $('body').removeClass('loading unloading');
+        });
+        window.addEventListener('pageshow', (event) => {
+            $('body').removeClass('loading unloading');
+        });
+        window.addEventListener('beforeunload', (event) => {
+            $("BODY").removeClass("loading");
+            $("BODY").addClass("unloading");
+        });
+    </script>
+
+    <div id="loading" style="text-align: center;">
+        <h2 style="font-size:25pt;">
+            <br />
+            <br />
+            Loading...</h2>
+        <progress></progress>
+    </div>
+    
+
+    <nav class="navbar navbar-expand-lg navbar-dark text-white" style="background: #6ab43e">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand bg-white text-dark px-2" href="/" style="overflow: hidden; position: relative;">
+                <img alt="Free Cricket API and Widgets from CricketData" src="https://cdorg.b-cdn.net/img/icon.png" style="height: 1.5em;" />
+                <b>Cricket Data</b>
+                <span data-bs-toggle='tooltip' data-bs-placement='bottom' title='Launched 1st May 2022' alt='Launched 1st May 2022' style='font-size: 8px; float: right; color: black; font-weight: normal; position: absolute; bottom: 1px; right: 10px; text-align: center;'>Version 1.0</span>
+                </a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login.aspx">Login</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <style>
+        #topnav {
+            border-bottom: 1px rgba(100,100,100,0.5) solid;
+        }
+
+        .navbar form {
+            display: none !important;
+        }
+
+
+        .buttbutton {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d388;
+            border-radius: 20px;
+            width: 40px;
+            height: 40px;
+            line-height: 35px;
+            text-align: center;
+            z-index: 5;
+        }
+
+            .buttbutton img {
+                width: 32px;
+                height: 32px;
+            }
+
+        #sidepan A {
+            text-decoration: none
+        }
+
+
+        #topnav .d-none {
+            display: none !important;
+        }
+
+        #menu a.active {
+            color: orange;
+            background: #222;
+            width: 100%;
+        }
+
+        #menu .nav-item {
+            width: 100%;
+        }
+
+        .alert:empty {
+            display: none;
+        }
+    </style>
+
+    
+    <!-- 1234 -->
+    
+
+    <style>
+        #scoretxtshow {
+            padding: 5px 0px 5px 0px;
+            margin: 5px 0px 5px 0px;
+            border-top: 1px #ccc solid;
+            border-bottom: 1px #ccc solid;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        * {
+            user-select: none;
+        }
+
+        .card {
+            border: 0px;
+        }
+
+            .card * {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+        #cdnav * {
+            border-radius: 0px
+        }
+
+        #cdnav .nav-item:hover *, #cdnav .nav-item.active * {
+            background: #6ab43e;
+            color: #fff !important;
+            font-weight: bold;
+        }
+
+        #cdnav .nav-item:not(:hover) {
+            background: #fff;
+            color: #6ab43e;
+        }
+
+        .statinfotable th {
+            text-align: center;
+            padding: 3px 5px;
+            background: #eee;
+        }
+
+        .statinfotable td {
+            text-align: center;
+            padding: 3px 5px;
+        }
+
+            .statinfotable td:first-child, .statinfotable th:first-child {
+                text-align: left !important;
+            }
+    </style>
+    <div class="container-full mt-3 px-3">
+        <div class="row">
+            <div class="col-12 text-center mb-2">
+                
+
+ 
+<ul class="nav nav-pills justify-content-center" id="cdnav">
+    <li class="nav-item">
+        <a class="nav-link" href="/cricket-data-formats/series">Series</a>
+    </li>
+    <li class="nav-item me-5">
+        <a class="nav-link" href="/cricket-data-formats/series-schedule">Schedule</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/cricket-data-formats/matches">Matches</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/cricket-data-formats/schedule">Schedule</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/cricket-data-formats/results">Results</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/cricket-data-formats/players">Players</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/cricket-data-formats/points">Points</a>
+    </li>
+</ul>
+
+<script>
+    $("#cdnav .nav-item A[href='/cricket-data-formats/matches/royal-challengers-bengaluru-vs-sunrisers-hyderabad-1st-match-indian-premier-league-2026-55fe0f15-6eb0-4ad5-835b-5564be4f6a21']").addClass("active");
+</script>
+
+<style>
+    #cdnav .nav-item a.active {
+        background: #6ab43e;
+        color: #fff !important;
+        font-weight: bold;
+    }
+</style>
+
+
+                <div class="mb-3">Results moved to the 'Results' tab</div>
+            </div>
+
+            
+
+
+
+            <hr />
+            <div class="col-12 bg-white text-dark" style="overflow: auto;">
+                <b><a href="/cricket-data-formats/series/indian-premier-league-2026-87c62aac-bc3c-4738-ab93-19da0690488f">Indian Premier League 2026</a> from 2026-03-28 to May 31</b>
+                <h1>Royal Challengers Bengaluru vs Sunrisers Hyderabad, 1st Match, Indian Premier League 2026</h1>
+                At M.Chinnaswamy Stadium, Bengaluru, Royal Challengers Bengaluru won by 6 wkts. 
+
+                
+                <br />
+                <div id="scoretxtshow"></div>
+                <div class="row justify-content-center">
+                    
+                </div>
+                <table width="100%">
+                    <tr><td id='scorecard1' width=350 style='max-width:100vw;'><b>Sunrisers Hyderabad Inning 1</b></td><td class='px-3'>201/9 in 20 overs</td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Batsman Stats</b>
+                            <table class="table table-striped statinfotable" style="min-width: 500px;">
+                                <tr>
+                                    <th>batsman</th>
+                                    <th>dismissal</th>
+                                    <th>bowler</th>
+                                    <th>catcher</th>
+                                    
+                                    <th>runs</th>
+                                    
+                                    <th>balls</th>
+                                    
+                                    <th>fours</th>
+                                    
+                                    <th>sixes</th>
+                                    
+                                    <th>strike rate</th>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/travis-head-D6720897-E81D-4703-BF33-D2B60C973D30'>Travis Head</a></td>
+                                    <td
+                                        data-debug="c Phil Salt b Jacob Duffy">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/jacob-duffy-6E05CBEA-6A4B-42EF-8E2E-B44E4B434C2F'>Jacob Duffy</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/philip-salt-6DB25D60-FF96-4D8D-8D22-DEDEEB5FFA29'>Philip Salt</a></td>
+                                    
+                                    <td>11</td>
+                                    
+                                    <td>9</td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>122.22</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/abhishek-sharma-83FE6AB6-D63C-420E-9416-A93D59A9A964'>Abhishek Sharma</a></td>
+                                    <td
+                                        data-debug="c Jitesh Sharma b Jacob Duffy">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/jacob-duffy-6E05CBEA-6A4B-42EF-8E2E-B44E4B434C2F'>Jacob Duffy</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/jitesh-sharma-E28DE73B-F5DF-49EB-BDF6-C50471319404'>Jitesh Sharma</a></td>
+                                    
+                                    <td>7</td>
+                                    
+                                    <td>8</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>87.5</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/ishan-kishan-9AE68636-48D9-488F-8ADC-E62A19815D85'>Ishan Kishan</a></td>
+                                    <td
+                                        data-debug="c Phil Salt b Abhinandan Singh">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/abhinandan-singh-849877F5-7704-4CAD-B1BA-9E0B33AED35E'>Abhinandan Singh</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/philip-salt-6DB25D60-FF96-4D8D-8D22-DEDEEB5FFA29'>Philip Salt</a></td>
+                                    
+                                    <td>80</td>
+                                    
+                                    <td>38</td>
+                                    
+                                    <td>8</td>
+                                    
+                                    <td>5</td>
+                                    
+                                    <td>210.53</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/nitish-kumar-reddy-5BF98798-B2B0-47D2-B799-5307C0FD4936'>Nitish Kumar Reddy</a></td>
+                                    <td
+                                        data-debug="c Abhinandan Singh b Jacob Duffy">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/jacob-duffy-6E05CBEA-6A4B-42EF-8E2E-B44E4B434C2F'>Jacob Duffy</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/abhinandan-singh-849877F5-7704-4CAD-B1BA-9E0B33AED35E'>Abhinandan Singh</a></td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>6</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>16.67</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/heinrich-klaasen-7D662361-8F12-4A52-9A4B-01E8734BD31D'>Heinrich Klaasen</a></td>
+                                    <td
+                                        data-debug="c Phil Salt b Romario Shepherd">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/romario-shepherd-7FD4FA20-BC49-4337-AE8A-540B67CB011D'>Romario Shepherd</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/philip-salt-6DB25D60-FF96-4D8D-8D22-DEDEEB5FFA29'>Philip Salt</a></td>
+                                    
+                                    <td>31</td>
+                                    
+                                    <td>22</td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>140.91</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/salil-arora-80C06194-6B4E-44A3-978F-DDACB33A95BB'>Salil Arora</a></td>
+                                    <td
+                                        data-debug="c Devdutt Padikkal b Suyash Sharma">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/suyash-sharma-2BF2258F-F35E-4831-884E-F88EF46968F5'>Suyash Sharma</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/devdutt-padikkal-74C6584A-45A5-4781-A5E7-C0C9340DA954'>Devdutt Padikkal</a></td>
+                                    
+                                    <td>9</td>
+                                    
+                                    <td>6</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>150</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/aniket-verma-196F622E-E1AE-4962-95B5-81324E26C5FE'>Aniket Verma</a></td>
+                                    <td
+                                        data-debug="c Virat Kohli b Romario Shepherd">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/romario-shepherd-7FD4FA20-BC49-4337-AE8A-540B67CB011D'>Romario Shepherd</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/virat-kohli-C61D247D-7F77-452C-B495-2813A9CD0AC4'>Virat Kohli</a></td>
+                                    
+                                    <td>43</td>
+                                    
+                                    <td>18</td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>4</td>
+                                    
+                                    <td>238.89</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/harsh-dubey-CC7C9A0B-B6AC-4109-84C8-DD9B1704308F'>Harsh Dubey</a></td>
+                                    <td
+                                        data-debug="c Devdutt Padikkal b Romario Shepherd">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/romario-shepherd-7FD4FA20-BC49-4337-AE8A-540B67CB011D'>Romario Shepherd</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/devdutt-padikkal-74C6584A-45A5-4781-A5E7-C0C9340DA954'>Devdutt Padikkal</a></td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>100</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/harshal-patel-15BCCB4F-8C3C-4DA6-ACD9-551782278BFD'>Harshal Patel</a></td>
+                                    <td
+                                        data-debug="c Devdutt Padikkal b Bhuvneshwar Kumar">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/bhuvneshwar-kumar-3F3ECF51-8411-4046-9477-18C0FE3DA6AC'>Bhuvneshwar Kumar</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/devdutt-padikkal-74C6584A-45A5-4781-A5E7-C0C9340DA954'>Devdutt Padikkal</a></td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/david-payne-7CB23EF6-2CD5-4AEB-9047-A5054D220F98'>David Payne</a></td>
+                                    <td
+                                        data-debug="not out"></td>
+                                    <td></td><td></td>
+                                    <td>6</td>
+                                    
+                                    <td>5</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>120</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/jaydev-unadkat-F589D2A9-4E44-464D-9741-E224354A1370'>Jaydev Unadkat</a></td>
+                                    <td
+                                        data-debug="not out"></td>
+                                    <td></td><td></td>
+                                    <td>4</td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>133.33</td>
+                                    
+                                </tr>
+                                
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <b>Bowler Stats</b>
+                            <table class="table table-striped statinfotable" style="min-width: 500px;">
+                                <tr>
+                                    <th>Player</th>
+                                    
+                                    <th>overs</th>
+                                    
+                                    <th>maidens</th>
+                                    
+                                    <th>runs</th>
+                                    
+                                    <th>wickets</th>
+                                    
+                                    <th>wides</th>
+                                    
+                                    <th>noballs</th>
+                                    
+                                    <th>economy</th>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/jacob-duffy-6E05CBEA-6A4B-42EF-8E2E-B44E4B434C2F'>Jacob Duffy</a></td>
+                                    
+                                    <td>4</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>22</td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>5.5</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/bhuvneshwar-kumar-3F3ECF51-8411-4046-9477-18C0FE3DA6AC'>Bhuvneshwar Kumar</a></td>
+                                    
+                                    <td>4</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>31</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>7.8</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/abhinandan-singh-849877F5-7704-4CAD-B1BA-9E0B33AED35E'>Abhinandan Singh</a></td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>38</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>12.7</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/romario-shepherd-7FD4FA20-BC49-4337-AE8A-540B67CB011D'>Romario Shepherd</a></td>
+                                    
+                                    <td>4</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>54</td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>13.5</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/suyash-sharma-2BF2258F-F35E-4831-884E-F88EF46968F5'>Suyash Sharma</a></td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>28</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>9.3</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/krunal-pandya-81C09C1B-1B1D-4E87-9EAA-D7D0A89A6159'>Krunal Pandya</a></td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>26</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>13</td>
+                                    
+                                </tr>
+                                
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <b>Catcher Stats</b>
+                            <table class="table table-striped statinfotable" style="min-width: 500px;">
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Stumped</th>
+                                    <th>Runout</th>
+                                    <th>Catch</th>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/philip-salt-6DB25D60-FF96-4D8D-8D22-DEDEEB5FFA29'>Philip Salt</a></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>3</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/jitesh-sharma-E28DE73B-F5DF-49EB-BDF6-C50471319404'>Jitesh Sharma</a></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/abhinandan-singh-849877F5-7704-4CAD-B1BA-9E0B33AED35E'>Abhinandan Singh</a></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/devdutt-padikkal-74C6584A-45A5-4781-A5E7-C0C9340DA954'>Devdutt Padikkal</a></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>3</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/virat-kohli-C61D247D-7F77-452C-B495-2813A9CD0AC4'>Virat Kohli</a></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                </tr>
+                                
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td valign="top">
+                            
+
+                            <b>Extras</b>
+                            <table class="table table-striped" style="width: 200px;">
+                                
+                            </table>
+                            
+                        </td>
+                        <td valign="top">
+                            
+                            <b>Totals</b>
+                            <table class="table table-striped" style="width: 200px;">
+                                
+                            </table>
+                            
+                        </td>
+                    </tr>
+                    <tr><td id='scorecard2' width=350 style='max-width:100vw;'><b>Royal Challengers Bengaluru Inning 1</b></td><td class='px-3'>203/4 in 15.4 overs</td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Batsman Stats</b>
+                            <table class="table table-striped statinfotable" style="min-width: 500px;">
+                                <tr>
+                                    <th>batsman</th>
+                                    <th>dismissal</th>
+                                    <th>bowler</th>
+                                    <th>catcher</th>
+                                    
+                                    <th>runs</th>
+                                    
+                                    <th>balls</th>
+                                    
+                                    <th>fours</th>
+                                    
+                                    <th>sixes</th>
+                                    
+                                    <th>strike rate</th>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/philip-salt-6DB25D60-FF96-4D8D-8D22-DEDEEB5FFA29'>Philip Salt</a></td>
+                                    <td
+                                        data-debug="c Heinrich Klaasen b Jaydev Unadkat">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/jaydev-unadkat-F589D2A9-4E44-464D-9741-E224354A1370'>Jaydev Unadkat</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/heinrich-klaasen-7D662361-8F12-4A52-9A4B-01E8734BD31D'>Heinrich Klaasen</a></td>
+                                    
+                                    <td>8</td>
+                                    
+                                    <td>7</td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>114.29</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/virat-kohli-C61D247D-7F77-452C-B495-2813A9CD0AC4'>Virat Kohli</a></td>
+                                    <td
+                                        data-debug="not out"></td>
+                                    <td></td><td></td>
+                                    <td>69</td>
+                                    
+                                    <td>38</td>
+                                    
+                                    <td>5</td>
+                                    
+                                    <td>5</td>
+                                    
+                                    <td>181.58</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/devdutt-padikkal-74C6584A-45A5-4781-A5E7-C0C9340DA954'>Devdutt Padikkal</a></td>
+                                    <td
+                                        data-debug="c Heinrich Klaasen b Harsh Dubey">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/harsh-dubey-CC7C9A0B-B6AC-4109-84C8-DD9B1704308F'>Harsh Dubey</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/heinrich-klaasen-7D662361-8F12-4A52-9A4B-01E8734BD31D'>Heinrich Klaasen</a></td>
+                                    
+                                    <td>61</td>
+                                    
+                                    <td>26</td>
+                                    
+                                    <td>7</td>
+                                    
+                                    <td>4</td>
+                                    
+                                    <td>234.62</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/rajat-patidar-88215EE9-CA67-48AF-A3F0-6B38718BD830'>Rajat Patidar</a></td>
+                                    <td
+                                        data-debug="c Harsh Dubey b David Payne">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/david-payne-7CB23EF6-2CD5-4AEB-9047-A5054D220F98'>David Payne</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/harsh-dubey-CC7C9A0B-B6AC-4109-84C8-DD9B1704308F'>Harsh Dubey</a></td>
+                                    
+                                    <td>31</td>
+                                    
+                                    <td>12</td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>258.33</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/jitesh-sharma-E28DE73B-F5DF-49EB-BDF6-C50471319404'>Jitesh Sharma</a></td>
+                                    <td
+                                        data-debug="c Jaydev Unadkat b David Payne">catch</td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/david-payne-7CB23EF6-2CD5-4AEB-9047-A5054D220F98'>David Payne</a></td>
+                                    
+                                    <td><a href='/cricket-data-formats/players/jaydev-unadkat-F589D2A9-4E44-464D-9741-E224354A1370'>Jaydev Unadkat</a></td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <a href='/cricket-data-formats/players/tim-david-69718248-2A3A-45D4-9A2A-6F4DFC6942A5'>Tim David</a></td>
+                                    <td
+                                        data-debug="not out"></td>
+                                    <td></td><td></td>
+                                    <td>16</td>
+                                    
+                                    <td>10</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>160</td>
+                                    
+                                </tr>
+                                
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <b>Bowler Stats</b>
+                            <table class="table table-striped statinfotable" style="min-width: 500px;">
+                                <tr>
+                                    <th>Player</th>
+                                    
+                                    <th>overs</th>
+                                    
+                                    <th>maidens</th>
+                                    
+                                    <th>runs</th>
+                                    
+                                    <th>wickets</th>
+                                    
+                                    <th>wides</th>
+                                    
+                                    <th>noballs</th>
+                                    
+                                    <th>economy</th>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/nitish-kumar-reddy-5BF98798-B2B0-47D2-B799-5307C0FD4936'>Nitish Kumar Reddy</a></td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>19</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>9.5</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/jaydev-unadkat-F589D2A9-4E44-464D-9741-E224354A1370'>Jaydev Unadkat</a></td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>29</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>9.7</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/david-payne-7CB23EF6-2CD5-4AEB-9047-A5054D220F98'>David Payne</a></td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>35</td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>11.7</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/harsh-dubey-CC7C9A0B-B6AC-4109-84C8-DD9B1704308F'>Harsh Dubey</a></td>
+                                    
+                                    <td>3</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>35</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>11.7</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/eshan-malinga-7AA19B4A-48EF-4D17-BEF7-1E71F7829CB5'>Eshan Malinga</a></td>
+                                    
+                                    <td>2</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>35</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>4</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>17.5</td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/harshal-patel-15BCCB4F-8C3C-4DA6-ACD9-551782278BFD'>Harshal Patel</a></td>
+                                    
+                                    <td>2.4</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>39</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>1</td>
+                                    
+                                    <td>0</td>
+                                    
+                                    <td>14.6</td>
+                                    
+                                </tr>
+                                
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <b>Catcher Stats</b>
+                            <table class="table table-striped statinfotable" style="min-width: 500px;">
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Stumped</th>
+                                    <th>Runout</th>
+                                    <th>Catch</th>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/heinrich-klaasen-7D662361-8F12-4A52-9A4B-01E8734BD31D'>Heinrich Klaasen</a></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/harsh-dubey-CC7C9A0B-B6AC-4109-84C8-DD9B1704308F'>Harsh Dubey</a></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a href='/cricket-data-formats/players/jaydev-unadkat-F589D2A9-4E44-464D-9741-E224354A1370'>Jaydev Unadkat</a></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                </tr>
+                                
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td valign="top">
+                            
+
+                            <b>Extras</b>
+                            <table class="table table-striped" style="width: 200px;">
+                                
+                            </table>
+                            
+                        </td>
+                        <td valign="top">
+                            
+                            <b>Totals</b>
+                            <table class="table table-striped" style="width: 200px;">
+                                
+                            </table>
+                            
+                        </td>
+                    </tr>
+                    
+                    <script>
+                        $("#scoretxtshow").html(`Sunrisers Hyderabad (I1): 201/9 (20) <a href='#scorecard1'>Scorecard</a><BR>Royal Challengers Bengaluru (I1): 203/4 (15.4) <a href='#scorecard2'>Scorecard</a><BR>`);
+                    </script>
+
+                    
+                </table>
+
+                <div class="row mt-3">
+                    
+                    <div class="mt-3 col-6">
+                        <h4>Royal Challengers Bengaluru</h4>
+                        <table>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/bhuvneshwar-kumar-3F3ECF51-8411-4046-9477-18C0FE3DA6AC'>Bhuvneshwar Kumar</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/virat-kohli-C61D247D-7F77-452C-B495-2813A9CD0AC4'>Virat Kohli</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/vicky-ostwal-B9701B53-3B9E-4EDA-93B1-3543809674D4'>Vicky Ostwal</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/vihaan-malhotra-E5932C98-5C2A-4ADE-8238-3B6382B18EF3'>Vihaan Malhotra</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/yash-dayal-F061B5FC-CD70-480C-86AA-45C7828E739C'>Yash Dayal</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/romario-shepherd-7FD4FA20-BC49-4337-AE8A-540B67CB011D'>Romario Shepherd</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/jacob-bethell-D8B0E01B-B754-432B-80A4-551E8C7EC8CA'>Jacob Bethell</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/rajat-patidar-88215EE9-CA67-48AF-A3F0-6B38718BD830'>Rajat Patidar</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/tim-david-69718248-2A3A-45D4-9A2A-6F4DFC6942A5'>Tim David</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/jordan-cox-40ED69DA-5D26-45EB-B9F8-72140B81B51A'>Jordan Cox</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/mangesh-yadav-4C17AABA-7455-4E74-82AC-86E60D480999'>Mangesh Yadav</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/satvik-deswal-3676CC16-9DDF-446F-A4F1-93DBBEF6E132'>Satvik Deswal</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/josh-hazlewood-2190C28D-1712-4FD2-AE44-9AC54319FC21'>Josh Hazlewood</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/venkatesh-iyer-C3236037-6694-404A-8F01-9AD880564EA9'>Venkatesh Iyer</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/abhinandan-singh-849877F5-7704-4CAD-B1BA-9E0B33AED35E'>Abhinandan Singh</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/swapnil-singh-41F91A34-8989-4B88-96B9-9FBBE725776F'>Swapnil Singh</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/jacob-duffy-6E05CBEA-6A4B-42EF-8E2E-B44E4B434C2F'>Jacob Duffy</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/rasikh-salam-dar-A1F7A1F3-F19C-43D2-BCD7-B4BAE22F5842'>Rasikh Salam Dar</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/devdutt-padikkal-74C6584A-45A5-4781-A5E7-C0C9340DA954'>Devdutt Padikkal</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/jitesh-sharma-E28DE73B-F5DF-49EB-BDF6-C50471319404'>Jitesh Sharma</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/krunal-pandya-81C09C1B-1B1D-4E87-9EAA-D7D0A89A6159'>Krunal Pandya</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/philip-salt-6DB25D60-FF96-4D8D-8D22-DEDEEB5FFA29'>Philip Salt</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/kanishk-chouhan-2DBBE6B1-B7A7-4609-810A-DF536C049EE0'>Kanishk Chouhan</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/nuwan-thushara-EB911B3B-10B3-40F8-9294-E63BA030AF83'>Nuwan Thushara</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/suyash-sharma-2BF2258F-F35E-4831-884E-F88EF46968F5'>Suyash Sharma</a></td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                    
+                    <div class="mt-3 col-6">
+                        <h4>Sunrisers Hyderabad</h4>
+                        <table>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/heinrich-klaasen-7D662361-8F12-4A52-9A4B-01E8734BD31D'>Heinrich Klaasen</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/eshan-malinga-7AA19B4A-48EF-4D17-BEF7-1E71F7829CB5'>Eshan Malinga</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/praful-hinge-8F631EEA-FA55-4296-B7CB-4F51E8EE2C98'>Praful Hinge</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/nitish-kumar-reddy-5BF98798-B2B0-47D2-B799-5307C0FD4936'>Nitish Kumar Reddy</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/harshal-patel-15BCCB4F-8C3C-4DA6-ACD9-551782278BFD'>Harshal Patel</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/sakib-hussain-02247315-1E19-4E52-B800-5F39EFAF3839'>Sakib Hussain</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/smaran-ravichandran-E3686FFA-FC7E-4CD0-AD49-7C355AB6691D'>Smaran Ravichandran</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/aniket-verma-196F622E-E1AE-4962-95B5-81324E26C5FE'>Aniket Verma</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/jack-edwards-6D751BE3-3023-43B9-8415-8259D19689FD'>Jack Edwards</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/kamindu-mendis-B4CC5506-212F-4D6B-825D-8EC89E1E084A'>Kamindu Mendis</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/krains-fuletra-391537B8-1983-4080-8737-976C7E5BFAB7'>Krains Fuletra</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/shivang-kumar-80C68F84-9DDF-4F6D-9672-9B21D51FD44E'>Shivang Kumar</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/david-payne-7CB23EF6-2CD5-4AEB-9047-A5054D220F98'>David Payne</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/onkar-tarmale-0CF24408-C280-406D-8D7A-A78B0C3964ED'>Onkar Tarmale</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/abhishek-sharma-83FE6AB6-D63C-420E-9416-A93D59A9A964'>Abhishek Sharma</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/shivam-mavi-F00CCDBA-6137-4852-A490-BA782044B866'>Shivam Mavi</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/amit-kumar-6ED13677-5228-45CF-8CFB-C72C476F8FDB'>Amit Kumar</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/pat-cummins-13B3D56E-0FBA-4D31-A174-D211211404E2'>Pat Cummins</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/travis-head-D6720897-E81D-4703-BF33-D2B60C973D30'>Travis Head</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/harsh-dubey-CC7C9A0B-B6AC-4109-84C8-DD9B1704308F'>Harsh Dubey</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/salil-arora-80C06194-6B4E-44A3-978F-DDACB33A95BB'>Salil Arora</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/brydon-carse-D50E7092-DC22-4854-84D3-E08CCBA038E9'>Brydon Carse</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/jaydev-unadkat-F589D2A9-4E44-464D-9741-E224354A1370'>Jaydev Unadkat</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/ishan-kishan-9AE68636-48D9-488F-8ADC-E62A19815D85'>Ishan Kishan</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/liam-livingstone-D1C0A448-6EE6-473A-90A2-E6A486698A8A'>Liam Livingstone</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><a href='/cricket-data-formats/players/zeeshan-ansari-F183C67E-0B7C-44E5-8AB7-FE1E0BE672F3'>Zeeshan Ansari</a></td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+
+            
+
+            <center>
+                <a href="/member.aspx" class="btn m-3 btn-lg btn-success">For more matches, grab the API</a>
+            </center>
+
+        </div>
+    </div>
+    <style>
+        .marquee {
+            font-size: inherit;
+            overflow: hidden;
+        }
+
+            .marquee * {
+                overflow: initial !important;
+                text-overflow: initial !important;
+            }
+
+        .marquee--long {
+            font-size: inherit;
+        }
+
+        .marquee > span {
+            border-top: 2px #bbb dotted;
+            margin-top: 5px;
+            padding-top: 5px;
+        }
+
+        .marquee span {
+            display: inline-block;
+            white-space: nowrap;
+            color: #00112C;
+            width: var(--tw);
+            text-shadow: var(--tw) 0 currentColor, calc(var(--tw) * 2) 0 currentColor, calc(var(--tw) * 3) 0 currentColor, calc(var(--tw) * 4) 0 currentColor;
+            will-change: transform;
+            animation: marquee var(--ad) linear infinite;
+            animation-play-state: running;
+        }
+
+        .marquee:hover span {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /*  
+ * on MacOs: System Preferences > 
+ *           Accessibility > 
+ *           Display > Reduce motion
+ */
+
+        @media (prefers-reduced-motion: reduce) {
+            .marquee span {
+                animation: none;
+                text-shadow: none;
+                width: auto;
+                display: block;
+                line-height: 1.5;
+                text-align: center;
+                white-space: normal;
+            }
+        }
+
+        :checked ~ .marquee span {
+            animation-play-state: running;
+        }
+
+        label {
+            font: .85rem Courier;
+            margin-left: .5em
+        }
+    </style>
+    <script>
+        $(function () {
+            $("BODY").removeClass("loading unloading");
+        })
+
+        setInterval(function () {
+            $(".countdown").each(function () {
+                let x = Date.parse($(this).data("till"));
+                let seo = Math.round((x - new Date().getTime()) / 1000);
+                if (seo > 0 && seo < 86400) {
+                    let h = "" + Math.floor(seo / 3600);
+                    seo = seo - h * 3600;
+                    let m = "" + Math.floor(seo / 60);
+                    seo = seo - m * 60;
+                    let s = "" + seo;
+                    $(this).html("Starts in " + h.padStart(2, "0") + ":" + m.padStart(2, "0") + ":" + s.padStart(2, "0"));
+                } else {
+                    $(this).html("");
+                }
+            })
+        }, 1000);
+    </script>
+
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+        window._alert = window.alert;
+        window._confirm = window.confirm;
+        window._prompt = window.prompt;
+        window.alert = function (text, title = "Alert") {
+            $("#genericModal").modal("show");
+            $("#genericModal .modal-body").html(text);
+            $("#genericModal .modal-footer *").remove();
+            $("#genericModal .modal-footer").html(`<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>`);
+            $("#genericModalLabel").html(`<i class="fa fa-info-circle"></i> ` + title);
+            $("#genericModal .btn-close").show();
+        }
+        window.progresswait = function (text) {
+            enableWaiting();
+            $("#genericModal").modal("show");
+            $("#genericModal .modal-body").html(text);
+            $("#genericModal .modal-footer *").remove();
+            $("#genericModal .modal-footer").html(`<i class='fa fa-spin fa-spinner'></i>`);
+            $("#genericModalLabel").html(`<i class="fa fa-info-circle"></i> Please wait`);
+            $("#genericModal .btn-close").hide();
+        }
+        window.progressfinish = function (text) {
+            disableWaiting();
+            $("#genericModal").modal("hide");
+        }
+        window.confirm = function (text, yesfn = function () { }, nofn = function () { }) {
+            enableWaiting();
+            $("#genericModal").modal("show");
+            $("#genericModal .modal-body").html(text);
+            $("#genericModal .modal-footer *").remove();
+            let yesbtn = document.createElement("button");
+            yesbtn.className = "btn btn-primary";
+            yesbtn.innerHTML = "OK";
+            yesbtn.onclick = function () {
+                disableWaiting();
+                $("#genericModal").modal("hide");
+                yesfn();
+            }
+
+            let nobtn = document.createElement("button");
+            nobtn.className = "btn btn-secondary";
+            nobtn.innerHTML = "Cancel";
+            nobtn.onclick = function () {
+                disableWaiting();
+                $("#genericModal").modal("hide");
+                nofn();
+            }
+
+            $("#genericModal .modal-footer").append(yesbtn);
+            $("#genericModal .modal-footer").append(nobtn);
+            $("#genericModalLabel").html(`<i class="fa fa-info-circle"></i> Give confirmation`);
+            $("#genericModal .btn-close").hide();
+        }
+        window.prompt = function (text = "Enter the choice", promptResult) {
+            enableWaiting();
+            $("#genericModal").modal("show");
+            $("#genericModal .modal-body").html(text + "<BR><input class='form-control' type='text' id='promptresult' name='promptresult' />");
+            $("#genericModal .modal-footer *").remove();
+            let yesbtn = document.createElement("button");
+            yesbtn.className = "btn btn-primary";
+            yesbtn.innerHTML = "OK";
+            yesbtn.onclick = function () {
+                disableWaiting();
+                promptResult($('#promptresult').val());
+                $("#genericModal .modal-body").html(" ");
+                $("#genericModal").modal("hide");
+            }
+
+            let nobtn = document.createElement("button");
+            nobtn.className = "btn btn-secondary";
+            nobtn.innerHTML = "Cancel";
+            nobtn.onclick = function () {
+                disableWaiting();
+                promptResult(null);
+                $("#genericModal .modal-body").html(" ");
+                $("#genericModal").modal("hide");
+            }
+
+            $("#genericModal .modal-footer").append(yesbtn);
+            $("#genericModal .modal-footer").append(nobtn);
+            $("#genericModalLabel").html(`<i class="fa fa-info-circle"></i> Give input`);
+            $("#genericModal .btn-close").hide();
+        }
+
+        window.enableWaiting = function () {
+            addEventListener("beforeunload", beforeUnloadListener, { capture: true });
+        }
+        window.disableWaiting = function () {
+            removeEventListener("beforeunload", beforeUnloadListener, { capture: true });
+        }
+        window.beforeUnloadListener = (event) => {
+            event.preventDefault();
+            return event.returnValue = "Are you sure you want to exit?";
+        };
+
+        window.nicePathHTML = function (pth, endicon = 'fa-folder text-yellow') {
+            let result = "";
+            let depth = 0;
+            if (pth.startsWith('/documents')) {
+                result = "<i class='fa fa-hdd text-primary'></i><br>";
+                pth = pth.substring(10);
+            }
+            let arz = pth.trim("/").split("/");
+
+            arz.filter((P) => { return P && (P != ""); })
+                .forEach(function (P) {
+                    depth++;
+
+                    result += "&nbsp;&nbsp;".repeat(depth) + "<i style='float:none;' class='fa " +
+                        ((depth >= (arz.length - 1)) ? endicon : " fa-folder text-yellow  ") +
+                        "'></i> " + P + "<br>";
+                });
+
+            return result;
+        }
+    </script>
+
+    <div class="modal fade" id="genericModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" style="background: rgba(0,0,0,0.3);">
+        <div class="modal-dialog">
+            <div class="modal-content bg-light text-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="genericModalLabel"><i class="fa fa-info-circle"></i>WoW Berry DMS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: calc(80vh - 50px); overflow-y: auto; overflow-x: auto;">
+                    <p>Check it out!</p>
+                    The most powerful Document Management Software ever created.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TTL 46.0003 ms -->
+
+    <link media="print" onload="this.media='all';" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <script>
+        window.fwSettings = {
+            'widget_id': 44000003482
+        };
+        !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/44000003482.js' async defer></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-2VZHSZCDR1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2VZHSZCDR1');
+    </script>
+    <script src="https://in-flow.in/scripts/loader.js" data-id="708F98C6A2689B15B5B49C25CA6FADA4261FDE2249B956F515D7A2091EBB9667" data-hint="Click to open"></script>
+</body>
+</html>

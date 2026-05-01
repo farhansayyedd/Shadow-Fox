@@ -1,0 +1,37 @@
+﻿≡ƒÅÅ RCB Fan Zone ΓÇö CricAPI Sync
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+
+≡ƒôí Fetching series match list...
+Γ£à Found 70 matches
+
+  ≡ƒôè Fetching scorecard: Match 1 (RCB vs SRH)...
+     Γ£à SRH 201/9 (20 Ov) | RCB 203/4 (15.4 Ov)
+  ≡ƒôè Fetching scorecard: Match 11 (RCB vs CSK)...
+node :   Attempt 1/3 failed for match_scorecard: hits today exceeded hits limit
+At line:1 char:1
++ node scripts/sync-cricapi.js 2>&1 | Out-File scripts/sync-final.txt - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (  Attempt 1/3 f...eded hits limit:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Attempt 2/3 failed for match_scorecard: Blocking since hits today exceeded hits limit
+  Attempt 3/3 failed for match_scorecard: Blocked for 15 minutes
+     ΓÜá No scorecard data
+  ≡ƒôè Fetching scorecard: Match 16 (RR vs RCB)...
+  Attempt 1/3 failed for match_scorecard: Blocked for 15 minutes
+  Attempt 2/3 failed for match_scorecard: Blocked for 15 minutes
+     ΓÜá No scorecard data
+  ≡ƒôè Fetching scorecard: Match 20 (MI vs RCB)...
+  Attempt 3/3 failed for match_scorecard: Blocked for 15 minutes
+  Attempt 1/3 failed for match_scorecard: Blocked for 15 minutes
+  Attempt 2/3 failed for match_scorecard: Blocked for 15 minutes
+  Attempt 3/3 failed for match_scorecard: Blocked for 15 minutes
+     ΓÜá No scorecard data
+  ≡ƒôè Fetching scorecard: Match 23 (RCB vs LSG)...
+  Attempt 1/3 failed for match_scorecard: Blocked for 15 minutes
+  Attempt 2/3 failed for match_scorecard: Blocked for 15 minutes
+     ΓÜá No scorecard data
+  Attempt 3/3 failed for match_scorecard: Blocked for 15 minutes
+  ≡ƒôè Fetching scorecard: Match 26 (RCB vs DC)...
+  Attempt 1/3 failed for match_scorecard: Blocked for 15 minutes
+  Attempt 2/3 failed for match_scorecard: Blocked for 15 minutes

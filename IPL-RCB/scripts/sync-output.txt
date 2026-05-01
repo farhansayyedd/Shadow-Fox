@@ -1,0 +1,67 @@
+﻿≡ƒÅÅ RCB Fan Zone ΓÇö IPL 2026 Live Scraper
+≡ƒôí Source: cricketdata.org
+
+
+≡ƒôÑ Match 1 (vs SRH)
+   Tables found: 13
+   Inn1: SRH 201/9 (20 Ov) | Bat:11 Bowl:6
+   Inn2: RCB 203/4 (15.4 Ov) | Bat:6 Bowl:6
+
+≡ƒôÑ Match 11 (vs CSK)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 16 (vs RR)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 20 (vs MI)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 23 (vs LSG)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 26 (vs DC)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 34 (vs GT)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 39 (vs DC)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 42 (vs GT)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 50 (vs LSG)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 54 (vs MI)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 57 (vs KKR)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 61 (vs PBKS)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+≡ƒôÑ Match 67 (vs SRH)
+   Tables found: 3
+   ΓÜá Not enough tables ΓÇö match likely upcoming/in progress
+
+Γ£à Successfully scraped: 1/14 RCB matches
+
+≡ƒô¥ Written: js/official-data.js
+   74 total matches | 1 with live scorecards
+
+≡ƒÜÇ Run: git add . && git commit -m "sync: Live IPL 2026 data" && git push

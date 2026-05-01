@@ -1,0 +1,38 @@
+﻿node : <anonymous_script>:6
+At line:1 char:1
++ node scripts/verify-data.js 2>&1 | 
+Out-File -FilePath scripts/verify- ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecif 
+   ied: (<anonymous_script>:6:String)   
+  [], RemoteException
+    + FullyQualifiedErrorId : NativeCom 
+   mandError
+ 
+D = [
+  ^
+
+ReferenceError: Cannot access 'D' 
+before initialization
+    at eval (eval at <anonymous> (D:\Sha
+dow-Fox\IPL-RCB\scripts\verify-data.js:2
+:11), <anonymous>:6:3)
+    at Object.<anonymous> (D:\Shadow-Fox
+\IPL-RCB\scripts\verify-data.js:2:11)
+    at Module._compile (node:internal/mo
+dules/cjs/loader:1812:14)
+    at Object..js (node:internal/modules
+/cjs/loader:1943:10)
+    at Module.load (node:internal/module
+s/cjs/loader:1533:32)
+    at Module._load (node:internal/modul
+es/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/mod
+ules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as 
+runMain] 
+(node:internal/modules/run_main:154:5)
+    at 
+node:internal/main/run_main_module:33:47
+
+Node.js v24.14.0

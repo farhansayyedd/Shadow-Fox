@@ -1,63 +1,63 @@
 'use strict';
 /* ============================================================
-   RCB Fan Zone — LIVE DATA SYSTEM (CricAPI Integration)
+   RCB Fan Zone — LIVE DATA SYSTEM v2 (Fixed)
    
    Features:
-   - Live fixtures from CricAPI
-   - Automatic scorecard updates for completed matches
+   - Live fixtures from CricAPI with 30-second polling
+   - Automatic score updates for ALL matches
    - True countdown for upcoming RCB matches
-   - Auto-update countdown when RCB finishes current match
+   - Real-time fixture rendering
    
    API Key: 3812d023-8576-4422-bc75-9cd9c7160d14
    ============================================================ */
 
 const CRIC_API_KEY = '3812d023-8576-4422-bc75-9cd9c7160d14';
-const SERIES_ID = 'ipl-2026'; // We'll use current matches and match info endpoints
+const SERIES_ID = '76b4f729-8cff-4df2-8d64-d96c1fb218ba'; // IPL 2025
 
 // Polling intervals
-const POLL_MATCHES = 30 * 1000;     // 30 seconds for live matches
-const POLL_SERIES = 5 * 60 * 1000;  // 5 minutes for series data
-const POLL_SCHEDULE = 60 * 60 * 1000; // 1 hour for schedule updates
+const POLL_LIVE = 30 * 1000;      // 30 seconds for live scores
+const POLL_SCHEDULE = 5 * 60 * 1000;  // 5 minutes for schedule
 
 // State
 let liveMatches = [];
-let upcomingRCBMatch = null;
-let currentRCBMatch = null;
-let countdownInterval = null;
-let lastCountdownUpdate = null;
+let updateTimer = null;
+let countdownTimer = null;
 
 /* ============================================================
-   1. FETCH LIVE FIXTURES FROM CRICAPI
+   1. FETCH LIVE DATA FROM CRICAPI
    ============================================================ */
 
-async function fetchSeriesMatches() {
+async function fetchLiveMatches() {
   try {
-    // Get current matches (includes live and recently completed)
-    const currentRes = await fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${CRIC_API_KEY}&offset=0`);
-    if (!currentRes.ok) throw new Error('Current matches API failed');
-    const currentData = await currentRes.json();
+    const res = await fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${CRIC_API_KEY}&offset=0`);
+    if (!res.ok) throw new Error('API failed');
+    const data = await res.json();
     
-    if (currentData.data) {
-      liveMatches = currentData.data.filter(m => {
+    if (data.data) {
+      liveMatches = data.data.filter(m => {
         const name = (m.name || '').toLowerCase();
         return name.includes('ipl') || name.includes('indian premier league');
       });
-      console.log('[LiveData] Fetched', liveMatches.length, 'IPL matches from CricAPI');
+      console.log('[LiveData] Fetched', liveMatches.length, 'matches');
+      updateFixturesFromAPIData(liveMatches);
     }
-    
-    // Get series info for full schedule
-    const seriesRes = await fetch(`https://api.cricapi.com/v1/series_info?apikey=${CRIC_API_KEY}&id=76b4f729-8cff-4df2-8d64-d96c1fb218ba`);
-    if (seriesRes.ok) {
-      const seriesData = await seriesRes.json();
-      if (seriesData.data && seriesData.data.matchList) {
-        updateFixturesFromSeries(seriesData.data.matchList);
-      }
-    }
-    
     return liveMatches;
   } catch (e) {
-    console.error('[LiveData] Error fetching series matches:', e.message);
+    console.error('[LiveData] Error:', e.message);
     return [];
+  }
+}
+
+async function fetchSeriesSchedule() {
+  try {
+    const res = await fetch(`https://api.cricapi.com/v1/series_info?apikey=${CRIC_API_KEY}&id=${SERIES_ID}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.data?.matchList) {
+      updateFixturesFromSchedule(data.data.matchList);
+    }
+  } catch (e) {
+    console.error('[LiveData] Schedule error:', e.message);
   }
 }
 
@@ -91,43 +91,101 @@ async function fetchScorecard(matchId) {
    2. UPDATE FIXTURES FROM LIVE DATA
    ============================================================ */
 
-function updateFixturesFromSeries(matchList) {
-  if (!matchList || !Array.isArray(matchList)) return;
+function updateFixturesFromAPIData(apiMatches) {
+  if (!apiMatches || !Array.isArray(apiMatches)) return;
   
-  matchList.forEach(apiMatch => {
-    // Find corresponding match in ALL_IPL_2026
+  let updated = false;
+  
+  apiMatches.forEach(apiMatch => {
     const localMatch = findLocalMatch(apiMatch);
     if (!localMatch) return;
     
-    // Update match data
-    if (apiMatch.date) localMatch.date = apiMatch.date;
-    if (apiMatch.dateTimeGMT) {
-      const dt = new Date(apiMatch.dateTimeGMT);
-      localMatch.time = dt.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false });
-    }
-    if (apiMatch.venue) localMatch.venue = apiMatch.venue;
-    if (apiMatch.status) {
-      // Check if match is complete
-      const status = apiMatch.status.toLowerCase();
-      if (status.includes('won') || status.includes('lost') || status.includes('tied') || status.includes('no result')) {
-        localMatch.result = apiMatch.status;
-        // Determine winner
-        if (status.includes(localMatch.t1.toLowerCase())) localMatch.winner = localMatch.t1;
-        else if (status.includes(localMatch.t2.toLowerCase())) localMatch.winner = localMatch.t2;
-        else if (status.includes('rcb')) localMatch.winner = 'RCB';
-      }
+    // Update scores
+    if (apiMatch.score && apiMatch.score.length > 0) {
+      if (apiMatch.score[0]) localMatch.t1runs = formatScore(apiMatch.score[0]);
+      if (apiMatch.score[1]) localMatch.t2runs = formatScore(apiMatch.score[1]);
     }
     
-    // Update scores if available
-    if (apiMatch.score && apiMatch.score.length >= 1) {
-      localMatch.t1runs = formatScore(apiMatch.score[0]);
+    // Check match status
+    const status = (apiMatch.status || '').toLowerCase();
+    const isComplete = apiMatch.matchEnded || 
+                        status.includes('won') || 
+                        status.includes('tied') ||
+                        status.includes('no result') ||
+                        status.includes('draw');
+    
+    // Mark as live if match started but not complete
+    if (!isComplete && (localMatch.t1runs || status.includes('live') || status.includes('innings'))) {
+      localMatch.isLive = true;
     }
-    if (apiMatch.score && apiMatch.score.length >= 2) {
-      localMatch.t2runs = formatScore(apiMatch.score[1]);
+    
+    // Update result if match just completed
+    if (isComplete && !localMatch.result) {
+      localMatch.result = apiMatch.status;
+      localMatch.isLive = false;
+      
+      // Determine winner
+      const t1Name = localMatch.t1.toLowerCase();
+      const t2Name = localMatch.t2.toLowerCase();
+      if (status.includes(t1Name)) localMatch.winner = localMatch.t1;
+      else if (status.includes(t2Name)) localMatch.winner = localMatch.t2;
+      else if (status.includes('rcb')) localMatch.winner = 'RCB';
+      
+      // Fetch full scorecard for completed matches
+      if (apiMatch.id) {
+        fetchFullScorecard(apiMatch.id, localMatch);
+      }
+      
+      updated = true;
     }
   });
   
-  console.log('[LiveData] Updated fixtures from series data');
+  // Re-render if updated
+  if (updated && typeof renderFixtures === 'function') {
+    const statusFilter = document.querySelector('.fx-tab.active')?.dataset.filter || 'all';
+    const teamFilter = document.getElementById('team-filter')?.value || 'all';
+    renderFixtures('fixtures-list', statusFilter, teamFilter);
+    console.log('[LiveData] Fixtures re-rendered');
+  }
+}
+
+function updateFixturesFromSchedule(matchList) {
+  if (!matchList || !Array.isArray(matchList)) return;
+  
+  matchList.forEach(apiMatch => {
+    const localMatch = findLocalMatch(apiMatch);
+    if (!localMatch) return;
+    
+    // Update basic info from schedule
+    if (apiMatch.date) localMatch.date = apiMatch.date;
+    if (apiMatch.dateTimeGMT) {
+      const dt = new Date(apiMatch.dateTimeGMT);
+      localMatch.time = dt.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+    }
+    if (apiMatch.venue) localMatch.venue = apiMatch.venue;
+    if (apiMatch.teams && apiMatch.teams.length === 2) {
+      // Map team names
+      const teamMap = {
+        'mumbai indians': 'MI', 'mi': 'MI',
+        'chennai super kings': 'CSK', 'csk': 'CSK',
+        'royal challengers bengaluru': 'RCB', 'rcb': 'RCB',
+        'kolkata knight riders': 'KKR', 'kkr': 'KKR',
+        'sunrisers hyderabad': 'SRH', 'srh': 'SRH',
+        'rajasthan royals': 'RR', 'rr': 'RR',
+        'delhi capitals': 'DC', 'dc': 'DC',
+        'punjab kings': 'PBKS', 'pbks': 'PBKS',
+        'gujarat titans': 'GT', 'gt': 'GT',
+        'lucknow super giants': 'LSG', 'lsg': 'LSG'
+      };
+      const t1 = teamMap[apiMatch.teams[0].toLowerCase()];
+      const t2 = teamMap[apiMatch.teams[1].toLowerCase()];
+      if (t1 && t2) {
+        localMatch.t1 = t1;
+        localMatch.t2 = t2;
+        localMatch.rcb = (t1 === 'RCB' || t2 === 'RCB');
+      }
+    }
+  });
 }
 
 function findLocalMatch(apiMatch) {
@@ -237,16 +295,22 @@ async function updateLiveScores() {
   }
 }
 
-async function fetchAndStoreScorecard(matchId, localMatch) {
+async function fetchFullScorecard(matchId, localMatch) {
   try {
     const scorecard = await fetchScorecard(matchId);
-    if (scorecard && scorecard.scorecard) {
+    if (scorecard?.scorecard) {
       localMatch.scorecard = convertCricapiScorecard(scorecard.scorecard);
-      console.log('[LiveData] Full scorecard fetched for match', localMatch.id);
+      cacheMatchResult(localMatch);
+      console.log('[LiveData] Scorecard fetched for match', localMatch.id);
     }
   } catch (e) {
     console.error('[LiveData] Error fetching scorecard:', e.message);
   }
+}
+
+// Legacy function name for compatibility
+async function fetchAndStoreScorecard(matchId, localMatch) {
+  return fetchFullScorecard(matchId, localMatch);
 }
 
 function convertCricapiScorecard(apiScorecard) {
@@ -337,40 +401,34 @@ function findUpcomingRCBMatch() {
 }
 
 function startTrueCountdown() {
-  // Clear existing interval
-  if (countdownInterval) clearInterval(countdownInterval);
+  // Clear existing timer
+  if (countdownTimer) clearInterval(countdownTimer);
   
-  upcomingRCBMatch = findUpcomingRCBMatch();
+  const upcomingRCBMatch = findUpcomingRCBMatch();
   
   if (!upcomingRCBMatch) {
-    // No upcoming RCB matches - show message
     updateCountdownUI(null);
     return;
   }
   
-  console.log('[LiveData] Next RCB match:', upcomingRCBMatch.id, '-', upcomingRCBMatch.t1, 'vs', upcomingRCBMatch.t2);
+  console.log('[LiveData] Next RCB match:', upcomingRCBMatch.id);
   
-  // Start countdown
-  updateCountdownTick();
-  countdownInterval = setInterval(updateCountdownTick, 1000);
+  // Update immediately and then every second
+  updateCountdownTick(upcomingRCBMatch);
+  countdownTimer = setInterval(() => updateCountdownTick(upcomingRCBMatch), 1000);
 }
 
-function updateCountdownTick() {
-  if (!upcomingRCBMatch) return;
+function updateCountdownTick(match) {
+  if (!match) return;
   
-  const matchTime = new Date(upcomingRCBMatch.date + 'T' + upcomingRCBMatch.time + ':00+05:30');
+  const matchTime = new Date(match.date + 'T' + match.time + ':00+05:30');
   const now = new Date();
   const diff = matchTime - now;
   
   if (diff <= 0) {
-    // Match is starting now!
-    updateCountdownUI({ live: true, match: upcomingRCBMatch });
-    
-    // Check if we need to find next match
-    setTimeout(() => {
-      startTrueCountdown();
-    }, 60000); // Recheck after 1 minute
-    
+    updateCountdownUI({ live: true, match });
+    // Recheck for next match after 1 minute
+    setTimeout(startTrueCountdown, 60000);
     return;
   }
   
@@ -379,13 +437,7 @@ function updateCountdownTick() {
   const minutes = Math.floor((diff % 3600000) / 60000);
   const seconds = Math.floor((diff % 60000) / 1000);
   
-  updateCountdownUI({
-    days,
-    hours,
-    minutes,
-    seconds,
-    match: upcomingRCBMatch
-  });
+  updateCountdownUI({ days, hours, minutes, seconds, match });
 }
 
 function updateCountdownUI(data) {
@@ -440,21 +492,19 @@ function updateCountdownUI(data) {
    ============================================================ */
 
 function handleRCBMatchComplete(completedMatch) {
-  console.log('[LiveData] Handling RCB match completion:', completedMatch.id);
+  console.log('[LiveData] RCB match complete:', completedMatch.id);
   
-  // Clear current countdown
-  if (countdownInterval) {
-    clearInterval(countdownInterval);
-    countdownInterval = null;
+  // Reset countdown for next match
+  if (countdownTimer) {
+    clearInterval(countdownTimer);
+    countdownTimer = null;
   }
-  
-  // Find and start countdown to next match
   startTrueCountdown();
   
-  // Show notification if supported
+  // Show notification
   if ('Notification' in window && Notification.permission === 'granted') {
     const won = completedMatch.winner === 'RCB';
-    new Notification(won ? '🎉 RCB WON!' : '😔 RCB Match Over', {
+    new Notification(won ? '🎉 RCB WON!' : '😔 RCB Lost', {
       body: completedMatch.result,
       icon: 'images/rcb-logo.png'
     });
@@ -524,32 +574,35 @@ function loadCachedResults() {
    ============================================================ */
 
 function initLiveDataSystem() {
-  console.log('[LiveData] Initializing Live Data System...');
+  console.log('[LiveData] Initializing v2...');
   
-  // Clear old cache first
+  // Clear old cache
   clearOldCache();
-  
-  // Load cached results
   loadCachedResults();
   
-  // Initial fetch
-  fetchSeriesMatches().then(() => {
-    updateLiveScores();
+  // Initial data fetch
+  fetchLiveMatches().then(() => {
+    fetchSeriesSchedule();
   });
   
   // Start countdown
   startTrueCountdown();
   
-  // Set up polling intervals
-  setInterval(updateLiveScores, POLL_MATCHES);      // Every 30s for live scores
-  setInterval(fetchSeriesMatches, POLL_SCHEDULE);   // Every hour for schedule
+  // Set up polling - 30 seconds like news
+  setInterval(() => {
+    fetchLiveMatches();
+  }, POLL_LIVE);
   
-  // Request notification permission
+  setInterval(() => {
+    fetchSeriesSchedule();
+  }, POLL_SCHEDULE);
+  
+  // Notification permission
   if ('Notification' in window && Notification.permission === 'default') {
     Notification.requestPermission();
   }
   
-  console.log('[LiveData] System initialized successfully');
+  console.log('[LiveData] v2 initialized - polling every 30s');
 }
 
 // Auto-init when DOM is ready
@@ -562,11 +615,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // Export for external use
 window.RCBLiveData = {
   init: initLiveDataSystem,
-  fetchSeriesMatches,
-  fetchScorecard,
-  updateLiveScores,
+  fetchLiveMatches,
+  fetchSeriesSchedule,
   startTrueCountdown,
-  findUpcomingRCBMatch,
-  getCurrentRCBMatch: () => currentRCBMatch,
-  getUpcomingRCBMatch: () => upcomingRCBMatch
+  refresh: () => {
+    fetchLiveMatches();
+    fetchSeriesSchedule();
+  }
 };

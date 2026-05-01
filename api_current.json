@@ -1,0 +1,1148 @@
+{
+  "apikey": "3812d023-8576-4422-bc75-9cd9c7160d14",
+  "data": [
+    {
+      "id": "a08ed3ed-037a-4fa3-898b-f51eb1765099",
+      "name": "Cyprus Women vs Greece Women, 4th T20I, Greece Women tour of Cyprus, 2026",
+      "matchType": "t20",
+      "status": "Cyprus Women opt to bat",
+      "venue": "Happy Valley Ground, Episkopi",
+      "date": "2026-04-04",
+      "dateTimeGMT": "2026-04-04T11:30:00",
+      "teams": [
+        "Cyprus Women",
+        "Greece Women"
+      ],
+      "teamInfo": [
+        {
+          "name": "Cyprus Women",
+          "shortname": "CPW",
+          "img": "https://h.cricapi.com/img/icon512.png"
+        },
+        {
+          "name": "Greece Women",
+          "shortname": "GW",
+          "img": "https://g.cricapi.com/iapi/609-637873697911451014.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 47,
+          "w": 5,
+          "o": 7.5,
+          "inning": "cyprus women Inning 1"
+        }
+      ],
+      "series_id": "a7df6d61-e0d1-4335-8879-01648bbb497f",
+      "fantasyEnabled": true,
+      "bbbEnabled": false,
+      "hasSquad": true,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "5fc630cf-34e1-48c2-b125-ee83e8c94ff1",
+      "name": "Cyprus Women vs Greece Women, 3rd T20I, Greece Women tour of Cyprus, 2026",
+      "matchType": "t20",
+      "status": "Cyprus Women won by 34 runs",
+      "venue": "Happy Valley Ground, Episkopi",
+      "date": "2026-04-04",
+      "dateTimeGMT": "2026-04-04T07:15:00",
+      "teams": [
+        "Cyprus Women",
+        "Greece Women"
+      ],
+      "teamInfo": [
+        {
+          "name": "Cyprus Women",
+          "shortname": "CPW",
+          "img": "https://h.cricapi.com/img/icon512.png"
+        },
+        {
+          "name": "Greece Women",
+          "shortname": "GW",
+          "img": "https://g.cricapi.com/iapi/609-637873697911451014.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 108,
+          "w": 6,
+          "o": 20,
+          "inning": "cyprus women Inning 1"
+        },
+        {
+          "r": 74,
+          "w": 10,
+          "o": 19.1,
+          "inning": "Cyprus Women,Greece Women Inning 1"
+        }
+      ],
+      "series_id": "a7df6d61-e0d1-4335-8879-01648bbb497f",
+      "fantasyEnabled": true,
+      "bbbEnabled": false,
+      "hasSquad": true,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "f6b08041-f333-45d2-8f76-f131a50c4399",
+      "name": "Cyprus Women vs Greece Women, 2nd T20I, Greece Women tour of Cyprus, 2026",
+      "matchType": "t20",
+      "status": "Cyprus Women won by 15 runs",
+      "venue": "Happy Valley Ground, Episkopi",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Cyprus Women",
+        "Greece Women"
+      ],
+      "teamInfo": [
+        {
+          "name": "Cyprus Women",
+          "shortname": "CPW",
+          "img": "https://h.cricapi.com/img/icon512.png"
+        },
+        {
+          "name": "Greece Women",
+          "shortname": "GW",
+          "img": "https://g.cricapi.com/iapi/609-637873697911451014.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 83,
+          "w": 8,
+          "o": 20,
+          "inning": "cyprus women Inning 1"
+        },
+        {
+          "r": 68,
+          "w": 10,
+          "o": 17.1,
+          "inning": "Cyprus Women,Greece Women Inning 1"
+        }
+      ],
+      "series_id": "a7df6d61-e0d1-4335-8879-01648bbb497f",
+      "fantasyEnabled": true,
+      "bbbEnabled": false,
+      "hasSquad": true,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "fbf102d9-82e1-4c74-b494-c95c45ac70bf",
+      "name": "Cyprus Women vs Greece Women, 1st T20I, Greece Women tour of Cyprus, 2026",
+      "matchType": "t20",
+      "status": "Cyprus Women won by 8 runs",
+      "venue": "Happy Valley Ground, Episkopi",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Cyprus Women",
+        "Greece Women"
+      ],
+      "teamInfo": [
+        {
+          "name": "Cyprus Women",
+          "shortname": "CPW",
+          "img": "https://h.cricapi.com/img/icon512.png"
+        },
+        {
+          "name": "Greece Women",
+          "shortname": "GW",
+          "img": "https://g.cricapi.com/iapi/609-637873697911451014.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 84,
+          "w": 8,
+          "o": 20,
+          "inning": "cyprus women Inning 1"
+        },
+        {
+          "r": 76,
+          "w": 9,
+          "o": 20,
+          "inning": "Cyprus Women,Greece Women Inning 1"
+        }
+      ],
+      "series_id": "a7df6d61-e0d1-4335-8879-01648bbb497f",
+      "fantasyEnabled": true,
+      "bbbEnabled": false,
+      "hasSquad": true,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "0ca21558-b894-4ad4-abb1-1a8e1b2546d0",
+      "name": "Namibia vs Oman, 93rd Match, ICC Cricket World Cup League Two 2023-27",
+      "matchType": "odi",
+      "status": "Oman won by 3 wkts",
+      "venue": "Wanderers Cricket Ground, Windhoek",
+      "date": "2026-04-04",
+      "dateTimeGMT": "2026-04-04T07:30:00",
+      "teams": [
+        "Namibia",
+        "Oman"
+      ],
+      "teamInfo": [
+        {
+          "name": "Namibia",
+          "shortname": "NAM",
+          "img": "https://g.cricapi.com/iapi/53-637877082656229722.webp?w=48"
+        },
+        {
+          "name": "Oman",
+          "shortname": "OMAN",
+          "img": "https://g.cricapi.com/iapi/64-637877083212505394.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 268,
+          "w": 7,
+          "o": 50,
+          "inning": "Namibia Inning 1"
+        },
+        {
+          "r": 274,
+          "w": 7,
+          "o": 49.1,
+          "inning": "Oman Inning 1"
+        }
+      ],
+      "series_id": "e994b480-f303-4b25-a36f-1d37b7d5b749",
+      "fantasyEnabled": true,
+      "bbbEnabled": false,
+      "hasSquad": true,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "a1e585fe-416f-4467-8434-76b66277769a",
+      "name": "Rawalpindiz vs Islamabad United, 12th Match, Pakistan Super League 2026",
+      "matchType": "t20",
+      "status": "Islamabad United won by 7 wkts",
+      "venue": "Gaddafi Stadium, Lahore",
+      "date": "2026-04-04",
+      "dateTimeGMT": "2026-04-04T14:00:00",
+      "teams": [
+        "Rawalpindiz",
+        "Islamabad United"
+      ],
+      "teamInfo": [
+        {
+          "name": "Islamabad United",
+          "shortname": "ISU",
+          "img": "https://g.cricapi.com/iapi/34-637992689284766336.webp?w=48"
+        },
+        {
+          "name": "Rawalpindiz",
+          "shortname": "R",
+          "img": "https://h.cricapi.com/img/icon512.png"
+        }
+      ],
+      "score": [
+        {
+          "r": 156,
+          "w": 7,
+          "o": 20,
+          "inning": "Rawalpindiz Inning 1"
+        },
+        {
+          "r": 157,
+          "w": 3,
+          "o": 14.2,
+          "inning": "Islamabad United Inning 1"
+        }
+      ],
+      "series_id": "7a4694ac-94d6-4516-9796-0fae84426668",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "b3ef1d5f-3e1d-4736-804e-57884a946094",
+      "name": "Lahore Qalandars vs Multan Sultans, 11th Match, Pakistan Super League 2026",
+      "matchType": "t20",
+      "status": "Lahore Qalandars won by 20 runs (13 Overs game due to rain)",
+      "venue": "Gaddafi Stadium, Lahore",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Lahore Qalandars",
+        "Multan Sultans"
+      ],
+      "teamInfo": [
+        {
+          "name": "Lahore Qalandars",
+          "shortname": "LHQ",
+          "img": "https://g.cricapi.com/iapi/41-637991979136379824.webp?w=48"
+        },
+        {
+          "name": "Multan Sultans",
+          "shortname": "MS",
+          "img": "https://g.cricapi.com/iapi/50-637991992950999418.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 185,
+          "w": 5,
+          "o": 13,
+          "inning": "Lahore Qalandars Inning 1"
+        },
+        {
+          "r": 165,
+          "w": 5,
+          "o": 13,
+          "inning": "Multan Sultans Inning 1"
+        }
+      ],
+      "series_id": "7a4694ac-94d6-4516-9796-0fae84426668",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "94767d70-cfe8-461c-81f7-a3a7506e6c07",
+      "name": "Rawalpindiz vs Karachi Kings, 10th Match, Pakistan Super League 2026",
+      "matchType": "t20",
+      "status": "Karachi Kings won by 5 wkts",
+      "venue": "Gaddafi Stadium, Lahore",
+      "date": "2026-04-02",
+      "dateTimeGMT": "2026-04-02T00:00:00",
+      "teams": [
+        "Rawalpindiz",
+        "Karachi Kings"
+      ],
+      "teamInfo": [
+        {
+          "name": "Karachi Kings",
+          "shortname": "KRK",
+          "img": "https://g.cricapi.com/iapi/37-637992689033348642.webp?w=48"
+        },
+        {
+          "name": "Rawalpindiz",
+          "shortname": "R",
+          "img": "https://h.cricapi.com/img/icon512.png"
+        }
+      ],
+      "score": [
+        {
+          "r": 197,
+          "w": 6,
+          "o": 20,
+          "inning": "Rawalpindiz Inning 1"
+        },
+        {
+          "r": 199,
+          "w": 5,
+          "o": 19.2,
+          "inning": "Karachi Kings Inning 1"
+        }
+      ],
+      "series_id": "7a4694ac-94d6-4516-9796-0fae84426668",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "494cff71-7c4b-4820-9df5-fb50a1018137",
+      "name": "Quetta Gladiators vs Islamabad United, 9th Match, Pakistan Super League 2026",
+      "matchType": "t20",
+      "status": "Islamabad United won by 8 wkts",
+      "venue": "Gaddafi Stadium, Lahore",
+      "date": "2026-04-02",
+      "dateTimeGMT": "2026-04-02T00:00:00",
+      "teams": [
+        "Quetta Gladiators",
+        "Islamabad United"
+      ],
+      "teamInfo": [
+        {
+          "name": "Islamabad United",
+          "shortname": "ISU",
+          "img": "https://g.cricapi.com/iapi/34-637992689284766336.webp?w=48"
+        },
+        {
+          "name": "Quetta Gladiators",
+          "shortname": "QTG",
+          "img": "https://g.cricapi.com/iapi/74-637992667257901247.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 183,
+          "w": 5,
+          "o": 20,
+          "inning": "quetta gladiators Inning 1"
+        },
+        {
+          "r": 189,
+          "w": 2,
+          "o": 18.2,
+          "inning": "Quetta Gladiators,Islamabad United Inning 1"
+        }
+      ],
+      "series_id": "7a4694ac-94d6-4516-9796-0fae84426668",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "1fa4d5d7-6ac3-4fb7-8c36-7cae84bb08d6",
+      "name": "Multan Sultans vs Hyderabad Kingsmen, 8th Match, Pakistan Super League 2026",
+      "matchType": "t20",
+      "status": "Multan Sultans won by 6 wkts",
+      "venue": "Gaddafi Stadium, Lahore",
+      "date": "2026-04-01",
+      "dateTimeGMT": "2026-04-01T00:00:00",
+      "teams": [
+        "Multan Sultans",
+        "Hyderabad Kingsmen"
+      ],
+      "teamInfo": [
+        {
+          "name": "Hyderabad Kingsmen",
+          "shortname": "HK",
+          "img": "https://h.cricapi.com/img/icon512.png"
+        },
+        {
+          "name": "Multan Sultans",
+          "shortname": "MS",
+          "img": "https://g.cricapi.com/iapi/50-637991992950999418.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 225,
+          "w": 5,
+          "o": 20,
+          "inning": "hyderabad kingsmen Inning 1"
+        },
+        {
+          "r": 227,
+          "w": 4,
+          "o": 18.4,
+          "inning": "Multan Sultans,Hyderabad Kingsmen Inning 1"
+        }
+      ],
+      "series_id": "7a4694ac-94d6-4516-9796-0fae84426668",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "c70e8cdd-1aea-4ce5-b71f-8a364957c1c4",
+      "name": "Costa Rica vs Brazil, 5th Match, Mexico T20I Tri-Series, 2026",
+      "matchType": "t20",
+      "status": "Brazil won by 69 runs",
+      "venue": "Reforma Athletic Club, Naucalpan",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T15:00:00",
+      "teams": [
+        "Costa Rica",
+        "Brazil"
+      ],
+      "teamInfo": [
+        {
+          "name": "Brazil",
+          "shortname": "BRA",
+          "img": "https://g.cricapi.com/iapi/590-637928918903393620.png?w=48"
+        },
+        {
+          "name": "Costa Rica",
+          "shortname": "CRC",
+          "img": "https://g.cricapi.com/iapi/596-637928918453494661.png?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 157,
+          "w": 7,
+          "o": 20,
+          "inning": "Brazil Inning 1"
+        },
+        {
+          "r": 88,
+          "w": 7,
+          "o": 20,
+          "inning": "Costa Rica Inning 1"
+        }
+      ],
+      "series_id": "71e1ac3c-5d80-4e18-9fd2-40f8170e3a25",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "9d50f6ee-2ef8-4b5e-b5af-6123d947ede6",
+      "name": "Mexico vs Brazil, 4th Match, Mexico T20I Tri-Series, 2026",
+      "matchType": "t20",
+      "status": "Mexico won by 16 runs",
+      "venue": "Reforma Athletic Club, Naucalpan",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T20:00:00",
+      "teams": [
+        "Mexico",
+        "Brazil"
+      ],
+      "teamInfo": [
+        {
+          "name": "Brazil",
+          "shortname": "BRA",
+          "img": "https://g.cricapi.com/iapi/590-637928918903393620.png?w=48"
+        },
+        {
+          "name": "Mexico",
+          "shortname": "MEX",
+          "img": "https://g.cricapi.com/iapi/628-637872735821966360.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 160,
+          "w": 9,
+          "o": 20,
+          "inning": "Mexico Inning 1"
+        },
+        {
+          "r": 144,
+          "w": 8,
+          "o": 20,
+          "inning": "Brazil Inning 1"
+        }
+      ],
+      "series_id": "71e1ac3c-5d80-4e18-9fd2-40f8170e3a25",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "5b18efea-2881-4818-ae08-8828417bc7f0",
+      "name": "West Indies Women vs Australia Women, 3rd ODI, Australia Women tour of West Indies, 2026",
+      "status": "Australia Women won by 9 wkts",
+      "venue": "Warner Park, Basseterre, St Kitts",
+      "date": "2026-04-02",
+      "dateTimeGMT": "2026-04-02T00:00:00",
+      "teams": [
+        "West Indies Women",
+        "Australia Women"
+      ],
+      "teamInfo": [
+        {
+          "name": "Australia Women",
+          "shortname": "AUSW",
+          "img": "https://g.cricapi.com/iapi/7-637877070884402012.webp?w=48"
+        },
+        {
+          "name": "West Indies Women",
+          "shortname": "WIW",
+          "img": "https://g.cricapi.com/iapi/102-637877078650138806.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 136,
+          "w": 10,
+          "o": 35.4,
+          "inning": "west indies women Inning 1"
+        },
+        {
+          "r": 137,
+          "w": 1,
+          "o": 19.4,
+          "inning": "West Indies Women,Australia Women Inning 1"
+        }
+      ],
+      "series_id": "ba355f3c-4a4c-4dcf-8b8f-1b87b2e188b0",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "4b1de5c3-e129-4ee8-9765-25685a168833",
+      "name": "Brazil vs Costa Rica, 3rd Match, Mexico T20I Tri-Series, 2026",
+      "matchType": "t20",
+      "status": "Brazil won by 10 wkts",
+      "venue": "Reforma Athletic Club, Naucalpan",
+      "date": "2026-04-02",
+      "dateTimeGMT": "2026-04-02T00:00:00",
+      "teams": [
+        "Brazil",
+        "Costa Rica"
+      ],
+      "teamInfo": [
+        {
+          "name": "Brazil",
+          "shortname": "BRA",
+          "img": "https://g.cricapi.com/iapi/590-637928918903393620.png?w=48"
+        },
+        {
+          "name": "Costa Rica",
+          "shortname": "CRC",
+          "img": "https://g.cricapi.com/iapi/596-637928918453494661.png?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 64,
+          "w": 10,
+          "o": 19.2,
+          "inning": "costa rica Inning 1"
+        },
+        {
+          "r": 66,
+          "w": 0,
+          "o": 6.1,
+          "inning": "Brazil,Costa Rica Inning 1"
+        }
+      ],
+      "series_id": "71e1ac3c-5d80-4e18-9fd2-40f8170e3a25",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "bb947b50-a3a5-4c9e-be3c-682ecbe40e88",
+      "name": "Somerset vs Nottinghamshire, 5th Match, County Championship Division One 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Nottinghamshire trail by 129 runs",
+      "venue": "The Cooper Associates County Ground, Taunton",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Somerset",
+        "Nottinghamshire"
+      ],
+      "teamInfo": [
+        {
+          "name": "Nottinghamshire",
+          "shortname": "NOT",
+          "img": "https://g.cricapi.com/iapi/1130-637889092060873937.webp?w=48"
+        },
+        {
+          "name": "Somerset",
+          "shortname": "SOM",
+          "img": "https://g.cricapi.com/iapi/1131-637885552070524344.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 347,
+          "w": 10,
+          "o": 103.5,
+          "inning": "Somerset Inning 1"
+        },
+        {
+          "r": 218,
+          "w": 3,
+          "o": 67,
+          "inning": "Nottinghamshire Inning 1"
+        }
+      ],
+      "series_id": "709d7240-ef0f-4460-b185-22f328902a41",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "306aeb5b-4d70-4085-98ca-eb312e9f7ffc",
+      "name": "Leicestershire vs Sussex, 4th Match, County Championship Division One 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Sussex lead by 265 runs",
+      "venue": "Grace Road, Leicester",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Leicestershire",
+        "Sussex"
+      ],
+      "teamInfo": [
+        {
+          "name": "Leicestershire",
+          "shortname": "LECS",
+          "img": "https://g.cricapi.com/iapi/1126-637889090878436462.webp?w=48"
+        },
+        {
+          "name": "Sussex",
+          "shortname": "SUSS",
+          "img": "https://g.cricapi.com/iapi/1134-637889091814592518.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 361,
+          "w": 10,
+          "o": 89.5,
+          "inning": "Sussex Inning 1"
+        },
+        {
+          "r": 245,
+          "w": 10,
+          "o": 65,
+          "inning": "Leicestershire Inning 1"
+        },
+        {
+          "r": 149,
+          "w": 3,
+          "o": 35,
+          "inning": "Sussex Inning 2"
+        }
+      ],
+      "series_id": "709d7240-ef0f-4460-b185-22f328902a41",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "3d510cbd-49ae-403c-b83c-5b83bc40e746",
+      "name": "Glamorgan vs Yorkshire, 3rd Match, County Championship Division One 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Yorkshire trail by 301 runs",
+      "venue": "Sophia Gardens, Cardiff",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Glamorgan",
+        "Yorkshire"
+      ],
+      "teamInfo": [
+        {
+          "name": "Glamorgan",
+          "shortname": "GLAM",
+          "img": "https://g.cricapi.com/iapi/1120-637889090390357869.webp?w=48"
+        },
+        {
+          "name": "Yorkshire",
+          "shortname": "YRK",
+          "img": "https://g.cricapi.com/iapi/1139-637885552795894277.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 302,
+          "w": 10,
+          "o": 120.3,
+          "inning": "Glamorgan Inning 1"
+        },
+        {
+          "r": 1,
+          "w": 0,
+          "o": 1.4,
+          "inning": "Yorkshire Inning 1"
+        }
+      ],
+      "series_id": "709d7240-ef0f-4460-b185-22f328902a41",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "c772a4e4-fc93-4aeb-9c1d-ca2bf887d627",
+      "name": "Hampshire vs Essex, 2nd Match, County Championship Division One 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Hampshire trail by 413 runs",
+      "venue": "The Rose Bowl, Southampton",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Hampshire",
+        "Essex"
+      ],
+      "teamInfo": [
+        {
+          "name": "Essex",
+          "shortname": "ESX",
+          "img": "https://g.cricapi.com/iapi/1119-637885549753088458.webp?w=48"
+        },
+        {
+          "name": "Hampshire",
+          "shortname": "HAM",
+          "img": "https://g.cricapi.com/iapi/1122-637885550993657486.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 461,
+          "w": 7,
+          "o": 138.3,
+          "inning": "Essex Inning 1"
+        },
+        {
+          "r": 48,
+          "w": 3,
+          "o": 14.4,
+          "inning": "Hampshire Inning 1"
+        }
+      ],
+      "series_id": "709d7240-ef0f-4460-b185-22f328902a41",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "7aa8d6e8-e223-4b4e-b2a0-ecce35a31a9e",
+      "name": "Mexico vs Costa Rica, 2nd Match, Mexico T20I Tri-Series, 2026",
+      "matchType": "t20",
+      "status": "Mexico won by 124 runs",
+      "venue": "Reforma Athletic Club, Naucalpan",
+      "date": "2026-04-02",
+      "dateTimeGMT": "2026-04-02T00:00:00",
+      "teams": [
+        "Mexico",
+        "Costa Rica"
+      ],
+      "teamInfo": [
+        {
+          "name": "Costa Rica",
+          "shortname": "CRC",
+          "img": "https://g.cricapi.com/iapi/596-637928918453494661.png?w=48"
+        },
+        {
+          "name": "Mexico",
+          "shortname": "MEX",
+          "img": "https://g.cricapi.com/iapi/628-637872735821966360.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 204,
+          "w": 5,
+          "o": 20,
+          "inning": "mexico Inning 1"
+        },
+        {
+          "r": 80,
+          "w": 7,
+          "o": 20,
+          "inning": "Mexico,Costa Rica Inning 1"
+        }
+      ],
+      "series_id": "71e1ac3c-5d80-4e18-9fd2-40f8170e3a25",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "8ff67758-0663-4d36-b263-de90368b3753",
+      "name": "Durham vs Kent, 4th Match, County Championship Division Two 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Durham lead by 221 runs",
+      "venue": "Riverside Ground, Chester-le-Street",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Durham",
+        "Kent"
+      ],
+      "teamInfo": [
+        {
+          "name": "Durham",
+          "shortname": "DURH",
+          "img": "https://g.cricapi.com/iapi/1118-637889090599643548.webp?w=48"
+        },
+        {
+          "name": "Kent",
+          "shortname": "KENT",
+          "img": "https://g.cricapi.com/iapi/1124-637885551212175895.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 335,
+          "w": 10,
+          "o": 77.4,
+          "inning": "Durham Inning 1"
+        },
+        {
+          "r": 197,
+          "w": 10,
+          "o": 55.2,
+          "inning": "Kent Inning 1"
+        },
+        {
+          "r": 83,
+          "w": 2,
+          "o": 22,
+          "inning": "Durham Inning 2"
+        }
+      ],
+      "series_id": "c1854be4-bbf3-4435-9183-1a01c7bb57d3",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "ab7b6900-ca06-4f04-9530-45b28e122b2b",
+      "name": "Mexico vs Brazil, 1st Match, Mexico T20I Tri-Series, 2026",
+      "matchType": "t20",
+      "status": "Mexico won by 23 runs",
+      "venue": "Reforma Athletic Club, Naucalpan",
+      "date": "2026-04-02",
+      "dateTimeGMT": "2026-04-02T00:00:00",
+      "teams": [
+        "Mexico",
+        "Brazil"
+      ],
+      "teamInfo": [
+        {
+          "name": "Brazil",
+          "shortname": "BRA",
+          "img": "https://g.cricapi.com/iapi/590-637928918903393620.png?w=48"
+        },
+        {
+          "name": "Mexico",
+          "shortname": "MEX",
+          "img": "https://g.cricapi.com/iapi/628-637872735821966360.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 153,
+          "w": 6,
+          "o": 20,
+          "inning": "Mexico Inning 1"
+        },
+        {
+          "r": 130,
+          "w": 4,
+          "o": 20,
+          "inning": "Brazil Inning 1"
+        }
+      ],
+      "series_id": "71e1ac3c-5d80-4e18-9fd2-40f8170e3a25",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "ea522043-8ca3-41ec-ab63-ac155651ca95",
+      "name": "Northamptonshire vs Lancashire, 3rd Match, County Championship Division Two 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Northamptonshire trail by 169 runs",
+      "venue": "County Ground, Northampton",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Northamptonshire",
+        "Lancashire"
+      ],
+      "teamInfo": [
+        {
+          "name": "Lancashire",
+          "shortname": "LNCS",
+          "img": "https://g.cricapi.com/iapi/1125-637885551497331567.webp?w=48"
+        },
+        {
+          "name": "Northamptonshire",
+          "shortname": "NOR",
+          "img": "https://g.cricapi.com/iapi/1129-637885551856435418.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 384,
+          "w": 10,
+          "o": 106.3,
+          "inning": "lancashire Inning 1"
+        },
+        {
+          "r": 215,
+          "w": 9,
+          "o": 62,
+          "inning": "Northamptonshire,Lancashire Inning 1"
+        }
+      ],
+      "series_id": "c1854be4-bbf3-4435-9183-1a01c7bb57d3",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "e3ae588e-f155-472e-bc5e-b358d9ff76bf",
+      "name": "Warwickshire vs Surrey, 1st Match, County Championship Division One 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Warwickshire lead by 2 runs",
+      "venue": "Edgbaston, Birmingham",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Warwickshire",
+        "Surrey"
+      ],
+      "teamInfo": [
+        {
+          "name": "Surrey",
+          "shortname": "SUR",
+          "img": "https://g.cricapi.com/iapi/1133-637885552361099530.webp?w=48"
+        },
+        {
+          "name": "Warwickshire",
+          "shortname": "WRKS",
+          "img": "https://g.cricapi.com/iapi/1137-637885552592685258.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 328,
+          "w": 10,
+          "o": 95.1,
+          "inning": "Surrey Inning 1"
+        },
+        {
+          "r": 330,
+          "w": 2,
+          "o": 80,
+          "inning": "Warwickshire Inning 1"
+        }
+      ],
+      "series_id": "709d7240-ef0f-4460-b185-22f328902a41",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "2c6ceca9-7e51-4cb8-8977-3a84d4184d89",
+      "name": "Middlesex vs Gloucestershire, 2nd Match, County Championship Division Two 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Gloucestershire trail by 329 runs",
+      "venue": "Lord's, London",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Middlesex",
+        "Gloucestershire"
+      ],
+      "teamInfo": [
+        {
+          "name": "Gloucestershire",
+          "shortname": "GLOU",
+          "img": "https://g.cricapi.com/iapi/1121-637885550747990018.webp?w=48"
+        },
+        {
+          "name": "Middlesex",
+          "shortname": "MDX",
+          "img": "https://g.cricapi.com/iapi/1127-637889091340507643.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 445,
+          "w": 9,
+          "o": 131,
+          "inning": "Middlesex Inning 1"
+        },
+        {
+          "r": 116,
+          "w": 4,
+          "o": 48.4,
+          "inning": "Gloucestershire Inning 1"
+        }
+      ],
+      "series_id": "c1854be4-bbf3-4435-9183-1a01c7bb57d3",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    },
+    {
+      "id": "40891800-4b6a-4b83-a8a2-b4f99f0044e0",
+      "name": "Derbyshire vs Worcestershire, 1st Match, County Championship Division Two 2026",
+      "matchType": "test",
+      "status": "Day 2: Stumps - Worcestershire trail by 512 runs",
+      "venue": "County Ground, Derby",
+      "date": "2026-04-03",
+      "dateTimeGMT": "2026-04-03T00:00:00",
+      "teams": [
+        "Derbyshire",
+        "Worcestershire"
+      ],
+      "teamInfo": [
+        {
+          "name": "Derbyshire",
+          "shortname": "DERB",
+          "img": "https://g.cricapi.com/iapi/1117-637889091569915358.webp?w=48"
+        },
+        {
+          "name": "Worcestershire",
+          "shortname": "WRCS",
+          "img": "https://g.cricapi.com/iapi/1138-637889091123850841.webp?w=48"
+        }
+      ],
+      "score": [
+        {
+          "r": 625,
+          "w": 8,
+          "o": 140.4,
+          "inning": "Derbyshire Inning 1"
+        },
+        {
+          "r": 113,
+          "w": 2,
+          "o": 36,
+          "inning": "Worcestershire Inning 1"
+        }
+      ],
+      "series_id": "c1854be4-bbf3-4435-9183-1a01c7bb57d3",
+      "fantasyEnabled": false,
+      "bbbEnabled": false,
+      "hasSquad": false,
+      "matchStarted": true,
+      "matchEnded": false
+    }
+  ],
+  "status": "success",
+  "info": {
+    "hitsToday": 44,
+    "hitsUsed": 1,
+    "hitsLimit": 100,
+    "credits": 0,
+    "server": 15,
+    "offsetRows": 0,
+    "totalRows": 32,
+    "queryTime": 44.4704,
+    "s": 0,
+    "cache": 0
+  }
+}

@@ -1,4 +1,4 @@
-/* AUTO-GENERATED — 2026-04-05T09:25:57.920Z
+/* AUTO-GENERATED — 2026-04-27T18:19:49.911Z
  * Source: cricketdata.org (IPL 2026)
  * DO NOT EDIT MANUALLY — run: node scripts/sync-live.js
  */
@@ -8,286 +8,11 @@ window.ALL_IPL_2026 = [
     "id": 1,
     "date": "2026-03-28",
     "time": "19:30",
-    "t1": "SRH",
-    "t2": "RCB",
+    "t1": "RCB",
+    "t2": "SRH",
     "venue": "M. Chinnaswamy Stadium",
     "city": "Bengaluru",
-    "rcb": true,
-    "t1runs": "201/9",
-    "t1ovs": "20",
-    "t2runs": "203/4",
-    "t2ovs": "15.4",
-    "result": "RCB won by 6 wickets",
-    "winner": "RCB",
-    "potm": "",
-    "scorecard": {
-      "toss": "",
-      "inn1": {
-        "team": "SRH",
-        "score": "201/9 (20 Ov)",
-        "bat": [
-          [
-            "Travis Head",
-            "c Philip Salt b Jacob Duffy",
-            11,
-            9,
-            2,
-            0,
-            "122.22"
-          ],
-          [
-            "Abhishek Sharma",
-            "c Jitesh Sharma b Jacob Duffy",
-            7,
-            8,
-            0,
-            1,
-            "87.50"
-          ],
-          [
-            "Ishan Kishan",
-            "c Philip Salt b Abhinandan Singh",
-            80,
-            38,
-            8,
-            5,
-            "210.53"
-          ],
-          [
-            "Nitish Kumar Reddy",
-            "c Abhinandan Singh b Jacob Duffy",
-            1,
-            6,
-            0,
-            0,
-            "16.67"
-          ],
-          [
-            "Heinrich Klaasen",
-            "c Philip Salt b Romario Shepherd",
-            31,
-            22,
-            2,
-            1,
-            "140.91"
-          ],
-          [
-            "Salil Arora",
-            "c Devdutt Padikkal b Suyash Sharma",
-            9,
-            6,
-            0,
-            1,
-            "150.00"
-          ],
-          [
-            "Aniket Verma",
-            "c Virat Kohli b Romario Shepherd",
-            43,
-            18,
-            3,
-            4,
-            "238.89"
-          ],
-          [
-            "Harsh Dubey",
-            "c Devdutt Padikkal b Romario Shepherd",
-            3,
-            3,
-            0,
-            0,
-            "100.00"
-          ],
-          [
-            "Harshal Patel",
-            "c Devdutt Padikkal b Bhuvneshwar Kumar",
-            0,
-            2,
-            0,
-            0,
-            "0.00"
-          ],
-          [
-            "David Payne",
-            "not out",
-            6,
-            5,
-            0,
-            0,
-            "120.00"
-          ],
-          [
-            "Jaydev Unadkat",
-            "not out",
-            4,
-            3,
-            0,
-            0,
-            "133.33"
-          ]
-        ],
-        "bowl": [
-          [
-            "Jacob Duffy",
-            "4",
-            "0",
-            "22",
-            "3",
-            "5.50"
-          ],
-          [
-            "Bhuvneshwar Kumar",
-            "4",
-            "0",
-            "31",
-            "1",
-            "7.80"
-          ],
-          [
-            "Abhinandan Singh",
-            "3",
-            "0",
-            "38",
-            "1",
-            "12.70"
-          ],
-          [
-            "Romario Shepherd",
-            "4",
-            "0",
-            "54",
-            "3",
-            "13.50"
-          ],
-          [
-            "Suyash Sharma",
-            "3",
-            "0",
-            "28",
-            "1",
-            "9.30"
-          ],
-          [
-            "Krunal Pandya",
-            "2",
-            "0",
-            "26",
-            "0",
-            "13.00"
-          ]
-        ]
-      },
-      "inn2": {
-        "team": "RCB",
-        "score": "203/4 (15.4 Ov)",
-        "bat": [
-          [
-            "Philip Salt",
-            "c Heinrich Klaasen b Jaydev Unadkat",
-            8,
-            7,
-            2,
-            0,
-            "114.29"
-          ],
-          [
-            "Virat Kohli",
-            "not out",
-            69,
-            38,
-            5,
-            5,
-            "181.58"
-          ],
-          [
-            "Devdutt Padikkal",
-            "c Heinrich Klaasen b Harsh Dubey",
-            61,
-            26,
-            7,
-            4,
-            "234.62"
-          ],
-          [
-            "Rajat Patidar",
-            "c Harsh Dubey b David Payne",
-            31,
-            12,
-            2,
-            3,
-            "258.33"
-          ],
-          [
-            "Jitesh Sharma",
-            "c Jaydev Unadkat b David Payne",
-            0,
-            1,
-            0,
-            0,
-            "0.00"
-          ],
-          [
-            "Tim David",
-            "not out",
-            16,
-            10,
-            1,
-            1,
-            "160.00"
-          ]
-        ],
-        "bowl": [
-          [
-            "Nitish Kumar Reddy",
-            "2",
-            "0",
-            "19",
-            "0",
-            "9.50"
-          ],
-          [
-            "Jaydev Unadkat",
-            "3",
-            "0",
-            "29",
-            "1",
-            "9.70"
-          ],
-          [
-            "David Payne",
-            "3",
-            "0",
-            "35",
-            "2",
-            "11.70"
-          ],
-          [
-            "Harsh Dubey",
-            "3",
-            "0",
-            "35",
-            "1",
-            "11.70"
-          ],
-          [
-            "Eshan Malinga",
-            "2",
-            "0",
-            "35",
-            "0",
-            "17.50"
-          ],
-          [
-            "Harshal Patel",
-            "2.4",
-            "0",
-            "39",
-            "0",
-            "14.60"
-          ]
-        ]
-      }
-    }
+    "rcb": true
   },
   {
     "id": 2,
@@ -297,13 +22,7 @@ window.ALL_IPL_2026 = [
     "t2": "KKR",
     "venue": "Wankhede Stadium",
     "city": "Mumbai",
-    "rcb": false,
-    "t1runs": "185/6",
-    "t1ovs": "20",
-    "t2runs": "186/4",
-    "t2ovs": "17.3",
-    "result": "KKR won by 6 wickets",
-    "winner": "KKR"
+    "rcb": false
   },
   {
     "id": 3,
@@ -313,13 +32,7 @@ window.ALL_IPL_2026 = [
     "t2": "CSK",
     "venue": "Sawai Mansingh Stadium",
     "city": "Jaipur",
-    "rcb": false,
-    "t1runs": "176/8",
-    "t1ovs": "20",
-    "t2runs": "177/5",
-    "t2ovs": "19.2",
-    "result": "CSK won by 5 wickets",
-    "winner": "CSK"
+    "rcb": false
   },
   {
     "id": 4,
@@ -329,13 +42,7 @@ window.ALL_IPL_2026 = [
     "t2": "GT",
     "venue": "New PCA Stadium",
     "city": "Mullanpur",
-    "rcb": false,
-    "t1runs": "198/5",
-    "t1ovs": "20",
-    "t2runs": "199/3",
-    "t2ovs": "18.4",
-    "result": "GT won by 7 wickets",
-    "winner": "GT"
+    "rcb": false
   },
   {
     "id": 5,
@@ -345,13 +52,7 @@ window.ALL_IPL_2026 = [
     "t2": "DC",
     "venue": "Ekana Cricket Stadium",
     "city": "Lucknow",
-    "rcb": false,
-    "t1runs": "168/6",
-    "t1ovs": "20",
-    "t2runs": "169/4",
-    "t2ovs": "19.1",
-    "result": "DC won by 6 wickets",
-    "winner": "DC"
+    "rcb": false
   },
   {
     "id": 6,
@@ -361,13 +62,7 @@ window.ALL_IPL_2026 = [
     "t2": "SRH",
     "venue": "Eden Gardens",
     "city": "Kolkata",
-    "rcb": false,
-    "t1runs": "190/7",
-    "t1ovs": "20",
-    "t2runs": "191/3",
-    "t2ovs": "17.5",
-    "result": "SRH won by 7 wickets",
-    "winner": "SRH"
+    "rcb": false
   },
   {
     "id": 7,
@@ -377,13 +72,7 @@ window.ALL_IPL_2026 = [
     "t2": "PBKS",
     "venue": "MA Chidambaram Stadium",
     "city": "Chennai",
-    "rcb": false,
-    "t1runs": "210/4",
-    "t1ovs": "20",
-    "t2runs": "189/9",
-    "t2ovs": "20",
-    "result": "CSK won by 21 runs",
-    "winner": "CSK"
+    "rcb": false
   },
   {
     "id": 8,
@@ -393,13 +82,7 @@ window.ALL_IPL_2026 = [
     "t2": "MI",
     "venue": "Arun Jaitley Stadium",
     "city": "Delhi",
-    "rcb": false,
-    "t1runs": "172/8",
-    "t1ovs": "20",
-    "t2runs": "173/5",
-    "t2ovs": "19.3",
-    "result": "MI won by 5 wickets",
-    "winner": "MI"
+    "rcb": false
   },
   {
     "id": 9,
@@ -409,13 +92,7 @@ window.ALL_IPL_2026 = [
     "t2": "RR",
     "venue": "Narendra Modi Stadium",
     "city": "Ahmedabad",
-    "rcb": false,
-    "t1runs": "165/7",
-    "t1ovs": "20",
-    "t2runs": "166/4",
-    "t2ovs": "18.2",
-    "result": "RR won by 6 wickets",
-    "winner": "RR"
+    "rcb": false
   },
   {
     "id": 10,
@@ -425,15 +102,12 @@ window.ALL_IPL_2026 = [
     "t2": "LSG",
     "venue": "Rajiv Gandhi Intl. Cricket Stadium",
     "city": "Hyderabad",
-    "rcb": false,
-    "isLive": true,
-    "t1runs": "215/6 (20)",
-    "t2runs": "180/4 (16.2)"
+    "rcb": false
   },
   {
     "id": 11,
     "date": "2026-04-05",
-    "time": "19:30",
+    "time": "15:30",
     "t1": "RCB",
     "t2": "CSK",
     "venue": "M. Chinnaswamy Stadium",
