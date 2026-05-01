@@ -51,42 +51,66 @@
   .fx-count{margin-left:auto;font-family:var(--font-heading);font-size:11px;color:var(--text-muted);letter-spacing:.1em;white-space:nowrap}
 
   /* ─── Match list ─── */
-  .fx-list{display:flex;flex-direction:column;gap:10px;max-width:940px;margin:0 auto}
+  .fx-list{display:flex;flex-direction:column;gap:12px;max-width:940px;margin:0 auto}
 
-  /* ─── Match card ─── */
-  .fx-card{background:var(--bg-elevated);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 22px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
-  .fx-card:hover{border-color:rgba(255,255,255,.16);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.35)}
-  .fx-card.fx-rcb{border-left:3px solid rgba(204,0,0,.6)}
-  .fx-card.fx-win{border-left:3px solid #00C864}
-  .fx-card.fx-loss{border-left:3px solid #cc0000}
-  .fx-card.fx-live-card{border-left:3px solid #00C864;animation:live-glow 2s infinite}
-  @keyframes live-glow{0%,100%{box-shadow:0 0 0 rgba(0,200,100,0)}50%{box-shadow:0 0 22px rgba(0,200,100,.2)}}
+  /* ══ BASE card ══ */
+  .fx-card{border-radius:16px;padding:18px 24px;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s,border-color .22s;border:1px solid rgba(255,255,255,.07)}
   .fx-card.fx-clickable{cursor:pointer}
+  .fx-card.fx-clickable:hover{transform:translateY(-3px)}
+
+  /* ── COMPLETED — dark steel with FULL TIME stamp ── */
+  .fx-done{background:linear-gradient(135deg,#111118 0%,#0d0d14 100%);border-color:rgba(255,255,255,.11);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+  .fx-done::before{content:'FULL TIME';position:absolute;top:13px;right:18px;font-family:var(--font-heading);font-size:9px;letter-spacing:.22em;color:rgba(255,255,255,.2);font-weight:700}
+  .fx-done:hover{box-shadow:0 8px 32px rgba(0,0,0,.5);border-color:rgba(255,255,255,.18)}
+
+  /* ── RCB WIN — green glow ── */
+  .fx-win{background:linear-gradient(135deg,#071410 0%,#091810 100%);border-color:rgba(0,200,100,.28);border-left:4px solid #00C864;box-shadow:inset 4px 0 28px rgba(0,200,100,.07)}
+  .fx-win::before{content:'FULL TIME';position:absolute;top:13px;right:18px;font-family:var(--font-heading);font-size:9px;letter-spacing:.22em;color:rgba(0,200,100,.35);font-weight:700}
+  .fx-win:hover{box-shadow:0 8px 32px rgba(0,200,100,.14),inset 4px 0 28px rgba(0,200,100,.1)}
+  .fx-win .fx-score{color:#00C864;text-shadow:0 0 12px rgba(0,200,100,.4)}
+  .fx-win .fx-logo{filter:drop-shadow(0 0 8px rgba(0,200,100,.2))}
+
+  /* ── RCB LOSS — red glow ── */
+  .fx-loss{background:linear-gradient(135deg,#120808 0%,#0d0606 100%);border-color:rgba(204,0,0,.22);border-left:4px solid #cc0000;box-shadow:inset 4px 0 24px rgba(204,0,0,.05)}
+  .fx-loss::before{content:'FULL TIME';position:absolute;top:13px;right:18px;font-family:var(--font-heading);font-size:9px;letter-spacing:.22em;color:rgba(204,0,0,.35);font-weight:700}
+  .fx-loss:hover{box-shadow:0 8px 32px rgba(204,0,0,.12),inset 4px 0 24px rgba(204,0,0,.08)}
+
+  /* ── UPCOMING — blue-tinted ── */
+  .fx-upcoming{background:linear-gradient(135deg,#0b0b1c 0%,#0d0d20 100%);border-color:rgba(100,120,255,.16);border-left:4px solid rgba(100,120,255,.4)}
+  .fx-upcoming::before{content:'UPCOMING';position:absolute;top:13px;right:18px;font-family:var(--font-heading);font-size:9px;letter-spacing:.22em;color:rgba(120,140,255,.4);font-weight:700}
+  .fx-upcoming:hover{border-color:rgba(100,120,255,.3);box-shadow:0 6px 24px rgba(80,100,255,.1)}
+  .fx-upcoming .fx-logo{opacity:.85}
+
+  /* ── LIVE — pulsing green ── */
+  .fx-live-card{background:linear-gradient(135deg,#051210 0%,#081a10 100%);border-color:rgba(0,200,100,.45);border-left:4px solid #00C864;animation:live-glow 2s infinite}
+  @keyframes live-glow{0%,100%{box-shadow:0 0 0 rgba(0,200,100,0),inset 4px 0 20px rgba(0,200,100,.08)}50%{box-shadow:0 0 30px rgba(0,200,100,.2),inset 4px 0 30px rgba(0,200,100,.14)}}
+
+  /* ─── Card internals ─── */
   .fx-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
   .fx-match-num{font-family:var(--font-heading);font-size:10px;letter-spacing:.2em;color:var(--text-muted)}
   .fx-badges{display:flex;gap:6px;align-items:center}
   .fx-badge-rcb{background:var(--rcb-red);color:#fff;font-family:var(--font-heading);font-size:9px;letter-spacing:.12em;padding:3px 8px;border-radius:4px}
   .fx-badge-live{background:rgba(0,200,100,.18);color:#00C864;border:1px solid rgba(0,200,100,.4);font-family:var(--font-heading);font-size:9px;letter-spacing:.12em;padding:3px 8px;border-radius:4px;animation:pulse 1.5s infinite}
-  .fx-body{display:grid;grid-template-columns:1fr 180px 1fr;gap:12px;align-items:center}
+  .fx-body{display:grid;grid-template-columns:1fr 190px 1fr;gap:12px;align-items:center}
   .fx-team{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
-  .fx-logo{width:72px;height:72px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.3)}
+  .fx-logo{width:72px;height:72px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.3);transition:opacity .2s}
   .fx-logo img{width:82%;height:82%;object-fit:contain}
   .fx-logo span{font-weight:800;font-size:11px}
   .fx-tname{font-family:var(--font-heading);font-size:15px;font-weight:800;letter-spacing:.06em;color:#fff}
   .fx-score{font-family:var(--font-display);font-size:17px;color:var(--rcb-gold);letter-spacing:.03em;margin-top:2px}
   .fx-center{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
-  .fx-vs{font-family:'Bebas Neue',sans-serif;font-size:34px;color:rgba(255,255,255,.2);letter-spacing:.15em}
-  .fx-result-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
-  .fx-result-badge{font-family:var(--font-heading);font-size:11px;font-weight:800;letter-spacing:.12em;padding:5px 14px;border-radius:16px}
-  .fx-badge-win-style{background:rgba(0,200,100,.14);color:#00C864;border:1px solid rgba(0,200,100,.3)}
-  .fx-badge-loss-style{background:rgba(204,0,0,.14);color:#ff5555;border:1px solid rgba(204,0,0,.3)}
-  .fx-badge-neutral{background:rgba(255,255,255,.07);color:var(--text-muted);border:1px solid rgba(255,255,255,.1)}
-  .fx-result-text{font-family:var(--font-heading);font-size:12px;color:var(--text-muted);letter-spacing:.03em;max-width:160px;text-align:center}
+  .fx-vs{font-family:'Bebas Neue',sans-serif;font-size:34px;color:rgba(100,120,255,.3);letter-spacing:.15em}
+  .fx-result-wrap{display:flex;flex-direction:column;align-items:center;gap:5px}
+  .fx-result-badge{font-family:var(--font-heading);font-size:11px;font-weight:800;letter-spacing:.12em;padding:5px 16px;border-radius:20px}
+  .fx-badge-win-style{background:rgba(0,200,100,.16);color:#00C864;border:1px solid rgba(0,200,100,.35)}
+  .fx-badge-loss-style{background:rgba(204,0,0,.16);color:#ff5555;border:1px solid rgba(204,0,0,.35)}
+  .fx-badge-neutral{background:rgba(255,255,255,.07);color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.12)}
+  .fx-result-text{font-family:var(--font-heading);font-size:11px;color:var(--text-muted);letter-spacing:.03em;max-width:160px;text-align:center;line-height:1.4}
   .fx-live-score{font-family:var(--font-display);font-size:22px;color:#00C864;letter-spacing:.03em;animation:pulse 1.5s infinite}
-  .fx-meta{display:flex;flex-direction:column;gap:3px;margin-top:4px}
+  .fx-meta{display:flex;flex-direction:column;gap:3px;margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.05)}
   .fx-meta-line{font-size:10px;color:var(--text-muted)}
-  .fx-hint{font-family:var(--font-heading);font-size:9px;letter-spacing:.12em;color:var(--rcb-gold);margin-top:2px;opacity:.8}
-  .fx-upcoming-pill{border:1px solid rgba(255,255,255,.1);padding:3px 10px;border-radius:10px;font-family:var(--font-heading);font-size:9px;letter-spacing:.2em;color:var(--text-muted)}
+  .fx-hint{font-family:var(--font-heading);font-size:9px;letter-spacing:.1em;color:var(--rcb-gold);margin-top:3px;opacity:.75}
+  .fx-upcoming-pill{background:rgba(100,120,255,.1);border:1px solid rgba(100,120,255,.25);padding:4px 14px;border-radius:12px;font-family:var(--font-heading);font-size:9px;letter-spacing:.2em;color:rgba(130,150,255,.7)}
   .fx-empty{text-align:center;padding:60px 20px;color:var(--text-muted);font-family:var(--font-heading);letter-spacing:.15em}
 
   /* ─── Scorecard Modal ─── */

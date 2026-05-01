@@ -99,8 +99,11 @@ function buildCard(m) {
   var canClick = done || live;
 
   var cls = 'fx-card';
-  if (m.rcb) cls += done ? (won ? ' fx-win' : ' fx-loss') : ' fx-rcb';
-  if (live)  cls += ' fx-live-card';
+  if (live)       cls += ' fx-live-card';
+  else if (won)   cls += ' fx-win';
+  else if (lost)  cls += ' fx-loss';
+  else if (done)  cls += ' fx-done';
+  else            cls += ' fx-upcoming';
   if (canClick) cls += ' fx-clickable';
 
   var dt = matchDT(m);
