@@ -1,508 +1,463 @@
-'use strict';
-/**
- * RCB Fan Zone — Fixtures Engine
- * Fetches data/ipl2026.json every 30 seconds
- * Shows real IPL 2026 fixtures, live scores, results, countdown & scorecards
- */
+/* ============================================================
+   RCB Fan Zone — Fixtures Engine v3
+   - Loads instantly from window.IPL_2026_DATA (script tag)
+   - Refreshes via fetch() every 30s when on HTTP/GitHub Pages
+   - Working countdown, live badge, scorecard modal
+   ============================================================ */
 
 const CRICAPI_KEY = '3812d023-8576-4422-bc75-9cd9c7160d14';
 const DATA_URL    = 'data/ipl2026.json';
-const REFRESH_MS  = 30000; // 30 seconds
+const REFRESH_MS  = 30000;
 
-let _matches     = [];
-let _activeFilter = 'all';
-let _teamFilter   = 'all';
-let _countdownTimer = null;
-let _refreshTimer   = null;
-let _currentScorecardId = null;
+var _matches = [];
+var _filter  = 'all';
+var _team    = 'all';
+var _cdTimer = null;
 
-/* ── Team helpers ── */
-const LOGOS = {
+/* ─── Team config ─── */
+var LOGOS = {
   RCB:'images/rcb-logo.png', CSK:'images/csk.png', MI:'images/mi.png',
   KKR:'images/kkr.png', SRH:'images/srh.png', RR:'images/rr.png',
   DC:'images/dc.png', PBKS:'images/pbks.png', GT:'images/gt.png', LSG:'images/lsg.png'
 };
-const COLORS = {
-  RCB:'#CC0000', CSK:'#F9CD05', MI:'#004BA0', KKR:'#3A225D',
+var COLORS = {
+  RCB:'#CC0000', CSK:'#DBA70A', MI:'#004BA0', KKR:'#3A225D',
   SRH:'#F7A721', RR:'#254AA5', DC:'#0078BC', PBKS:'#ED1C24',
-  GT:'#1B2133', LSG:'#A2EDFC'
-};
-const FULL_NAMES = {
-  RCB:'Royal Challengers Bengaluru', CSK:'Chennai Super Kings',
-  MI:'Mumbai Indians', KKR:'Kolkata Knight Riders',
-  SRH:'Sunrisers Hyderabad', RR:'Rajasthan Royals',
-  DC:'Delhi Capitals', PBKS:'Punjab Kings',
-  GT:'Gujarat Titans', LSG:'Lucknow Super Giants'
+  GT:'#1B2133', LSG:'#56CCF2'
 };
 
-function logo(t) { return LOGOS[t] || ''; }
-function color(t) { return COLORS[t] || '#888'; }
+function teamColor(t) { return COLORS[t] || '#666'; }
+function teamLogo(t)  { return LOGOS[t] || ''; }
 
-/* ── Match time ── */
-function matchDateTime(m) {
-  // dateTimeGMT from API is UTC, stored as IST in our JSON time field
-  // date = "2026-04-27", time = "19:30" (IST)
-  return new Date(`${m.date}T${m.time}:00+05:30`);
+/* ─── DateTime ─── */
+function matchDT(m) {
+  return new Date(m.date + 'T' + m.time + ':00+05:30');
 }
-
 function isLive(m) {
   if (m.ended) return false;
   if (m.isLive) return true;
-  const dt = matchDateTime(m);
-  const now = new Date();
-  const elapsed = now - dt;
-  return m.started && !m.ended && elapsed > 0;
+  var dt = matchDT(m), now = new Date();
+  return m.started && !m.ended && now > dt && (now - dt) < 4 * 3600000;
 }
 
-function isUpcoming(m) {
-  return !m.ended && !isLive(m) && matchDateTime(m) > new Date();
-}
-
-/* ── Data fetch ── */
-async function fetchData() {
-  // Try JSON fetch (works on GitHub Pages / HTTP, gets fresh data)
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 5000);
-    const r = await fetch(`${DATA_URL}?t=${Date.now()}`, { signal: controller.signal });
-    clearTimeout(timeout);
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const json = await r.json();
-    if (json.matches && json.matches.length) {
-      _matches = json.matches;
-      updateLastUpdated(json.generatedAt);
-      return true;
-    }
-  } catch (e) {
-    // Silently fall through to window global
-  }
-  // Fallback: window global from ipl-data.js script tag (always works)
-  if (window.IPL_2026_DATA && window.IPL_2026_DATA.matches) {
+/* ─── Load data from window global (SYNCHRONOUS — always works) ─── */
+function loadFromGlobal() {
+  if (window.IPL_2026_DATA && window.IPL_2026_DATA.matches && window.IPL_2026_DATA.matches.length) {
     _matches = window.IPL_2026_DATA.matches;
-    updateLastUpdated(window.IPL_2026_DATA.generatedAt);
+    setUpdatedLabel(window.IPL_2026_DATA.generatedAt);
     return true;
   }
   return false;
 }
 
-function updateLastUpdated(ts) {
-  const el = document.getElementById('last-updated');
-  if (!el) return;
-  if (ts) {
-    const d = new Date(ts);
-    const mins = Math.floor((Date.now() - d) / 60000);
-    el.textContent = mins < 1 ? '• Updated just now'
-      : mins < 60 ? `• Updated ${mins}m ago`
-      : `• Updated ${Math.floor(mins/60)}h ago`;
-  }
+/* ─── Fetch fresh JSON (async — works on HTTP/GitHub Pages) ─── */
+function fetchFresh() {
+  var ctrl = new AbortController();
+  var tid = setTimeout(function() { ctrl.abort(); }, 6000);
+  fetch(DATA_URL + '?t=' + Date.now(), { signal: ctrl.signal })
+    .then(function(r) {
+      clearTimeout(tid);
+      if (!r.ok) throw new Error('bad status');
+      return r.json();
+    })
+    .then(function(json) {
+      if (json && json.matches && json.matches.length) {
+        _matches = json.matches;
+        setUpdatedLabel(json.generatedAt);
+        render();
+        updateCountdown();
+      }
+    })
+    .catch(function() { /* silently ignore on file:// */ });
 }
 
-/* ── Full refresh cycle ── */
-async function refreshData(showLoader = false) {
-  // FIRST: load synchronously from the embedded JS global (works on file://)
-  if (window.IPL_2026_DATA && window.IPL_2026_DATA.matches && !_matches.length) {
-    _matches = window.IPL_2026_DATA.matches;
-    updateLastUpdated(window.IPL_2026_DATA.generatedAt);
-    render();
-    updateCountdown();
-  }
-  // THEN: try async fetch for fresh data (works on GitHub Pages / HTTP server)
-  await fetchData();
-  render();
-  updateCountdown();
+function setUpdatedLabel(ts) {
+  var el = document.getElementById('last-updated');
+  if (!el || !ts) return;
+  var mins = Math.floor((Date.now() - new Date(ts)) / 60000);
+  el.textContent = mins < 1 ? '• Updated just now'
+    : mins < 60 ? '• Updated ' + mins + 'm ago'
+    : '• Updated ' + Math.floor(mins / 60) + 'h ago';
 }
 
-/* ── Countdown ── */
+/* ─── Filter ─── */
+function filtered() {
+  var list = _matches.slice();
+  if (_filter === 'rcb')      list = list.filter(function(m) { return m.rcb; });
+  if (_filter === 'results')  list = list.filter(function(m) { return m.ended; });
+  if (_filter === 'upcoming') list = list.filter(function(m) { return !m.ended; });
+  if (_team !== 'all') list = list.filter(function(m) { return m.t1 === _team || m.t2 === _team; });
+  return list;
+}
+
+/* ─── Build one card ─── */
+function buildCard(m) {
+  var live = isLive(m);
+  var done = m.ended;
+  var won  = done && m.winner === 'RCB';
+  var lost = done && m.rcb && m.winner && m.winner !== 'RCB';
+  var canClick = done || live;
+
+  var cls = 'fx-card';
+  if (m.rcb) cls += done ? (won ? ' fx-win' : ' fx-loss') : ' fx-rcb';
+  if (live)  cls += ' fx-live-card';
+  if (canClick) cls += ' fx-clickable';
+
+  var dt = matchDT(m);
+  var dateStr = dt.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short' });
+  var c1 = teamColor(m.t1), c2 = teamColor(m.t2);
+  var l1 = teamLogo(m.t1), l2 = teamLogo(m.t2);
+
+  // Badges row
+  var badges = '';
+  if (m.rcb)  badges += '<span class="fx-badge-rcb">RCB</span>';
+  if (live)   badges += '<span class="fx-badge-live">&#9679; LIVE</span>';
+
+  // Scores
+  var s1 = (done || live) && m.t1runs ? m.t1runs + (m.t1ovs ? '<small> (' + m.t1ovs + ' Ov)</small>' : '') : '';
+  var s2 = (done || live) && m.t2runs ? m.t2runs + (m.t2ovs ? '<small> (' + m.t2ovs + ' Ov)</small>' : '') : '';
+
+  // Center
+  var center = '';
+  if (live) {
+    center = '<div class="fx-result-wrap">'
+      + '<div class="fx-result-badge" style="background:rgba(0,200,100,.2);color:#00C864;border:1px solid rgba(0,200,100,.5)">&#9679; LIVE</div>'
+      + '<div class="fx-hint">TAP FOR LIVE SCORE</div>'
+      + '</div>';
+  } else if (done) {
+    var bcls = won ? 'fx-badge-win-style' : lost ? 'fx-badge-loss-style' : 'fx-badge-neutral';
+    var btxt = won ? '&#10003; RCB WON' : lost ? '&#10007; RCB LOST' : (m.winner ? m.winner + ' WON' : 'COMPLETED');
+    center = '<div class="fx-result-wrap">'
+      + '<div class="fx-result-badge ' + bcls + '">' + btxt + '</div>'
+      + '<div class="fx-result-text">' + (m.result || '') + '</div>'
+      + '<div class="fx-hint">&#128202; TAP FOR SCORECARD</div>'
+      + '</div>';
+  } else {
+    center = '<div class="fx-vs">VS</div><div class="fx-upcoming-pill">UPCOMING</div>';
+  }
+
+  var onclk = canClick ? ' onclick="openScorecard(\'' + m.apiId + '\',' + m.id + ')"' : '';
+
+  return '<div class="' + cls + '"' + onclk + '>'
+    + '<div class="fx-top-row">'
+    +   '<div class="fx-match-num">MATCH ' + m.id + ' &mdash; IPL 2026</div>'
+    +   '<div class="fx-badges">' + badges + '</div>'
+    + '</div>'
+    + '<div class="fx-body">'
+    +   '<div class="fx-team">'
+    +     '<div class="fx-logo" style="border-color:' + c1 + '">'
+    +       (l1 ? '<img src="' + l1 + '" alt="' + m.t1 + '" onerror="this.style.display=\'none\'">' : '')
+    +     '</div>'
+    +     '<div class="fx-tname">' + m.t1 + '</div>'
+    +     (s1 ? '<div class="fx-score">' + s1 + '</div>' : '')
+    +   '</div>'
+    +   '<div class="fx-center">'
+    +     center
+    +     '<div class="fx-meta">'
+    +       '<div class="fx-meta-line">&#128197; ' + dateStr + ' &bull; ' + m.time + ' IST</div>'
+    +       '<div class="fx-meta-line">&#128205; ' + m.venue + (m.city ? ', ' + m.city : '') + '</div>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div class="fx-team">'
+    +     '<div class="fx-logo" style="border-color:' + c2 + '">'
+    +       (l2 ? '<img src="' + l2 + '" alt="' + m.t2 + '" onerror="this.style.display=\'none\'">' : '')
+    +     '</div>'
+    +     '<div class="fx-tname">' + m.t2 + '</div>'
+    +     (s2 ? '<div class="fx-score">' + s2 + '</div>' : '')
+    +   '</div>'
+    + '</div>'
+    + '</div>';
+}
+
+/* ─── Render list ─── */
+function render() {
+  var list = document.getElementById('fixtures-list');
+  if (!list) return;
+  var items = filtered();
+  var countEl = document.getElementById('fx-count');
+  if (countEl) countEl.textContent = items.length + ' MATCH' + (items.length !== 1 ? 'ES' : '');
+  if (!items.length) {
+    list.innerHTML = '<div class="fx-empty">No matches found.</div>';
+    return;
+  }
+  list.innerHTML = items.map(buildCard).join('');
+}
+
+/* ─── Countdown ─── */
 function updateCountdown() {
-  // Clear old timer
-  if (_countdownTimer) { clearInterval(_countdownTimer); _countdownTimer = null; }
+  if (_cdTimer) { clearInterval(_cdTimer); _cdTimer = null; }
 
-  const now = new Date();
-  // Check if any RCB match is live right now
-  const liveMatch = _matches.find(m => m.rcb && isLive(m));
+  var liveMatch = _matches.find(function(m) { return m.rcb && isLive(m); });
   if (liveMatch) {
     showLiveBanner(liveMatch);
     return;
   }
 
-  // Find next upcoming RCB match
-  const next = _matches
-    .filter(m => m.rcb && !m.ended && matchDateTime(m) > now)
-    .sort((a, b) => matchDateTime(a) - matchDateTime(b))[0];
+  var now = new Date();
+  var upcoming = _matches
+    .filter(function(m) { return m.rcb && !m.ended && matchDT(m) > now; })
+    .sort(function(a, b) { return matchDT(a) - matchDT(b); });
 
+  var next = upcoming[0];
   if (!next) {
-    // All done
-    const wrap = document.getElementById('countdown-wrap');
-    if (wrap) wrap.innerHTML = `<div class="cdw-label">🏆 IPL 2026 SEASON</div><div class="cdw-match">All RCB Matches Completed</div>`;
+    var w = document.getElementById('countdown-wrap');
+    if (w) w.innerHTML = '<div class="cdw-label">IPL 2026</div><div class="cdw-match">All RCB Matches Complete</div>';
     return;
   }
 
-  const dt = matchDateTime(next);
-  const opp = next.t1 === 'RCB' ? next.t2 : next.t1;
-  const vsText = `RCB VS ${opp}`;
-  const dateStr = dt.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-  const timeStr = next.time + ' IST';
+  var dt   = matchDT(next);
+  var opp  = next.t1 === 'RCB' ? next.t2 : next.t1;
+  var vsT  = 'RCB vs ' + opp;
+  var dateS = dt.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
 
-  document.getElementById('cdw-label').textContent = '⚡ Next RCB Match In';
-  document.getElementById('cdw-match').textContent = vsText;
-  document.getElementById('cdw-venue').textContent = `${next.venue}${next.city ? ', ' + next.city : ''}`;
-  document.getElementById('cdw-date').textContent = `${dateStr} • ${timeStr}`;
-  document.getElementById('cdw-timer').style.display = 'flex';
+  var cdLabel = document.getElementById('cdw-label');
+  var cdMatch = document.getElementById('cdw-match');
+  var cdVenue = document.getElementById('cdw-venue');
+  var cdDate  = document.getElementById('cdw-date');
+  var cdTimer = document.getElementById('cdw-timer');
+
+  if (cdLabel) cdLabel.textContent  = 'Next RCB Match In';
+  if (cdMatch) cdMatch.textContent  = vsT;
+  if (cdVenue) cdVenue.textContent  = next.venue + (next.city ? ', ' + next.city : '');
+  if (cdDate)  cdDate.textContent   = dateS + ' \u2022 ' + next.time + ' IST';
+  if (cdTimer) cdTimer.style.display = 'flex';
 
   function tick() {
-    const diff = dt - new Date();
+    var diff = dt - new Date();
     if (diff <= 0) {
-      clearInterval(_countdownTimer);
-      _countdownTimer = null;
-      // Show live banner
-      document.getElementById('cdw-label').textContent = '🔴 MATCH IS LIVE';
-      document.getElementById('cdw-timer').innerHTML = `<div class="cdw-live-banner">● ${vsText} IS LIVE NOW</div>`;
+      clearInterval(_cdTimer); _cdTimer = null;
+      if (cdLabel) cdLabel.textContent = 'MATCH IS LIVE';
+      if (cdTimer) cdTimer.innerHTML = '<div class="cdw-live-banner">\u25CF ' + vsT + ' IS LIVE</div>';
       return;
     }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = String(v).padStart(2, '0'); };
-    set('cd-d', d); set('cd-h', h); set('cd-m', m); set('cd-s', s);
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var min = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    function pad(v) { return v < 10 ? '0' + v : '' + v; }
+    var dEl = document.getElementById('cd-d');
+    var hEl = document.getElementById('cd-h');
+    var mEl = document.getElementById('cd-m');
+    var sEl = document.getElementById('cd-s');
+    if (dEl) dEl.textContent = pad(d);
+    if (hEl) hEl.textContent = pad(h);
+    if (mEl) mEl.textContent = pad(min);
+    if (sEl) sEl.textContent = pad(s);
   }
   tick();
-  _countdownTimer = setInterval(tick, 1000);
+  _cdTimer = setInterval(tick, 1000);
 }
 
 function showLiveBanner(m) {
-  const opp = m.t1 === 'RCB' ? m.t2 : m.t1;
-  document.getElementById('cdw-label').textContent = '🔴 MATCH LIVE NOW';
-  document.getElementById('cdw-match').textContent = `RCB VS ${opp}`;
-  document.getElementById('cdw-venue').textContent = `${m.venue}, ${m.city}`;
-  document.getElementById('cdw-date').textContent = 'Live score updates every 30 seconds';
-  const score1 = m.t1runs ? `${m.t1}: ${m.t1runs}` : '';
-  const score2 = m.t2runs ? `${m.t2}: ${m.t2runs}` : '';
-  document.getElementById('cdw-timer').innerHTML = `<div class="cdw-live-banner">● LIVE${score1 ? ' — ' + score1 + (score2 ? ' | ' + score2 : '') : ''}</div>`;
+  var opp = m.t1 === 'RCB' ? m.t2 : m.t1;
+  var cdMatch = document.getElementById('cdw-match');
+  var cdLabel = document.getElementById('cdw-label');
+  var cdVenue = document.getElementById('cdw-venue');
+  var cdDate  = document.getElementById('cdw-date');
+  var cdTimer = document.getElementById('cdw-timer');
+  if (cdLabel) cdLabel.textContent = '\uD83D\uDD34 MATCH LIVE NOW';
+  if (cdMatch) cdMatch.textContent = 'RCB vs ' + opp;
+  if (cdVenue) cdVenue.textContent = m.venue + (m.city ? ', ' + m.city : '');
+  if (cdDate)  cdDate.textContent  = 'Live score updates every 30 seconds';
+  var scoreStr = '';
+  if (m.t1runs) scoreStr += m.t1 + ' ' + m.t1runs;
+  if (m.t2runs) scoreStr += (scoreStr ? ' | ' : '') + m.t2 + ' ' + m.t2runs;
+  if (cdTimer) cdTimer.innerHTML = '<div class="cdw-live-banner">\u25CF LIVE' + (scoreStr ? ' &mdash; ' + scoreStr : '') + '</div>';
 }
 
-/* ── Filter helpers ── */
-function getFilteredMatches() {
-  let list = [..._matches];
-  if (_activeFilter === 'rcb')      list = list.filter(m => m.rcb);
-  if (_activeFilter === 'results')  list = list.filter(m => m.ended);
-  if (_activeFilter === 'upcoming') list = list.filter(m => !m.ended);
-  if (_teamFilter && _teamFilter !== 'all') list = list.filter(m => m.t1 === _teamFilter || m.t2 === _teamFilter);
-  return list;
-}
-
-/* ── Build match card HTML ── */
-function cardHTML(m) {
-  const live   = isLive(m);
-  const done   = m.ended;
-  const rcb    = m.rcb;
-  const won    = done && m.winner === 'RCB';
-  const lost   = done && m.winner && m.winner !== 'RCB' && rcb;
-  const canClick = done || live;
-
-  const dt = matchDateTime(m);
-  const dateStr = dt.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short' });
-  const t1c = color(m.t1), t2c = color(m.t2);
-  const t1l = logo(m.t1), t2l = logo(m.t2);
-
-  // Card classes
-  let cls = 'fx-card';
-  if (rcb)  cls += ' fx-rcb';
-  if (won)  cls += ' fx-win';
-  if (lost) cls += ' fx-loss';
-  if (live) cls += ' fx-live-card';
-  if (canClick) cls += ' fx-clickable';
-
-  // Badges
-  let badges = '';
-  if (rcb)  badges += `<span class="fx-badge-rcb">RCB MATCH</span>`;
-  if (live) badges += `<span class="fx-badge-live">● LIVE</span>`;
-
-  // Center content
-  let centerContent = '';
-  if (live) {
-    const s = m.t1runs ? `${m.t1} ${m.t1runs}${m.t1ovs ? ' ('+m.t1ovs+' Ov)' : ''}` : '';
-    const s2 = m.t2runs ? `${m.t2} ${m.t2runs}${m.t2ovs ? ' ('+m.t2ovs+' Ov)' : ''}` : '';
-    centerContent = `
-      <div class="fx-result-wrap">
-        <div class="fx-result-badge" style="background:rgba(0,200,100,.18);color:#00C864;border:1px solid rgba(0,200,100,.4);animation:pulse 1.5s infinite">● LIVE</div>
-        ${s || s2 ? `<div class="fx-live-score">${s}${s && s2 ? '<br>' : ''}${s2}</div>` : ''}
-        <div class="fx-hint">TAP FOR LIVE SCORE</div>
-      </div>`;
-  } else if (done) {
-    const badgeCls = won ? 'fx-badge-win-style' : lost ? 'fx-badge-loss-style' : 'fx-badge-neutral';
-    const badgeTxt = won ? '✓ RCB WON' : lost ? '✗ RCB LOST'
-      : m.winner ? `${m.winner} WON` : 'COMPLETED';
-    centerContent = `
-      <div class="fx-result-wrap">
-        <div class="fx-result-badge ${badgeCls}">${badgeTxt}</div>
-        <div class="fx-result-text">${m.result || ''}</div>
-        <div class="fx-hint">📊 TAP FOR SCORECARD</div>
-      </div>`;
-  } else {
-    centerContent = `
-      <div class="fx-vs">VS</div>
-      <div class="fx-upcoming-pill">UPCOMING</div>`;
-  }
-
-  // Scores under team names (only if match started)
-  const t1score = (done || live) && m.t1runs ? `<div class="fx-score">${m.t1runs}${m.t1ovs ? ' <small style="font-size:11px;opacity:.7">('+m.t1ovs+' Ov)</small>' : ''}</div>` : '';
-  const t2score = (done || live) && m.t2runs ? `<div class="fx-score">${m.t2runs}${m.t2ovs ? ' <small style="font-size:11px;opacity:.7">('+m.t2ovs+' Ov)</small>' : ''}</div>` : '';
-
-  return `
-  <div class="${cls}" ${canClick ? `onclick="showScorecard('${m.apiId}', ${m.id})"` : ''}>
-    <div class="fx-top-row">
-      <div class="fx-match-num">MATCH ${m.id} — IPL 2026</div>
-      <div class="fx-badges">${badges}</div>
-    </div>
-    <div class="fx-body">
-      <div class="fx-team">
-        <div class="fx-logo" style="border-color:${t1c}">
-          ${t1l ? `<img src="${t1l}" alt="${m.t1}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">` : ''}
-          <span style="display:none;color:${t1c};font-weight:800;font-size:11px">${m.t1}</span>
-        </div>
-        <div class="fx-tname">${m.t1}</div>
-        ${t1score}
-      </div>
-      <div class="fx-center">
-        ${centerContent}
-        <div class="fx-meta">
-          <div class="fx-meta-line">📅 ${dateStr} • ${m.time} IST</div>
-          <div class="fx-meta-line">📍 ${m.venue}${m.city ? ', ' + m.city : ''}</div>
-        </div>
-      </div>
-      <div class="fx-team">
-        <div class="fx-logo" style="border-color:${t2c}">
-          ${t2l ? `<img src="${t2l}" alt="${m.t2}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">` : ''}
-          <span style="display:none;color:${t2c};font-weight:800;font-size:11px">${m.t2}</span>
-        </div>
-        <div class="fx-tname">${m.t2}</div>
-        ${t2score}
-      </div>
-    </div>
-  </div>`;
-}
-
-/* ── Render list ── */
-function render() {
-  const list = document.getElementById('fixtures-list');
-  if (!list) return;
-
-  const filtered = getFilteredMatches();
-  const countEl  = document.getElementById('fx-count');
-  if (countEl) countEl.textContent = `${filtered.length} MATCH${filtered.length !== 1 ? 'ES' : ''}`;
-
-  if (!filtered.length) {
-    list.innerHTML = '<div class="fx-empty">No matches found for this filter.</div>';
-    return;
-  }
-
-  list.innerHTML = filtered.map(cardHTML).join('');
-}
-
-/* ── Scorecard Modal ── */
-async function showScorecard(apiId, matchId) {
-  const modal = document.getElementById('sc-modal');
-  const inner = document.getElementById('sc-modal-inner');
+/* ─── Scorecard Modal ─── */
+function openScorecard(apiId, matchId) {
+  var modal = document.getElementById('sc-modal');
+  var inner = document.getElementById('sc-modal-inner');
   if (!modal || !inner) return;
 
-  _currentScorecardId = apiId;
-  inner.innerHTML = `<div class="sc-loading"><div class="sc-spinner"></div><br>Loading scorecard...</div>`;
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  // Find local match data
-  const m = _matches.find(x => x.id === matchId || x.apiId === apiId);
-  if (!m) { inner.innerHTML = '<div class="sc-no-data">Match not found.</div>'; return; }
-
-  // If we already have the scorecard locally, use it
-  if (m.scorecard) {
-    renderScorecard(m);
+  var m = _matches.find(function(x) { return x.id === matchId || x.apiId === apiId; });
+  if (!m) {
+    inner.innerHTML = '<div class="sc-no-data">Match not found.</div>';
     return;
   }
 
-  // Otherwise fetch from CricAPI
-  try {
-    const url = `https://api.cricapi.com/v1/match_scorecard?apikey=${CRICAPI_KEY}&id=${apiId}`;
-    const r = await fetch(url);
-    const json = await r.json();
-    if (json.status !== 'success' || !json.data) throw new Error('No data');
-    renderScorecardFromAPI(json.data, m);
-  } catch (e) {
-    // Fallback — show what we have
-    inner.innerHTML = `
-      <div class="sc-header">
-        <div class="sc-teams">${m.t1} vs ${m.t2}</div>
-        <div class="sc-meta">Match ${m.id} — ${m.date} • ${m.venue}</div>
-        <div class="sc-result sc-res-other">${m.result || 'Score unavailable'}</div>
-      </div>
-      <div class="sc-body">
-        <div class="sc-no-data">
-          Detailed scorecard unavailable at the moment.<br>
-          <a href="https://www.espncricinfo.com" target="_blank" class="sc-ext-link">View on ESPNcricinfo →</a>
-        </div>
-      </div>`;
+  // If we have local scorecard data, render it immediately (no network needed)
+  if (m.scorecard) {
+    inner.innerHTML = buildScorecardHTML(m);
+    return;
   }
+
+  // Show spinner and fetch from CricAPI
+  inner.innerHTML = '<div class="sc-loading"><div class="sc-spinner"></div><br>Loading scorecard...</div>';
+
+  var url = 'https://api.cricapi.com/v1/match_scorecard?apikey=' + CRICAPI_KEY + '&id=' + apiId;
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(json) {
+      if (json.status === 'success' && json.data) {
+        inner.innerHTML = buildScorecardFromAPI(json.data, m);
+      } else {
+        inner.innerHTML = buildNoScorecard(m);
+      }
+    })
+    .catch(function() {
+      inner.innerHTML = buildNoScorecard(m);
+    });
 }
 
-function renderScorecard(m) {
-  const inner = document.getElementById('sc-modal-inner');
-  if (!inner) return;
-  const sc = m.scorecard;
-  const won = m.winner === 'RCB';
-  const lost = m.winner && m.winner !== 'RCB' && m.rcb;
-  const resCls = won ? 'sc-res-win' : lost ? 'sc-res-loss' : 'sc-res-other';
-  inner.innerHTML = `
-    <div class="sc-header">
-      <div class="sc-teams">${m.t1} vs ${m.t2}</div>
-      <div class="sc-meta">Match ${m.id} • ${new Date(m.date+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} • ${m.venue}${m.city ? ', '+m.city : ''}</div>
-      <div class="sc-result ${resCls}">${m.result || 'Completed'}</div>
-    </div>
-    ${sc.toss ? `<div class="sc-toss">🪙 Toss: ${sc.toss}</div>` : ''}
-    <div class="sc-body">
-      ${sc.inn1 ? innHTML(sc.inn1) : ''}
-      ${sc.inn2 ? innHTML(sc.inn2) : ''}
-    </div>
-    <div class="sc-footer">
-      <a href="https://www.espncricinfo.com/series/indian-premier-league-2026-1449924" target="_blank" class="sc-ext-link">Full details on ESPNCricinfo ↗</a>
-    </div>`;
+function buildNoScorecard(m) {
+  var won = m.winner === 'RCB', lost = m.rcb && m.winner && m.winner !== 'RCB';
+  return '<div class="sc-header">'
+    + '<div class="sc-teams">' + m.t1 + ' vs ' + m.t2 + '</div>'
+    + '<div class="sc-meta">Match ' + m.id + ' &bull; ' + m.date + ' &bull; ' + m.venue + '</div>'
+    + '<div class="sc-result ' + (won ? 'sc-res-win' : lost ? 'sc-res-loss' : 'sc-res-other') + '">' + (m.result || 'Completed') + '</div>'
+    + '</div>'
+    + '<div class="sc-body"><div class="sc-no-data">Detailed scorecard not available.<br>'
+    + '<a href="https://www.espncricinfo.com/series/indian-premier-league-2026-1449924" target="_blank" class="sc-ext-link">View on ESPNCricinfo &rarr;</a></div></div>';
 }
 
-function renderScorecardFromAPI(data, m) {
-  const inner = document.getElementById('sc-modal-inner');
-  if (!inner) return;
+function buildScorecardHTML(m) {
+  var sc = m.scorecard;
+  var won = m.winner === 'RCB', lost = m.rcb && m.winner && m.winner !== 'RCB';
+  var resCls = won ? 'sc-res-win' : lost ? 'sc-res-loss' : 'sc-res-other';
+  var dateStr = new Date(m.date + 'T12:00:00').toLocaleDateString('en-IN',
+    { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  return '<div class="sc-header">'
+    + '<div class="sc-teams">' + m.t1 + ' vs ' + m.t2 + '</div>'
+    + '<div class="sc-meta">Match ' + m.id + ' &bull; ' + dateStr + ' &bull; ' + m.venue + (m.city ? ', ' + m.city : '') + '</div>'
+    + '<div class="sc-result ' + resCls + '">' + (m.result || 'Completed') + '</div>'
+    + '</div>'
+    + (sc.toss ? '<div class="sc-toss">&#127922; Toss: ' + sc.toss + '</div>' : '')
+    + '<div class="sc-body">'
+    + (sc.inn1 ? buildInningsHTML(sc.inn1) : '')
+    + (sc.inn2 ? buildInningsHTML(sc.inn2) : '')
+    + '</div>'
+    + '<div class="sc-footer"><a href="https://www.espncricinfo.com/series/indian-premier-league-2026-1449924" target="_blank" class="sc-ext-link">Full details on ESPNCricinfo &nearr;</a></div>';
+}
 
-  const innings = data.scorecard || [];
-  const score   = data.score || [];
-  const won     = data.matchWinner && (data.matchWinner.toLowerCase().includes('royal challengers') || data.matchWinner === 'RCB');
-  const rcb     = m && m.rcb;
-  const resCls  = (won && rcb) ? 'sc-res-win' : (!won && rcb) ? 'sc-res-loss' : 'sc-res-other';
-  const toss    = data.tossWinner
-    ? `${data.tossWinner.charAt(0).toUpperCase() + data.tossWinner.slice(1)} won the toss and elected to ${data.tossChoice || 'bat'}`
+function buildScorecardFromAPI(data, m) {
+  var innings = data.scorecard || [];
+  var scores  = data.score || [];
+  var won = data.matchWinner && (data.matchWinner.toLowerCase().includes('royal challengers') || data.matchWinner === 'RCB');
+  var rcb = m && m.rcb;
+  var resCls = (won && rcb) ? 'sc-res-win' : (!won && rcb) ? 'sc-res-loss' : 'sc-res-other';
+  var toss = data.tossWinner
+    ? data.tossWinner.charAt(0).toUpperCase() + data.tossWinner.slice(1) + ' won the toss and elected to ' + (data.tossChoice || 'bat')
     : '';
-
-  const innSections = innings.map((inn, idx) => {
-    const sc_obj = score[idx];
-    const scoreStr = sc_obj ? `${sc_obj.r}/${sc_obj.w} (${sc_obj.o} Ov)` : '';
-    const teamShort = inn.inning.replace(/ Inning \d+/i, '').trim();
-    const bat = (inn.batting || []).map(b => [
-      b.batsman?.name || '',
-      b['dismissal-text'] || 'not out',
-      b.r ?? 0, b.b ?? 0, b['4s'] ?? 0, b['6s'] ?? 0,
-      (b.sr ?? 0).toFixed(2)
-    ]);
-    const bowl = (inn.bowling || []).map(b => [
-      b.bowler?.name || '',
-      String(b.o ?? 0), String(b.m ?? 0),
-      String(b.r ?? 0), String(b.w ?? 0),
-      (b.eco ?? 0).toFixed(2)
-    ]);
-    return innHTML({ team: teamShort, score: scoreStr, bat, bowl });
+  var innSections = innings.map(function(inn, idx) {
+    var sc = scores[idx];
+    var scoreStr = sc ? sc.r + '/' + sc.w + ' (' + sc.o + ' Ov)' : '';
+    var team = inn.inning.replace(/ Inning \d+/i, '').trim();
+    var bat = (inn.batting || []).map(function(b) {
+      return [b.batsman && b.batsman.name || '', b['dismissal-text'] || 'not out',
+        b.r || 0, b.b || 0, b['4s'] || 0, b['6s'] || 0,
+        (b.sr || 0).toFixed(2)];
+    });
+    var bowl = (inn.bowling || []).map(function(b) {
+      return [b.bowler && b.bowler.name || '', String(b.o || 0),
+        String(b.m || 0), String(b.r || 0), String(b.w || 0),
+        (b.eco || 0).toFixed(2)];
+    });
+    return buildInningsHTML({ team: team, score: scoreStr, bat: bat, bowl: bowl });
   }).join('');
 
-  inner.innerHTML = `
-    <div class="sc-header">
-      <div class="sc-teams">${data.teams?.[0] || (m?.t1 || '')} vs ${data.teams?.[1] || (m?.t2 || '')}</div>
-      <div class="sc-meta">Match ${m?.id || ''} • ${data.date ? new Date(data.date+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'}) : ''} • ${data.venue || ''}</div>
-      <div class="sc-result ${resCls}">${data.status || 'Completed'}</div>
-    </div>
-    ${toss ? `<div class="sc-toss">🪙 Toss: ${toss}</div>` : ''}
-    <div class="sc-body">${innSections || '<div class="sc-no-data">Scorecard not available yet.</div>'}</div>
-    <div class="sc-footer">
-      <a href="https://www.espncricinfo.com/series/indian-premier-league-2026-1449924" target="_blank" class="sc-ext-link">Full details on ESPNCricinfo ↗</a>
-    </div>`;
+  return '<div class="sc-header">'
+    + '<div class="sc-teams">' + (data.teams && data.teams[0] || (m && m.t1) || '') + ' vs ' + (data.teams && data.teams[1] || (m && m.t2) || '') + '</div>'
+    + '<div class="sc-meta">' + (data.date || '') + ' &bull; ' + (data.venue || '') + '</div>'
+    + '<div class="sc-result ' + resCls + '">' + (data.status || 'Completed') + '</div>'
+    + '</div>'
+    + (toss ? '<div class="sc-toss">&#127922; ' + toss + '</div>' : '')
+    + '<div class="sc-body">' + (innSections || '<div class="sc-no-data">Scorecard not available yet.</div>') + '</div>'
+    + '<div class="sc-footer"><a href="https://www.espncricinfo.com/series/indian-premier-league-2026-1449924" target="_blank" class="sc-ext-link">Full details on ESPNCricinfo &nearr;</a></div>';
 }
 
-function innHTML(inn) {
-  const batRows = (inn.bat || []).map(r =>
-    `<tr>
-      <td class="sc-name">${r[0]}</td>
-      <td class="sc-dim">${r[1]}</td>
-      <td class="sc-bold">${r[2]}</td>
-      <td>${r[3]}</td>
-      <td>${r[4]}</td>
-      <td>${r[5]}</td>
-      <td>${r[6]}</td>
-    </tr>`).join('');
-  const bowlRows = (inn.bowl || []).map(r =>
-    `<tr>
-      <td class="sc-name">${r[0]}</td>
-      <td>${r[1]}</td>
-      <td>${r[2]}</td>
-      <td>${r[3]}</td>
-      <td class="sc-bold">${r[4]}</td>
-      <td>${r[5]}</td>
-    </tr>`).join('');
-  return `
-    <div class="sc-inn-header">
-      <span class="sc-team">${inn.team}</span>
-      <span class="sc-score">${inn.score || ''}</span>
-    </div>
-    ${batRows ? `
-    <table class="sc-table">
-      <thead><tr><th>Batter</th><th>Dismissal</th><th>R</th><th>B</th><th>4s</th><th>6s</th><th>SR</th></tr></thead>
-      <tbody>${batRows}</tbody>
-    </table>` : ''}
-    ${bowlRows ? `
-    <table class="sc-table" style="margin-bottom:24px">
-      <thead><tr><th>Bowler</th><th>O</th><th>M</th><th>R</th><th>W</th><th>Econ</th></tr></thead>
-      <tbody>${bowlRows}</tbody>
-    </table>` : ''}`;
+function buildInningsHTML(inn) {
+  var batRows = (inn.bat || []).map(function(r) {
+    return '<tr>'
+      + '<td class="sc-name">' + r[0] + '</td>'
+      + '<td class="sc-dim">' + r[1] + '</td>'
+      + '<td class="sc-bold">' + r[2] + '</td>'
+      + '<td>' + r[3] + '</td><td>' + r[4] + '</td><td>' + r[5] + '</td>'
+      + '<td>' + r[6] + '</td>'
+      + '</tr>';
+  }).join('');
+  var bowlRows = (inn.bowl || []).map(function(r) {
+    return '<tr>'
+      + '<td class="sc-name">' + r[0] + '</td>'
+      + '<td>' + r[1] + '</td><td>' + r[2] + '</td>'
+      + '<td>' + r[3] + '</td>'
+      + '<td class="sc-bold">' + r[4] + '</td>'
+      + '<td>' + r[5] + '</td>'
+      + '</tr>';
+  }).join('');
+  return '<div class="sc-inn-header">'
+    + '<span class="sc-team">' + inn.team + '</span>'
+    + '<span class="sc-score">' + (inn.score || '') + '</span>'
+    + '</div>'
+    + (batRows ? '<table class="sc-table"><thead><tr>'
+      + '<th>Batter</th><th>Dismissal</th><th>R</th><th>B</th><th>4s</th><th>6s</th><th>SR</th>'
+      + '</tr></thead><tbody>' + batRows + '</tbody></table>' : '')
+    + (bowlRows ? '<table class="sc-table" style="margin-bottom:24px"><thead><tr>'
+      + '<th>Bowler</th><th>O</th><th>M</th><th>R</th><th>W</th><th>Eco</th>'
+      + '</tr></thead><tbody>' + bowlRows + '</tbody></table>' : '');
 }
 
 function closeScorecard() {
-  document.getElementById('sc-modal')?.classList.remove('open');
+  var modal = document.getElementById('sc-modal');
+  if (modal) modal.classList.remove('open');
   document.body.style.overflow = '';
-  _currentScorecardId = null;
 }
 
-/* ── Team filter population ── */
+/* ─── Team filter ─── */
 function populateTeamFilter() {
-  const sel = document.getElementById('team-filter');
+  var sel = document.getElementById('team-filter');
   if (!sel) return;
-  const teams = ['RCB','CSK','MI','KKR','SRH','RR','DC','PBKS','GT','LSG'];
-  sel.innerHTML = `<option value="all">All Teams</option>`
-    + teams.map(t => `<option value="${t}">${t}</option>`).join('');
+  var teams = ['RCB','CSK','MI','KKR','SRH','RR','DC','PBKS','GT','LSG'];
+  sel.innerHTML = '<option value="all">All Teams</option>'
+    + teams.map(function(t) { return '<option value="' + t + '">' + t + '</option>'; }).join('');
 }
 
-/* ── Init ── */
-document.addEventListener('DOMContentLoaded', async () => {
+/* ─── INIT ─── */
+document.addEventListener('DOMContentLoaded', function() {
+
+  // 1. Populate filters
   populateTeamFilter();
 
-  // Tab filter
-  document.querySelectorAll('.fx-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.fx-tab').forEach(b => b.classList.remove('active'));
+  // 2. INSTANTLY load & render from window global — no async, no waiting
+  loadFromGlobal();
+  render();
+  updateCountdown();
+
+  // 3. Set up filter tabs
+  document.querySelectorAll('.fx-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.fx-tab').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
-      _activeFilter = btn.dataset.filter || 'all';
+      _filter = btn.dataset.filter || 'all';
       render();
     });
   });
 
-  // Team filter
-  document.getElementById('team-filter')?.addEventListener('change', e => {
-    _teamFilter = e.target.value;
-    render();
-  });
+  // 4. Team dropdown
+  var sel = document.getElementById('team-filter');
+  if (sel) sel.addEventListener('change', function(e) { _team = e.target.value; render(); });
 
-  // Close modal
-  document.getElementById('sc-modal')?.addEventListener('click', e => {
-    if (e.target.id === 'sc-modal') closeScorecard();
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeScorecard(); });
+  // 5. Modal close handlers
+  var modal = document.getElementById('sc-modal');
+  if (modal) modal.addEventListener('click', function(e) { if (e.target === modal) closeScorecard(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeScorecard(); });
 
-  // Initial load
-  await refreshData(true);
+  // 6. Refresh button
+  var rbtn = document.getElementById('refresh-now');
+  if (rbtn) rbtn.addEventListener('click', function() { fetchFresh(); });
 
-  // Auto-refresh every 30 seconds
-  _refreshTimer = setInterval(async () => {
-    await fetchData();
-    render();
-    updateCountdown();
-  }, REFRESH_MS);
+  // 7. Background fetch for fresh data (HTTP only)
+  fetchFresh();
+
+  // 8. Auto-refresh every 30 seconds
+  setInterval(function() { fetchFresh(); }, REFRESH_MS);
 });
 
-/* ── Global exports ── */
-window.showScorecard = showScorecard;
+// Global exports
+window.openScorecard  = openScorecard;
 window.closeScorecard = closeScorecard;
-window.refreshData = () => refreshData(false);
+window.refreshData    = function() { fetchFresh(); };
