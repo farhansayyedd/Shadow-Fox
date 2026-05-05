@@ -37,7 +37,10 @@ async function api(endpoint, params = {}) {
   const url = `${BASE}/${endpoint}?${qs}`;
   for (let i = 0; i < 3; i++) {
     try {
-      const res  = await fetch(url, { signal: AbortSignal.timeout(12000) });
+      const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('timeout')), 15000)
+      );
+      const res  = await Promise.race([fetch(url), timeout]);
       const json = await res.json();
       if (json.status === 'success') return json.data;
       if (json.status === 'failure') throw new Error(json.reason || 'API failure');

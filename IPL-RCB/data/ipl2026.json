@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-01T21:12:44.993Z",
+  "generatedAt": "2026-05-05T11:13:49.452Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 70,
   "matches": [
@@ -15,12 +15,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Royal Challengers Bengaluru won by 6 wkts",
+      "winner": "RCB",
       "t1runs": "201/9",
       "t1ovs": "20",
       "t2runs": "203/4",
       "t2ovs": "15.4",
-      "result": "Royal Challengers Bengaluru won by 6 wkts",
-      "winner": "RCB",
       "scorecard": {
         "toss": "Royal challengers bengaluru won the toss and elected to bowl",
         "inn1": {
@@ -302,12 +302,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Mumbai Indians won by 6 wkts",
-      "winner": "MI"
+      "winner": "MI",
+      "t1runs": "220/4",
+      "t1ovs": "20",
+      "t2runs": "224/4",
+      "t2ovs": "19.1"
     },
     {
       "id": 3,
@@ -321,12 +321,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Rajasthan Royals won by 8 wkts",
-      "winner": "RR"
+      "winner": "RR",
+      "t1runs": "127/10",
+      "t1ovs": "19.4",
+      "t2runs": "128/2",
+      "t2ovs": "12.1"
     },
     {
       "id": 4,
@@ -340,12 +340,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Punjab Kings won by 3 wkts",
-      "winner": "PBKS"
+      "winner": "PBKS",
+      "t1runs": "162/6",
+      "t1ovs": "20",
+      "t2runs": "165/7",
+      "t2ovs": "19.1"
     },
     {
       "id": 5,
@@ -359,12 +359,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Delhi Capitals won by 6 wkts",
-      "winner": "DC"
+      "winner": "DC",
+      "t1runs": "141/10",
+      "t1ovs": "18.4",
+      "t2runs": "145/4",
+      "t2ovs": "17.1"
     },
     {
       "id": 6,
@@ -378,12 +378,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Sunrisers Hyderabad won by 65 runs",
-      "winner": "SRH"
+      "winner": "SRH",
+      "t1runs": "226/8",
+      "t1ovs": "20",
+      "t2runs": "161/10",
+      "t2ovs": "16"
     },
     {
       "id": 7,
@@ -397,12 +397,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Punjab Kings won by 5 wkts",
-      "winner": "PBKS"
+      "winner": "PBKS",
+      "t1runs": "209/5",
+      "t1ovs": "20",
+      "t2runs": "210/5",
+      "t2ovs": "18.4"
     },
     {
       "id": 8,
@@ -416,12 +416,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Delhi Capitals won by 6 wkts",
-      "winner": "DC"
+      "winner": "DC",
+      "t1runs": "162/6",
+      "t1ovs": "20",
+      "t2runs": "164/4",
+      "t2ovs": "18.1"
     },
     {
       "id": 9,
@@ -435,12 +435,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Rajasthan Royals won by 6 runs",
-      "winner": "RR"
+      "winner": "RR",
+      "t1runs": "210/6",
+      "t1ovs": "20",
+      "t2runs": "204/8",
+      "t2ovs": "20"
     },
     {
       "id": 10,
@@ -454,12 +454,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": "",
       "result": "Lucknow Super Giants won by 5 wkts",
-      "winner": "LSG"
+      "winner": "LSG",
+      "t1runs": "156/9",
+      "t1ovs": "20",
+      "t2runs": "160/5",
+      "t2ovs": "19.5"
     },
     {
       "id": 11,
@@ -473,12 +473,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Royal Challengers Bengaluru won by 43 runs",
+      "winner": "RCB",
       "t1runs": "250/3",
       "t1ovs": "20",
       "t2runs": "207/10",
       "t2ovs": "19.4",
-      "result": "Royal Challengers Bengaluru won by 43 runs",
-      "winner": "RCB",
       "scorecard": {
         "toss": "Chennai super kings won the toss and elected to bowl",
         "inn1": {
@@ -751,12 +751,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "No result (due to rain)",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "No result (due to rain)",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 13,
@@ -770,12 +770,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Rajasthan Royals won by 27 runs  -  11 overs game due to rain",
+      "winner": "RR",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Rajasthan Royals won by 27 runs  -  11 overs game due to rain",
-      "winner": "RR"
+      "t2ovs": ""
     },
     {
       "id": 14,
@@ -789,12 +789,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Gujarat Titans won by 1 run",
+      "winner": "GT",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Gujarat Titans won by 1 run",
-      "winner": "GT"
+      "t2ovs": ""
     },
     {
       "id": 15,
@@ -808,12 +808,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Lucknow Super Giants won by 3 wkts",
+      "winner": "LSG",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Lucknow Super Giants won by 3 wkts",
-      "winner": "LSG"
+      "t2ovs": ""
     },
     {
       "id": 16,
@@ -827,12 +827,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Rajasthan Royals won by 6 wkts",
+      "winner": "RR",
       "t1runs": "201/8",
       "t1ovs": "20",
       "t2runs": "202/4",
       "t2ovs": "18",
-      "result": "Rajasthan Royals won by 6 wkts",
-      "winner": "RR",
       "scorecard": {
         "toss": "Rajasthan royals won the toss and elected to bowl",
         "inn1": {
@@ -1105,12 +1105,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Punjab Kings won by 6 wkts",
+      "winner": "PBKS",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Punjab Kings won by 6 wkts",
-      "winner": "PBKS"
+      "t2ovs": ""
     },
     {
       "id": 18,
@@ -1124,12 +1124,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Chennai Super Kings won by 23 runs",
+      "winner": "CSK",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Chennai Super Kings won by 23 runs",
-      "winner": "CSK"
+      "t2ovs": ""
     },
     {
       "id": 19,
@@ -1143,12 +1143,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Gujarat Titans won by 7 wkts",
+      "winner": "GT",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Gujarat Titans won by 7 wkts",
-      "winner": "GT"
+      "t2ovs": ""
     },
     {
       "id": 20,
@@ -1162,12 +1162,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Royal Challengers Bengaluru won by 18 runs",
+      "winner": "RCB",
       "t1runs": "240/4",
       "t1ovs": "20",
       "t2runs": "222/5",
       "t2ovs": "20",
-      "result": "Royal Challengers Bengaluru won by 18 runs",
-      "winner": "RCB",
       "scorecard": {
         "toss": "Mumbai indians won the toss and elected to bowl",
         "inn1": {
@@ -1422,12 +1422,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Sunrisers Hyderabad won by 57 runs",
+      "winner": "SRH",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Sunrisers Hyderabad won by 57 runs",
-      "winner": "SRH"
+      "t2ovs": ""
     },
     {
       "id": 22,
@@ -1441,12 +1441,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Chennai Super Kings won by 32 runs",
+      "winner": "CSK",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Chennai Super Kings won by 32 runs",
-      "winner": "CSK"
+      "t2ovs": ""
     },
     {
       "id": 23,
@@ -1460,12 +1460,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Royal Challengers Bengaluru won by 5 wkts",
+      "winner": "RCB",
       "t1runs": "146/10",
       "t1ovs": "20",
       "t2runs": "149/5",
       "t2ovs": "15.1",
-      "result": "Royal Challengers Bengaluru won by 5 wkts",
-      "winner": "RCB",
       "scorecard": {
         "toss": "Royal challengers bengaluru won the toss and elected to bowl",
         "inn1": {
@@ -1740,12 +1740,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Punjab Kings won by 7 wkts",
+      "winner": "PBKS",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Punjab Kings won by 7 wkts",
-      "winner": "PBKS"
+      "t2ovs": ""
     },
     {
       "id": 25,
@@ -1759,12 +1759,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Gujarat Titans won by 5 wkts",
+      "winner": "GT",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Gujarat Titans won by 5 wkts",
-      "winner": "GT"
+      "t2ovs": ""
     },
     {
       "id": 26,
@@ -1778,12 +1778,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Delhi Capitals won by 6 wkts",
+      "winner": "DC",
       "t1runs": "175/8",
       "t1ovs": "20",
       "t2runs": "179/4",
       "t2ovs": "19.5",
-      "result": "Delhi Capitals won by 6 wkts",
-      "winner": "DC",
       "scorecard": {
         "toss": "Delhi capitals won the toss and elected to bowl",
         "inn1": {
@@ -2065,12 +2065,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Sunrisers Hyderabad won by 10 runs",
+      "winner": "SRH",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Sunrisers Hyderabad won by 10 runs",
-      "winner": "SRH"
+      "t2ovs": ""
     },
     {
       "id": 28,
@@ -2084,12 +2084,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Kolkata Knight Riders won by 4 wkts",
+      "winner": "KKR",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Kolkata Knight Riders won by 4 wkts",
-      "winner": "KKR"
+      "t2ovs": ""
     },
     {
       "id": 29,
@@ -2103,12 +2103,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Punjab Kings won by 54 runs",
+      "winner": "PBKS",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Punjab Kings won by 54 runs",
-      "winner": "PBKS"
+      "t2ovs": ""
     },
     {
       "id": 30,
@@ -2122,12 +2122,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Mumbai Indians won by 99 runs",
+      "winner": "MI",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Mumbai Indians won by 99 runs",
-      "winner": "MI"
+      "t2ovs": ""
     },
     {
       "id": 31,
@@ -2141,12 +2141,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Sunrisers Hyderabad won by 47 runs",
+      "winner": "SRH",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Sunrisers Hyderabad won by 47 runs",
-      "winner": "SRH"
+      "t2ovs": ""
     },
     {
       "id": 32,
@@ -2160,12 +2160,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Rajasthan Royals won by 40 runs",
+      "winner": "RR",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Rajasthan Royals won by 40 runs",
-      "winner": "RR"
+      "t2ovs": ""
     },
     {
       "id": 33,
@@ -2179,12 +2179,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Chennai Super Kings won by 103 runs",
+      "winner": "CSK",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Chennai Super Kings won by 103 runs",
-      "winner": "CSK"
+      "t2ovs": ""
     },
     {
       "id": 34,
@@ -2198,12 +2198,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Royal Challengers Bengaluru won by 5 wkts",
+      "winner": "RCB",
       "t1runs": "205/3",
       "t1ovs": "20",
       "t2runs": "206/5",
       "t2ovs": "18.5",
-      "result": "Royal Challengers Bengaluru won by 5 wkts",
-      "winner": "RCB",
       "scorecard": {
         "toss": "Royal challengers bengaluru won the toss and elected to bowl",
         "inn1": {
@@ -2440,12 +2440,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Punjab Kings won by 6 wkts",
+      "winner": "PBKS",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Punjab Kings won by 6 wkts",
-      "winner": "PBKS"
+      "t2ovs": ""
     },
     {
       "id": 36,
@@ -2459,12 +2459,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Sunrisers Hyderabad won by 5 wkts",
+      "winner": "SRH",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Sunrisers Hyderabad won by 5 wkts",
-      "winner": "SRH"
+      "t2ovs": ""
     },
     {
       "id": 37,
@@ -2478,12 +2478,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Gujarat Titans won by 8 wkts",
+      "winner": "GT",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Gujarat Titans won by 8 wkts",
-      "winner": "GT"
+      "t2ovs": ""
     },
     {
       "id": 38,
@@ -2497,12 +2497,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Match tied (KKR won the Super Over)",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Match tied (KKR won the Super Over)",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 39,
@@ -2516,12 +2516,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Royal Challengers Bengaluru won by 9 wkts",
+      "winner": "RCB",
       "t1runs": "75/10",
       "t1ovs": "16.3",
       "t2runs": "77/1",
       "t2ovs": "6.3",
-      "result": "Royal Challengers Bengaluru won by 9 wkts",
-      "winner": "RCB",
       "scorecard": {
         "toss": "Royal challengers bengaluru won the toss and elected to bowl",
         "inn1": {
@@ -2760,12 +2760,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Rajasthan Royals won by 6 wkts",
+      "winner": "RR",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Rajasthan Royals won by 6 wkts",
-      "winner": "RR"
+      "t2ovs": ""
     },
     {
       "id": 41,
@@ -2779,12 +2779,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Sunrisers Hyderabad won by 6 wkts",
+      "winner": "SRH",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Sunrisers Hyderabad won by 6 wkts",
-      "winner": "SRH"
+      "t2ovs": ""
     },
     {
       "id": 42,
@@ -2798,12 +2798,12 @@
       "rcb": true,
       "started": true,
       "ended": true,
+      "result": "Gujarat Titans won by 4 wkts",
+      "winner": "GT",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Gujarat Titans won by 4 wkts",
-      "winner": "GT"
+      "t2ovs": ""
     },
     {
       "id": 43,
@@ -2817,12 +2817,12 @@
       "rcb": false,
       "started": true,
       "ended": true,
+      "result": "Delhi Capitals won by 7 wkts",
+      "winner": "DC",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "Delhi Capitals won by 7 wkts",
-      "winner": "DC"
+      "t2ovs": ""
     },
     {
       "id": 44,
@@ -2834,14 +2834,14 @@
       "venue": "MA Chidambaram Stadium",
       "city": "Chennai",
       "rcb": false,
-      "started": false,
-      "ended": false,
+      "started": true,
+      "ended": true,
+      "result": "Chennai Super Kings won by 8 wkts",
+      "winner": "CSK",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 45,
@@ -2853,14 +2853,14 @@
       "venue": "Rajiv Gandhi International Stadium",
       "city": "Hyderabad",
       "rcb": false,
-      "started": false,
-      "ended": false,
+      "started": true,
+      "ended": true,
+      "result": "Kolkata Knight Riders won by 7 wkts",
+      "winner": "KKR",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 46,
@@ -2872,14 +2872,14 @@
       "venue": "Narendra Modi Stadium",
       "city": "Ahmedabad",
       "rcb": false,
-      "started": false,
-      "ended": false,
+      "started": true,
+      "ended": true,
+      "result": "Gujarat Titans won by 4 wkts",
+      "winner": "GT",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 47,
@@ -2891,14 +2891,14 @@
       "venue": "Wankhede Stadium",
       "city": "Mumbai",
       "rcb": false,
-      "started": false,
-      "ended": false,
+      "started": true,
+      "ended": true,
+      "result": "Mumbai Indians won by 6 wkts",
+      "winner": "MI",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 48,
@@ -2912,12 +2912,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 49,
@@ -2931,12 +2931,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 50,
@@ -2950,12 +2950,12 @@
       "rcb": true,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 51,
@@ -2969,12 +2969,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 52,
@@ -2988,12 +2988,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 53,
@@ -3007,12 +3007,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 54,
@@ -3026,12 +3026,12 @@
       "rcb": true,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 55,
@@ -3045,12 +3045,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 56,
@@ -3064,12 +3064,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 57,
@@ -3083,12 +3083,12 @@
       "rcb": true,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 58,
@@ -3102,12 +3102,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 59,
@@ -3121,12 +3121,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 60,
@@ -3140,12 +3140,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 61,
@@ -3159,12 +3159,12 @@
       "rcb": true,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 62,
@@ -3178,12 +3178,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 63,
@@ -3197,12 +3197,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 64,
@@ -3216,12 +3216,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 65,
@@ -3235,12 +3235,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 66,
@@ -3254,12 +3254,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 67,
@@ -3273,12 +3273,12 @@
       "rcb": true,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 68,
@@ -3292,12 +3292,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 69,
@@ -3311,12 +3311,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     },
     {
       "id": 70,
@@ -3330,12 +3330,12 @@
       "rcb": false,
       "started": false,
       "ended": false,
+      "result": "",
+      "winner": "",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
-      "t2ovs": "",
-      "result": "",
-      "winner": ""
+      "t2ovs": ""
     }
   ]
 }
