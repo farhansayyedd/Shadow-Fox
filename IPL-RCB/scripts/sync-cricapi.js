@@ -128,7 +128,14 @@ async function main() {
   // 1. Fetch series match list (1 API hit)
   console.log('📡 Fetching series match list...');
   const seriesData = await api('series_info', { id: SERIES_ID });
-  if (!seriesData) { console.error('❌ Failed to fetch series'); process.exit(1); }
+  if (!seriesData || seriesData === 'QUOTA_EXCEEDED') {
+    if (seriesData === 'QUOTA_EXCEEDED') {
+      console.warn('⛔ Quota exhausted — keeping existing data unchanged. Retry after midnight UTC.');
+    } else {
+      console.error('❌ Failed to fetch series');
+    }
+    process.exit(0); // Exit 0 so GitHub Actions doesn't flag as failed
+  }
 
   const matchList = seriesData.matchList || [];
   console.log(`✅ Found ${matchList.length} matches\n`);
