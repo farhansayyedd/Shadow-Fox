@@ -43,8 +43,17 @@ async function api(endpoint, params = {}) {
       const res  = await Promise.race([fetch(url), timeout]);
       const json = await res.json();
       if (json.status === 'success') return json.data;
-      if (json.status === 'failure') throw new Error(json.reason || 'API failure');
+      if (json.status === 'failure') {
+        const reason = json.reason || 'API failure';
+        // Quota exhausted — don't retry
+        if (reason.includes('exceeded') || reason.includes('Blocked')) {
+          console.warn(`  ⛔ Quota exhausted: ${reason}`);
+          return 'QUOTA_EXCEEDED';
+        }
+        throw new Error(reason);
+      }
     } catch (e) {
+      if (e.message === 'QUOTA_EXCEEDED') return 'QUOTA_EXCEEDED';
       console.warn(`  Attempt ${i+1}/3 failed for ${endpoint}: ${e.message}`);
       if (i < 2) await sleep(2000);
     }
@@ -189,8 +198,18 @@ async function main() {
         console.log(`  📊 NEW: Match ${matchNum} (${t1} vs ${t2}) — fetching...`);
         await sleep(400);
         const sc = await api('match_scorecard', { id: m.id });
-        hitsUsed += 2;
-        newlyFetched++;
+
+        // Stop immediately if quota exceeded
+        if (sc === 'QUOTA_EXCEEDED') {
+          console.log(`  ⛔ Quota hit — skipping remaining matches`);
+          hitsUsed = 999; // Force skip all remaining
+          if (cached) {
+            matchObj.t1runs = cached.t1runs || '';
+            matchObj.t2runs = cached.t2runs || '';
+          }
+        } else {
+          hitsUsed += 2;
+          newlyFetched++;
 
         if (sc && sc.score && sc.score.length) {
           const s1 = sc.score[0], s2 = sc.score[1];
@@ -222,6 +241,7 @@ async function main() {
             matchObj.t2runs = cached.t2runs || '';
           }
         }
+        } // end else (not QUOTA_EXCEEDED)
       } else {
         console.log(`  ⚠ Skipping Match ${matchNum} — API budget limit reached`);
         // Use cache if available
