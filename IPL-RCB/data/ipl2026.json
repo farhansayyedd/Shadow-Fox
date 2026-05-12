@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-11T19:49:44.209Z",
+  "generatedAt": "2026-05-12T19:54:56.406Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -3081,10 +3081,10 @@
       "ended": true,
       "result": "Delhi Capitals won by 7 wkts",
       "winner": "DC",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "225/6",
+      "t1ovs": "20",
+      "t2runs": "226/3",
+      "t2ovs": "19.1"
     },
     {
       "id": 44,
@@ -3100,10 +3100,10 @@
       "ended": true,
       "result": "Chennai Super Kings won by 8 wkts",
       "winner": "CSK",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "159/7",
+      "t1ovs": "20",
+      "t2runs": "160/2",
+      "t2ovs": "18.1"
     },
     {
       "id": 45,
@@ -3119,10 +3119,10 @@
       "ended": true,
       "result": "Kolkata Knight Riders won by 7 wkts",
       "winner": "KKR",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "165/10",
+      "t1ovs": "19",
+      "t2runs": "169/3",
+      "t2ovs": "18.2"
     },
     {
       "id": 46,
@@ -3138,10 +3138,10 @@
       "ended": true,
       "result": "Gujarat Titans won by 4 wkts",
       "winner": "GT",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "163/9",
+      "t1ovs": "20",
+      "t2runs": "167/6",
+      "t2ovs": "19.5"
     },
     {
       "id": 47,
@@ -3157,10 +3157,10 @@
       "ended": true,
       "result": "Mumbai Indians won by 6 wkts",
       "winner": "MI",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "228/5",
+      "t1ovs": "20",
+      "t2runs": "229/4",
+      "t2ovs": "18.4"
     },
     {
       "id": 48,
@@ -3176,10 +3176,10 @@
       "ended": true,
       "result": "Chennai Super Kings won by 8 wkts",
       "winner": "CSK",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "155/7",
+      "t1ovs": "20",
+      "t2runs": "159/2",
+      "t2ovs": "17.3"
     },
     {
       "id": 49,
@@ -3195,10 +3195,10 @@
       "ended": true,
       "result": "Sunrisers Hyderabad won by 33 runs",
       "winner": "SRH",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "235/4",
+      "t1ovs": "20",
+      "t2runs": "202/7",
+      "t2ovs": "20"
     },
     {
       "id": 50,
@@ -3324,10 +3324,10 @@
       "venue": "Narendra Modi Stadium",
       "city": "Ahmedabad",
       "rcb": false,
-      "started": false,
-      "ended": false,
-      "result": "",
-      "winner": "",
+      "started": true,
+      "ended": true,
+      "result": "Gujarat Titans won by 82 runs",
+      "winner": "GT",
       "t1runs": "",
       "t1ovs": "",
       "t2runs": "",
