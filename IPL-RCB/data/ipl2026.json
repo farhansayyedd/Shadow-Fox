@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-12T19:54:56.406Z",
+  "generatedAt": "2026-05-13T19:56:55.438Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -3213,11 +3213,235 @@
       "started": true,
       "ended": true,
       "result": "LSG won by 9 runs (19 Overs game due to rain, DLS Target 213)",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "winner": "L",
+      "t1runs": "209/3",
+      "t1ovs": "19",
+      "t2runs": "203/6",
+      "t2ovs": "19",
+      "scorecard": {
+        "toss": "Royal challengers bengaluru won the toss and elected to bowl",
+        "inn1": {
+          "team": "LSG",
+          "bat": [
+            [
+              "Mitchell Marsh",
+              "c Jacob Bethell b Josh Hazlewood",
+              111,
+              56,
+              9,
+              9,
+              "198.21"
+            ],
+            [
+              "Arshin Kulkarni",
+              "c Rajat Patidar b Krunal Pandya",
+              17,
+              24,
+              1,
+              0,
+              "70.83"
+            ],
+            [
+              "Nicholas Pooran",
+              "c Krunal Pandya b Rasikh Salam Dar",
+              38,
+              23,
+              4,
+              1,
+              "165.22"
+            ],
+            [
+              "Rishabh Pant",
+              "not out",
+              32,
+              10,
+              4,
+              2,
+              "320.00"
+            ],
+            [
+              "Aiden Markram",
+              "not out",
+              1,
+              1,
+              0,
+              0,
+              "100.00"
+            ]
+          ],
+          "bowl": [
+            [
+              "Bhuvneshwar Kumar",
+              "4",
+              "0",
+              "34",
+              "0",
+              "8.50"
+            ],
+            [
+              "Josh Hazlewood",
+              "4",
+              "0",
+              "49",
+              "1",
+              "12.20"
+            ],
+            [
+              "Krunal Pandya",
+              "4",
+              "0",
+              "31",
+              "1",
+              "7.80"
+            ],
+            [
+              "Rasikh Salam Dar",
+              "4",
+              "0",
+              "53",
+              "1",
+              "13.20"
+            ],
+            [
+              "Suyash Sharma",
+              "2",
+              "0",
+              "21",
+              "0",
+              "10.50"
+            ],
+            [
+              "Romario Shepherd",
+              "1",
+              "0",
+              "16",
+              "0",
+              "16.00"
+            ]
+          ],
+          "score": "209/3 (19 Ov)"
+        },
+        "inn2": {
+          "team": "RCB",
+          "bat": [
+            [
+              "Jacob Bethell",
+              "c Prince Yadav b Mohammed Shami",
+              4,
+              5,
+              1,
+              0,
+              "80.00"
+            ],
+            [
+              "Virat Kohli",
+              "b Prince Yadav",
+              0,
+              2,
+              0,
+              0,
+              "0.00"
+            ],
+            [
+              "Devdutt Padikkal",
+              "c and b Prince Yadav",
+              34,
+              25,
+              3,
+              1,
+              "136.00"
+            ],
+            [
+              "Rajat Patidar",
+              "c Aiden Markram b Shahbaz Ahmed",
+              61,
+              31,
+              3,
+              6,
+              "196.77"
+            ],
+            [
+              "Jitesh Sharma",
+              "c Rishabh Pant b Prince Yadav",
+              1,
+              3,
+              0,
+              0,
+              "33.33"
+            ],
+            [
+              "Tim David",
+              "c Digvesh Singh Rathi b Shahbaz Ahmed",
+              40,
+              17,
+              4,
+              3,
+              "235.29"
+            ],
+            [
+              "Krunal Pandya",
+              "not out",
+              28,
+              16,
+              2,
+              2,
+              "175.00"
+            ],
+            [
+              "Romario Shepherd",
+              "not out",
+              23,
+              15,
+              3,
+              1,
+              "153.33"
+            ]
+          ],
+          "bowl": [
+            [
+              "Mohammed Shami",
+              "4",
+              "0",
+              "33",
+              "1",
+              "8.20"
+            ],
+            [
+              "Prince Yadav",
+              "4",
+              "0",
+              "33",
+              "3",
+              "8.20"
+            ],
+            [
+              "Mayank Yadav",
+              "4",
+              "0",
+              "50",
+              "0",
+              "12.50"
+            ],
+            [
+              "Digvesh Singh Rathi",
+              "4",
+              "0",
+              "50",
+              "0",
+              "12.50"
+            ],
+            [
+              "Shahbaz Ahmed",
+              "3",
+              "0",
+              "33",
+              "2",
+              "11.00"
+            ]
+          ],
+          "score": "203/6 (19 Ov)"
+        }
+      }
     },
     {
       "id": 51,
@@ -3233,10 +3457,10 @@
       "ended": true,
       "result": "Kolkata Knight Riders won by 8 wkts",
       "winner": "KKR",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "142/8",
+      "t1ovs": "20",
+      "t2runs": "147/2",
+      "t2ovs": "14.2"
     },
     {
       "id": 52,
@@ -3252,10 +3476,10 @@
       "ended": true,
       "result": "Gujarat Titans won by 77 runs",
       "winner": "GT",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "229/4",
+      "t1ovs": "20",
+      "t2runs": "152/10",
+      "t2ovs": "16.3"
     },
     {
       "id": 53,
@@ -3271,10 +3495,10 @@
       "ended": true,
       "result": "Chennai Super Kings won by 5 wkts",
       "winner": "CSK",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "203/8",
+      "t1ovs": "20",
+      "t2runs": "208/5",
+      "t2ovs": "19.2"
     },
     {
       "id": 54,
@@ -3290,10 +3514,296 @@
       "ended": true,
       "result": "Royal Challengers Bengaluru won by 2 wkts",
       "winner": "RCB",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "166/7",
+      "t1ovs": "20",
+      "t2runs": "167/8",
+      "t2ovs": "20",
+      "scorecard": {
+        "toss": "Royal challengers bengaluru won the toss and elected to bowl",
+        "inn1": {
+          "team": "MI",
+          "bat": [
+            [
+              "Ryan Rickelton",
+              "c Rajat Patidar b Bhuvneshwar Kumar",
+              2,
+              4,
+              0,
+              0,
+              "50.00"
+            ],
+            [
+              "Rohit Sharma",
+              "c Jitesh Sharma b Bhuvneshwar Kumar",
+              22,
+              10,
+              2,
+              2,
+              "220.00"
+            ],
+            [
+              "Naman Dhir",
+              "b Rasikh Salam Dar",
+              47,
+              32,
+              5,
+              2,
+              "146.88"
+            ],
+            [
+              "Suryakumar Yadav",
+              "c Virat Kohli b Bhuvneshwar Kumar",
+              0,
+              1,
+              0,
+              0,
+              "0.00"
+            ],
+            [
+              "Tilak Varma",
+              "b Bhuvneshwar Kumar",
+              57,
+              42,
+              3,
+              2,
+              "135.71"
+            ],
+            [
+              "Will Jacks",
+              "c Jacob Bethell b Romario Shepherd",
+              10,
+              10,
+              1,
+              0,
+              "100.00"
+            ],
+            [
+              "Raj Bawa",
+              "c Rajat Patidar b Josh Hazlewood",
+              16,
+              14,
+              1,
+              0,
+              "114.29"
+            ],
+            [
+              "Corbin Bosch",
+              "not out",
+              5,
+              5,
+              0,
+              0,
+              "100.00"
+            ],
+            [
+              "Deepak Chahar",
+              "not out",
+              1,
+              2,
+              0,
+              0,
+              "50.00"
+            ]
+          ],
+          "bowl": [
+            [
+              "Bhuvneshwar Kumar",
+              "4",
+              "0",
+              "23",
+              "4",
+              "5.80"
+            ],
+            [
+              "Josh Hazlewood",
+              "4",
+              "0",
+              "33",
+              "1",
+              "8.20"
+            ],
+            [
+              "Rasikh Salam Dar",
+              "4",
+              "0",
+              "42",
+              "1",
+              "10.50"
+            ],
+            [
+              "Romario Shepherd",
+              "3",
+              "0",
+              "18",
+              "1",
+              "6.00"
+            ],
+            [
+              "Krunal Pandya",
+              "3",
+              "0",
+              "26",
+              "0",
+              "8.70"
+            ],
+            [
+              "Suyash Sharma",
+              "2",
+              "0",
+              "21",
+              "0",
+              "10.50"
+            ]
+          ],
+          "score": "166/7 (20 Ov)"
+        },
+        "inn2": {
+          "team": "RCB",
+          "bat": [
+            [
+              "Jacob Bethell",
+              "c Tilak Varma b Corbin Bosch",
+              27,
+              27,
+              2,
+              0,
+              "100.00"
+            ],
+            [
+              "Virat Kohli",
+              "c Raj Bawa b Deepak Chahar",
+              0,
+              1,
+              0,
+              0,
+              "0.00"
+            ],
+            [
+              "Devdutt Padikkal",
+              "c Ryan Rickelton b Deepak Chahar",
+              12,
+              11,
+              1,
+              1,
+              "109.09"
+            ],
+            [
+              "Rajat Patidar",
+              "c Ryan Rickelton b Corbin Bosch",
+              8,
+              8,
+              1,
+              0,
+              "100.00"
+            ],
+            [
+              "Krunal Pandya",
+              "c Tilak Varma b AM Ghazanfar",
+              73,
+              46,
+              4,
+              5,
+              "158.70"
+            ],
+            [
+              "Jitesh Sharma",
+              "c Naman Dhir b Corbin Bosch",
+              18,
+              12,
+              1,
+              2,
+              "150.00"
+            ],
+            [
+              "Tim David",
+              "c Ryan Rickelton b Corbin Bosch",
+              0,
+              1,
+              0,
+              0,
+              "0.00"
+            ],
+            [
+              "Romario Shepherd",
+              "c Tilak Varma b Raj Bawa",
+              4,
+              11,
+              0,
+              0,
+              "36.36"
+            ],
+            [
+              "Rasikh Salam Dar",
+              "not out",
+              3,
+              2,
+              0,
+              0,
+              "150.00"
+            ],
+            [
+              "Bhuvneshwar Kumar",
+              "not out",
+              7,
+              2,
+              0,
+              1,
+              "350.00"
+            ]
+          ],
+          "bowl": [
+            [
+              "Deepak Chahar",
+              "4",
+              "0",
+              "33",
+              "2",
+              "8.20"
+            ],
+            [
+              "Jasprit Bumrah",
+              "4",
+              "0",
+              "20",
+              "0",
+              "5.00"
+            ],
+            [
+              "Corbin Bosch",
+              "4",
+              "1",
+              "26",
+              "4",
+              "6.50"
+            ],
+            [
+              "Will Jacks",
+              "2",
+              "0",
+              "13",
+              "0",
+              "6.50"
+            ],
+            [
+              "AM Ghazanfar",
+              "3",
+              "0",
+              "33",
+              "1",
+              "11.00"
+            ],
+            [
+              "Raj Bawa",
+              "3",
+              "0",
+              "39",
+              "1",
+              "13.00"
+            ]
+          ],
+          "score": "167/8 (20 Ov)"
+        }
+      }
     },
     {
       "id": 55,
@@ -3309,10 +3819,10 @@
       "ended": true,
       "result": "Delhi Capitals won by 3 wkts",
       "winner": "DC",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "210/5",
+      "t1ovs": "20",
+      "t2runs": "216/7",
+      "t2ovs": "19"
     },
     {
       "id": 56,
@@ -3328,10 +3838,10 @@
       "ended": true,
       "result": "Gujarat Titans won by 82 runs",
       "winner": "GT",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "t1runs": "168/5",
+      "t1ovs": "20",
+      "t2runs": "86/10",
+      "t2ovs": "14.5"
     },
     {
       "id": 57,
@@ -3343,14 +3853,220 @@
       "venue": "Shaheed Veer Narayan Singh International Stadium",
       "city": "Raipur",
       "rcb": true,
-      "started": false,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "started": true,
+      "ended": true,
+      "result": "Royal Challengers Bengaluru won by 6 wkts",
+      "winner": "RCB",
+      "t1runs": "192/4",
+      "t1ovs": "20",
+      "t2runs": "194/4",
+      "t2ovs": "19.1",
+      "scorecard": {
+        "toss": "Royal challengers bengaluru won the toss and elected to bowl",
+        "inn1": {
+          "team": "KKR",
+          "bat": [
+            [
+              "Ajinkya Rahane",
+              "c and b Josh Hazlewood",
+              19,
+              13,
+              3,
+              1,
+              "146.15"
+            ],
+            [
+              "Finn Allen",
+              "c Jitesh Sharma b Bhuvneshwar Kumar",
+              18,
+              8,
+              3,
+              1,
+              "225.00"
+            ],
+            [
+              "Angkrish Raghuvanshi",
+              "run out (Devdutt Padikkal/Bhuvneshwar Kumar)",
+              71,
+              46,
+              7,
+              3,
+              "154.35"
+            ],
+            [
+              "Cameron Green",
+              "b Rasikh Salam Dar",
+              32,
+              24,
+              3,
+              1,
+              "133.33"
+            ],
+            [
+              "Rinku Singh",
+              "not out",
+              49,
+              29,
+              3,
+              2,
+              "168.97"
+            ]
+          ],
+          "bowl": [
+            [
+              "Bhuvneshwar Kumar",
+              "4",
+              "0",
+              "34",
+              "1",
+              "8.50"
+            ],
+            [
+              "Jacob Duffy",
+              "4",
+              "0",
+              "48",
+              "0",
+              "12.00"
+            ],
+            [
+              "Josh Hazlewood",
+              "4",
+              "0",
+              "35",
+              "1",
+              "8.80"
+            ],
+            [
+              "Rasikh Salam Dar",
+              "4",
+              "0",
+              "35",
+              "1",
+              "8.80"
+            ],
+            [
+              "Krunal Pandya",
+              "4",
+              "0",
+              "39",
+              "0",
+              "9.80"
+            ]
+          ],
+          "score": "192/4 (20 Ov)"
+        },
+        "inn2": {
+          "team": "RCB",
+          "bat": [
+            [
+              "Jacob Bethell",
+              "c and b Kartik Tyagi",
+              15,
+              12,
+              2,
+              1,
+              "125.00"
+            ],
+            [
+              "Virat Kohli",
+              "not out",
+              105,
+              60,
+              11,
+              3,
+              "175.00"
+            ],
+            [
+              "Devdutt Padikkal",
+              "c Ajinkya Rahane b Kartik Tyagi",
+              39,
+              27,
+              7,
+              0,
+              "144.44"
+            ],
+            [
+              "Rajat Patidar",
+              "c Ajinkya Rahane b Sunil Narine",
+              11,
+              8,
+              0,
+              1,
+              "137.50"
+            ],
+            [
+              "Tim David",
+              "c Manish Pandey b Kartik Tyagi",
+              2,
+              3,
+              0,
+              0,
+              "66.67"
+            ],
+            [
+              "Jitesh Sharma",
+              "not out",
+              8,
+              5,
+              1,
+              0,
+              "160.00"
+            ]
+          ],
+          "bowl": [
+            [
+              "Saurabh Dubey",
+              "2.1",
+              "0",
+              "21",
+              "0",
+              "9.70"
+            ],
+            [
+              "Vaibhav Arora",
+              "4",
+              "0",
+              "48",
+              "0",
+              "12.00"
+            ],
+            [
+              "Kartik Tyagi",
+              "4",
+              "0",
+              "32",
+              "3",
+              "8.00"
+            ],
+            [
+              "Sunil Narine",
+              "4",
+              "0",
+              "31",
+              "1",
+              "7.80"
+            ],
+            [
+              "Cameron Green",
+              "2",
+              "0",
+              "22",
+              "0",
+              "11.00"
+            ],
+            [
+              "Anukul Roy",
+              "3",
+              "0",
+              "36",
+              "0",
+              "12.00"
+            ]
+          ],
+          "score": "194/4 (19.1 Ov)"
+        }
+      }
     },
     {
       "id": 58,
