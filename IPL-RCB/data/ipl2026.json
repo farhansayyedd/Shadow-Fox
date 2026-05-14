@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T20:16:40.613Z",
+  "generatedAt": "2026-05-14T19:47:27.243Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4078,14 +4078,14 @@
       "venue": "Himachal Pradesh Cricket Association Stadium",
       "city": "Dharamsala",
       "rcb": false,
-      "started": false,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "started": true,
+      "ended": true,
+      "result": "Mumbai Indians won by 6 wkts",
+      "winner": "MI",
+      "t1runs": "200/8",
+      "t1ovs": "20",
+      "t2runs": "205/4",
+      "t2ovs": "19.5"
     },
     {
       "id": 59,
