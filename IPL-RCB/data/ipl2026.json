@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-15T16:00:28.014Z",
+  "generatedAt": "2026-05-15T19:40:38.579Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4098,13 +4098,13 @@
       "city": "Lucknow",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "ended": true,
+      "result": "Lucknow Super Giants won by 7 wkts",
+      "winner": "LSG",
+      "t1runs": "187/5",
+      "t1ovs": "20",
+      "t2runs": "188/3",
+      "t2ovs": "16.4"
     },
     {
       "id": 60,
