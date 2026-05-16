@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-16T13:24:58.657Z",
+  "generatedAt": "2026-05-16T18:56:20.904Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4116,14 +4116,14 @@
       "venue": "Eden Gardens",
       "city": "Kolkata",
       "rcb": false,
-      "started": false,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "started": true,
+      "ended": true,
+      "result": "Kolkata Knight Riders won by 29 runs",
+      "winner": "KKR",
+      "t1runs": "247/2",
+      "t1ovs": "20",
+      "t2runs": "218/4",
+      "t2ovs": "20"
     },
     {
       "id": 61,
