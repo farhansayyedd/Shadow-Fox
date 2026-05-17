@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-16T21:09:18.461Z",
+  "generatedAt": "2026-05-17T18:59:40.923Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4135,14 +4135,255 @@
       "venue": "Himachal Pradesh Cricket Association Stadium",
       "city": "Dharamsala",
       "rcb": true,
-      "started": false,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "started": true,
+      "ended": true,
+      "result": "Royal Challengers Bengaluru won by 23 runs",
+      "winner": "RCB",
+      "t1runs": "222/4",
+      "t1ovs": "20",
+      "t2runs": "199/8",
+      "t2ovs": "20",
+      "scorecard": {
+        "toss": "Punjab kings won the toss and elected to bowl",
+        "inn1": {
+          "team": "RCB",
+          "bat": [
+            [
+              "Jacob Bethell",
+              "b Harpreet Brar",
+              11,
+              7,
+              2,
+              0,
+              "157.14"
+            ],
+            [
+              "Virat Kohli",
+              "c Priyansh Arya b Yuzvendra Chahal",
+              58,
+              37,
+              4,
+              3,
+              "156.76"
+            ],
+            [
+              "Devdutt Padikkal",
+              "c Shreyas Iyer b Harpreet Brar",
+              45,
+              25,
+              4,
+              3,
+              "180.00"
+            ],
+            [
+              "Venkatesh Iyer",
+              "not out",
+              73,
+              40,
+              8,
+              4,
+              "182.50"
+            ],
+            [
+              "Tim David",
+              "c Harpreet Brar b Arshdeep Singh",
+              28,
+              12,
+              2,
+              2,
+              "233.33"
+            ]
+          ],
+          "bowl": [
+            [
+              "Arshdeep Singh",
+              "4",
+              "0",
+              "43",
+              "1",
+              "10.80"
+            ],
+            [
+              "Azmatullah Omarzai",
+              "4",
+              "0",
+              "38",
+              "0",
+              "9.50"
+            ],
+            [
+              "Harpreet Brar",
+              "4",
+              "0",
+              "35",
+              "2",
+              "8.80"
+            ],
+            [
+              "Lockie Ferguson",
+              "3",
+              "0",
+              "43",
+              "0",
+              "14.30"
+            ],
+            [
+              "Yuzvendra Chahal",
+              "3",
+              "0",
+              "42",
+              "1",
+              "14.00"
+            ],
+            [
+              "Shashank Singh",
+              "2",
+              "0",
+              "20",
+              "0",
+              "10.00"
+            ]
+          ],
+          "score": "222/4 (20 Ov)"
+        },
+        "inn2": {
+          "team": "PBKS",
+          "bat": [
+            [
+              "Priyansh Arya",
+              "c Romario Shepherd b Bhuvneshwar Kumar",
+              0,
+              3,
+              0,
+              0,
+              "0.00"
+            ],
+            [
+              "Prabhsimran Singh",
+              "c Devdutt Padikkal b Bhuvneshwar Kumar",
+              2,
+              5,
+              0,
+              0,
+              "40.00"
+            ],
+            [
+              "Cooper Connolly",
+              "c Jacob Bethell b Romario Shepherd",
+              37,
+              22,
+              3,
+              3,
+              "168.18"
+            ],
+            [
+              "Shreyas Iyer",
+              "c Jitesh Sharma b Rasikh Salam Dar",
+              1,
+              3,
+              0,
+              0,
+              "33.33"
+            ],
+            [
+              "Suryansh Shedge",
+              "c Virat Kohli b Suyash Sharma",
+              35,
+              22,
+              2,
+              2,
+              "159.09"
+            ],
+            [
+              "Marcus Stoinis",
+              "lbw b Josh Hazlewood",
+              37,
+              25,
+              5,
+              0,
+              "148.00"
+            ],
+            [
+              "Shashank Singh",
+              "c Virat Kohli b Rasikh Salam Dar",
+              56,
+              27,
+              4,
+              4,
+              "207.41"
+            ],
+            [
+              "Azmatullah Omarzai",
+              "c Tim David b Rasikh Salam Dar",
+              14,
+              10,
+              1,
+              1,
+              "140.00"
+            ],
+            [
+              "Harpreet Brar",
+              "not out",
+              5,
+              3,
+              1,
+              0,
+              "166.67"
+            ]
+          ],
+          "bowl": [
+            [
+              "Bhuvneshwar Kumar",
+              "4",
+              "0",
+              "38",
+              "2",
+              "9.50"
+            ],
+            [
+              "Josh Hazlewood",
+              "4",
+              "0",
+              "36",
+              "1",
+              "9.00"
+            ],
+            [
+              "Rasikh Salam Dar",
+              "4",
+              "0",
+              "36",
+              "3",
+              "9.00"
+            ],
+            [
+              "Suyash Sharma",
+              "4",
+              "0",
+              "50",
+              "1",
+              "12.50"
+            ],
+            [
+              "Romario Shepherd",
+              "1",
+              "0",
+              "8",
+              "1",
+              "8.00"
+            ],
+            [
+              "Krunal Pandya",
+              "3",
+              "0",
+              "27",
+              "0",
+              "9.00"
+            ]
+          ],
+          "score": "199/8 (20 Ov)"
+        }
+      }
     },
     {
       "id": 62,
@@ -4154,14 +4395,14 @@
       "venue": "Arun Jaitley Stadium",
       "city": "Delhi",
       "rcb": false,
-      "started": false,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "started": true,
+      "ended": true,
+      "result": "Delhi Capitals won by 5 wkts",
+      "winner": "DC",
+      "t1runs": "193/8",
+      "t1ovs": "20",
+      "t2runs": "197/5",
+      "t2ovs": "19.2"
     },
     {
       "id": 63,
