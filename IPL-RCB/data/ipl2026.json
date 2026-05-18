@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-18T15:36:26.254Z",
+  "generatedAt": "2026-05-18T19:45:57.832Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4415,13 +4415,13 @@
       "city": "Chennai",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "ended": true,
+      "result": "Sunrisers Hyderabad won by 5 wkts",
+      "winner": "SRH",
+      "t1runs": "180/7",
+      "t1ovs": "20",
+      "t2runs": "181/5",
+      "t2ovs": "19"
     },
     {
       "id": 64,
