@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-19T16:48:00.031Z",
+  "generatedAt": "2026-05-19T18:56:56.705Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4434,14 +4434,13 @@
       "city": "Jaipur",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
+      "ended": true,
+      "result": "Rajasthan Royals won by 7 wkts",
+      "winner": "RR",
       "t1runs": "220/5",
       "t1ovs": "20",
       "t2runs": "75/1",
-      "t2ovs": "6.3",
-      "isLive": true
+      "t2ovs": "6.3"
     },
     {
       "id": 65,
