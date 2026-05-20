@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T16:51:37.943Z",
+  "generatedAt": "2026-05-20T19:19:03.527Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4453,13 +4453,13 @@
       "city": "Kolkata",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "ended": true,
+      "result": "Kolkata Knight Riders won by 4 wkts",
+      "winner": "KKR",
+      "t1runs": "147/8",
+      "t1ovs": "20",
+      "t2runs": "148/6",
+      "t2ovs": "18.5"
     },
     {
       "id": 66,
