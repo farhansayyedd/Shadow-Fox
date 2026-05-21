@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T16:36:21.378Z",
+  "generatedAt": "2026-05-21T18:56:07.875Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4472,14 +4472,13 @@
       "city": "Ahmedabad",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
+      "ended": true,
+      "result": "Gujarat Titans won by 89 runs",
+      "winner": "GT",
       "t1runs": "229/4",
       "t1ovs": "20",
       "t2runs": "37/3",
-      "t2ovs": "3.3",
-      "isLive": true
+      "t2ovs": "3.3"
     },
     {
       "id": 67,
