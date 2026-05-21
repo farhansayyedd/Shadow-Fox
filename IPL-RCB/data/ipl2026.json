@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T15:30:52.283Z",
+  "generatedAt": "2026-05-21T16:36:21.378Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4475,10 +4475,10 @@
       "ended": false,
       "result": "",
       "winner": "",
-      "t1runs": "113/0",
-      "t1ovs": "10.1",
-      "t2runs": "",
-      "t2ovs": "",
+      "t1runs": "229/4",
+      "t1ovs": "20",
+      "t2runs": "37/3",
+      "t2ovs": "3.3",
       "isLive": true
     },
     {
