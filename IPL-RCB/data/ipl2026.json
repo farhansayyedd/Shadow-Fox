@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T09:27:59.978Z",
+  "generatedAt": "2026-05-22T14:45:26.361Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4490,14 +4490,15 @@
       "venue": "Rajiv Gandhi International Stadium",
       "city": "Hyderabad",
       "rcb": true,
-      "started": false,
+      "started": true,
       "ended": false,
       "result": "",
       "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
+      "t1runs": "97/2",
+      "t1ovs": "8.2",
       "t2runs": "",
-      "t2ovs": ""
+      "t2ovs": "",
+      "isLive": true
     },
     {
       "id": 68,
