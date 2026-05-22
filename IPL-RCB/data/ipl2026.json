@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T16:20:25.695Z",
+  "generatedAt": "2026-05-22T19:48:02.931Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4491,13 +4491,235 @@
       "city": "Hyderabad",
       "rcb": true,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "ended": true,
+      "result": "Sunrisers Hyderabad won by 55 runs",
+      "winner": "SRH",
+      "t1runs": "255/4",
+      "t1ovs": "20",
+      "t2runs": "200/4",
+      "t2ovs": "20",
+      "scorecard": {
+        "toss": "Sunrisers hyderabad won the toss and elected to bat",
+        "inn1": {
+          "team": "SH",
+          "bat": [
+            [
+              "Abhishek Sharma",
+              "c (sub)Jordan Cox b Suyash Sharma",
+              56,
+              22,
+              4,
+              5,
+              "254.55"
+            ],
+            [
+              "Travis Head",
+              "b Rasikh Salam Dar",
+              26,
+              16,
+              5,
+              0,
+              "162.50"
+            ],
+            [
+              "Ishan Kishan",
+              "c Devdutt Padikkal b Rasikh Salam Dar",
+              79,
+              46,
+              8,
+              3,
+              "171.74"
+            ],
+            [
+              "Heinrich Klaasen",
+              "c Venkatesh Iyer b Krunal Pandya",
+              51,
+              24,
+              2,
+              5,
+              "212.50"
+            ],
+            [
+              "Nitish Kumar Reddy",
+              "not out",
+              29,
+              12,
+              1,
+              3,
+              "241.67"
+            ]
+          ],
+          "bowl": [
+            [
+              "Bhuvneshwar Kumar",
+              "4",
+              "0",
+              "51",
+              "0",
+              "12.80"
+            ],
+            [
+              "Josh Hazlewood",
+              "4",
+              "0",
+              "55",
+              "0",
+              "13.80"
+            ],
+            [
+              "Rasikh Salam Dar",
+              "4",
+              "0",
+              "52",
+              "2",
+              "13.00"
+            ],
+            [
+              "Suyash Sharma",
+              "3",
+              "0",
+              "36",
+              "1",
+              "12.00"
+            ],
+            [
+              "Romario Shepherd",
+              "3",
+              "0",
+              "37",
+              "0",
+              "12.30"
+            ],
+            [
+              "Krunal Pandya",
+              "2",
+              "0",
+              "24",
+              "1",
+              "12.00"
+            ]
+          ],
+          "score": "255/4 (20 Ov)"
+        },
+        "inn2": {
+          "team": "SHCB",
+          "bat": [
+            [
+              "Venkatesh Iyer",
+              "c Abhishek Sharma b Eshan Malinga",
+              44,
+              19,
+              4,
+              4,
+              "231.58"
+            ],
+            [
+              "Virat Kohli",
+              "c Smaran Ravichandran b Sakib Hussain",
+              15,
+              11,
+              2,
+              0,
+              "136.36"
+            ],
+            [
+              "Devdutt Padikkal",
+              "c Abhishek Sharma b Eshan Malinga",
+              21,
+              14,
+              2,
+              1,
+              "150.00"
+            ],
+            [
+              "Rajat Patidar",
+              "c Smaran Ravichandran b Travis Head",
+              56,
+              39,
+              6,
+              1,
+              "143.59"
+            ],
+            [
+              "Krunal Pandya",
+              "not out",
+              41,
+              31,
+              5,
+              0,
+              "132.26"
+            ],
+            [
+              "Tim David",
+              "not out",
+              15,
+              7,
+              1,
+              1,
+              "214.29"
+            ]
+          ],
+          "bowl": [
+            [
+              "Pat Cummins",
+              "4",
+              "0",
+              "48",
+              "0",
+              "12.00"
+            ],
+            [
+              "Eshan Malinga",
+              "4",
+              "0",
+              "33",
+              "2",
+              "8.20"
+            ],
+            [
+              "Shivang Kumar",
+              "2",
+              "0",
+              "32",
+              "0",
+              "16.00"
+            ],
+            [
+              "Sakib Hussain",
+              "4",
+              "0",
+              "31",
+              "1",
+              "7.80"
+            ],
+            [
+              "Harshal Patel",
+              "4",
+              "0",
+              "37",
+              "0",
+              "9.20"
+            ],
+            [
+              "Nitish Kumar Reddy",
+              "1",
+              "0",
+              "10",
+              "0",
+              "10.00"
+            ],
+            [
+              "Travis Head",
+              "1",
+              "0",
+              "7",
+              "1",
+              "7.00"
+            ]
+          ],
+          "score": "200/4 (20 Ov)"
+        }
+      }
     },
     {
       "id": 68,
@@ -4599,7 +4821,7 @@
       "apiId": "58ddaae3-9fa7-4110-97f8-c9ae6d80099b",
       "date": "2026-05-27",
       "time": "19:30",
-      "t1": "T",
+      "t1": "SRH",
       "t2": "T",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium",
       "city": "Mullanpur, New Chandigarh",
@@ -4618,11 +4840,11 @@
       "apiId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
       "date": "2026-05-26",
       "time": "19:30",
-      "t1": "T",
-      "t2": "T",
+      "t1": "RCB",
+      "t2": "GT",
       "venue": "Himachal Pradesh Cricket Association Stadium",
       "city": "Dharamsala",
-      "rcb": false,
+      "rcb": true,
       "started": false,
       "ended": false,
       "result": "",
