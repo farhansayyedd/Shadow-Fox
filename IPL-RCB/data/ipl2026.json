@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-23T13:27:49.877Z",
+  "generatedAt": "2026-05-23T14:56:00.169Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "NW",
+      "winner": "",
       "t1runs": "25/2",
-      "t1ovs": "3.4",
+      "t1ovs": "",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4731,7 +4731,7 @@
       "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium",
       "city": "Lucknow",
       "rcb": false,
-      "started": false,
+      "started": true,
       "ended": false,
       "result": "",
       "winner": "",
