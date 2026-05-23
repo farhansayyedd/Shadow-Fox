@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-23T14:56:00.169Z",
+  "generatedAt": "2026-05-23T18:32:45.994Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4732,13 +4732,13 @@
       "city": "Lucknow",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "ended": true,
+      "result": "Punjab Kings won by 7 wkts",
+      "winner": "PBKS",
+      "t1runs": "196/6",
+      "t1ovs": "20",
+      "t2runs": "200/3",
+      "t2ovs": "18"
     },
     {
       "id": 69,
