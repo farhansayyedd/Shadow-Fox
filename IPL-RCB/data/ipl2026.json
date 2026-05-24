@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-24T13:38:44.664Z",
+  "generatedAt": "2026-05-24T18:41:23.331Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4751,13 +4751,13 @@
       "city": "Mumbai",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "ended": true,
+      "result": "Rajasthan Royals won by 30 runs",
+      "winner": "RR",
+      "t1runs": "205/8",
+      "t1ovs": "20",
+      "t2runs": "175/9",
+      "t2ovs": "20"
     },
     {
       "id": 70,
@@ -4769,14 +4769,14 @@
       "venue": "Eden Gardens",
       "city": "Kolkata",
       "rcb": false,
-      "started": false,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "started": true,
+      "ended": true,
+      "result": "Delhi Capitals won by 40 runs",
+      "winner": "DC",
+      "t1runs": "203/5",
+      "t1ovs": "20",
+      "t2runs": "163/10",
+      "t2ovs": "18.4"
     },
     {
       "id": 999,
@@ -4822,7 +4822,7 @@
       "date": "2026-05-27",
       "time": "19:30",
       "t1": "SRH",
-      "t2": "T",
+      "t2": "RR",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium",
       "city": "Mullanpur, New Chandigarh",
       "rcb": false,
