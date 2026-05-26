@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-26T17:23:36.178Z",
+  "generatedAt": "2026-05-26T19:32:49.819Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4783,11 +4783,11 @@
       "apiId": "182d11e6-db9d-4f56-a43a-52adb7b4d42a",
       "date": "2026-05-31",
       "time": "19:30",
-      "t1": "T",
+      "t1": "RCB",
       "t2": "T",
       "venue": "Narendra Modi Stadium",
       "city": "Ahmedabad",
-      "rcb": false,
+      "rcb": true,
       "started": false,
       "ended": false,
       "result": "",
@@ -4802,7 +4802,7 @@
       "apiId": "ab13f9a8-3660-4706-91d2-c1363810415d",
       "date": "2026-05-29",
       "time": "19:30",
-      "t1": "T",
+      "t1": "GT",
       "t2": "T",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium",
       "city": "Mullanpur, New Chandigarh",
@@ -4846,14 +4846,13 @@
       "city": "Dharamsala",
       "rcb": true,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
+      "ended": true,
+      "result": "Royal Challengers Bengaluru won by 92 runs",
+      "winner": "RCB",
       "t1runs": "254/5",
       "t1ovs": "20",
       "t2runs": "67/6",
-      "t2ovs": "9.3",
-      "isLive": true
+      "t2ovs": "9.3"
     }
   ]
 }
