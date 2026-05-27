@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-27T16:58:48.260Z",
+  "generatedAt": "2026-05-27T19:27:49.596Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4827,14 +4827,13 @@
       "city": "Mullanpur, New Chandigarh",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
+      "ended": true,
+      "result": "Rajasthan Royals won by 47 runs",
+      "winner": "RR",
       "t1runs": "243/8",
       "t1ovs": "20",
       "t2runs": "87/5",
-      "t2ovs": "7.1",
-      "isLive": true
+      "t2ovs": "7.1"
     },
     {
       "id": 999,
