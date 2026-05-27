@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-27T09:53:37.791Z",
+  "generatedAt": "2026-05-27T15:45:41.018Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4826,14 +4826,15 @@
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium",
       "city": "Mullanpur, New Chandigarh",
       "rcb": false,
-      "started": false,
+      "started": true,
       "ended": false,
       "result": "",
       "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
+      "t1runs": "234/6",
+      "t1ovs": "18.2",
       "t2runs": "",
-      "t2ovs": ""
+      "t2ovs": "",
+      "isLive": true
     },
     {
       "id": 999,
