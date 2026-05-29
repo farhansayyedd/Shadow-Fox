@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-29T17:30:02.956Z",
+  "generatedAt": "2026-05-29T19:54:02.494Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -4808,14 +4808,13 @@
       "city": "Mullanpur, New Chandigarh",
       "rcb": false,
       "started": true,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "194/6",
-      "t1ovs": "19.2",
-      "t2runs": "",
-      "t2ovs": "",
-      "isLive": true
+      "ended": true,
+      "result": "Gujarat Titans won by 7 wkts",
+      "winner": "GT",
+      "t1runs": "214/6",
+      "t1ovs": "20",
+      "t2runs": "219/3",
+      "t2ovs": "18.4"
     },
     {
       "id": 999,
