@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-30T15:01:36.615Z",
+  "generatedAt": "2026-05-30T19:18:08.465Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4784,7 +4784,7 @@
       "date": "2026-05-31",
       "time": "19:30",
       "t1": "RCB",
-      "t2": "T",
+      "t2": "GT",
       "venue": "Narendra Modi Stadium",
       "city": "Ahmedabad",
       "rcb": true,
