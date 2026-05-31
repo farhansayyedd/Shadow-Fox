@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-31T13:47:04.960Z",
+  "generatedAt": "2026-05-31T19:11:55.892Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -752,9 +752,9 @@
       "started": true,
       "ended": true,
       "result": "No result (due to rain)",
-      "winner": "",
+      "winner": "NW",
       "t1runs": "25/2",
-      "t1ovs": "",
+      "t1ovs": "3.4",
       "t2runs": "",
       "t2ovs": ""
     },
@@ -4788,14 +4788,274 @@
       "venue": "Narendra Modi Stadium",
       "city": "Ahmedabad",
       "rcb": true,
-      "started": false,
-      "ended": false,
-      "result": "",
-      "winner": "",
-      "t1runs": "",
-      "t1ovs": "",
-      "t2runs": "",
-      "t2ovs": ""
+      "started": true,
+      "ended": true,
+      "result": "Royal Challengers Bengaluru won by 5 wkts",
+      "winner": "RCB",
+      "t1runs": "155/8",
+      "t1ovs": "20",
+      "t2runs": "161/5",
+      "t2ovs": "18",
+      "scorecard": {
+        "toss": "Royal challengers bengaluru won the toss and elected to bowl",
+        "inn1": {
+          "team": "GT",
+          "bat": [
+            [
+              "Sai Sudharsan",
+              "c Jitesh Sharma b Bhuvneshwar Kumar",
+              12,
+              12,
+              2,
+              0,
+              "100.00"
+            ],
+            [
+              "Shubman Gill",
+              "c Rajat Patidar b Josh Hazlewood",
+              10,
+              8,
+              2,
+              0,
+              "125.00"
+            ],
+            [
+              "Nishant Sindhu",
+              "c Devdutt Padikkal b Rasikh Salam Dar",
+              20,
+              18,
+              3,
+              0,
+              "111.11"
+            ],
+            [
+              "Jos Buttler",
+              "st Jitesh Sharma b Krunal Pandya",
+              19,
+              23,
+              1,
+              0,
+              "82.61"
+            ],
+            [
+              "Washington Sundar",
+              "not out",
+              50,
+              37,
+              5,
+              0,
+              "135.14"
+            ],
+            [
+              "Arshad Khan",
+              "c Rasikh Salam Dar b Josh Hazlewood",
+              15,
+              6,
+              0,
+              2,
+              "250.00"
+            ],
+            [
+              "Rahul Tewatia",
+              "c Rajat Patidar b Rasikh Salam Dar",
+              7,
+              5,
+              1,
+              0,
+              "140.00"
+            ],
+            [
+              "Jason Holder",
+              "c Josh Hazlewood b Bhuvneshwar Kumar",
+              7,
+              5,
+              1,
+              0,
+              "140.00"
+            ],
+            [
+              "Rashid Khan",
+              "c Romario Shepherd b Rasikh Salam Dar",
+              7,
+              3,
+              0,
+              1,
+              "233.33"
+            ],
+            [
+              "Kagiso Rabada",
+              "not out",
+              3,
+              3,
+              0,
+              0,
+              "100.00"
+            ]
+          ],
+          "bowl": [
+            [
+              "Jacob Duffy",
+              "4",
+              "0",
+              "38",
+              "0",
+              "9.50"
+            ],
+            [
+              "Bhuvneshwar Kumar",
+              "4",
+              "0",
+              "29",
+              "2",
+              "7.20"
+            ],
+            [
+              "Josh Hazlewood",
+              "4",
+              "0",
+              "37",
+              "2",
+              "9.20"
+            ],
+            [
+              "Rasikh Salam Dar",
+              "4",
+              "0",
+              "27",
+              "3",
+              "6.80"
+            ],
+            [
+              "Krunal Pandya",
+              "4",
+              "0",
+              "23",
+              "1",
+              "5.80"
+            ]
+          ],
+          "score": "155/8 (20 Ov)"
+        },
+        "inn2": {
+          "team": "RCB",
+          "bat": [
+            [
+              "Venkatesh Iyer",
+              "c Kagiso Rabada b Mohammed Siraj",
+              32,
+              16,
+              4,
+              2,
+              "200.00"
+            ],
+            [
+              "Virat Kohli",
+              "not out",
+              75,
+              42,
+              9,
+              3,
+              "178.57"
+            ],
+            [
+              "Devdutt Padikkal",
+              "c Arshad Khan b Kagiso Rabada",
+              1,
+              4,
+              0,
+              0,
+              "25.00"
+            ],
+            [
+              "Rajat Patidar",
+              "c Kagiso Rabada b Rashid Khan",
+              15,
+              13,
+              1,
+              1,
+              "115.38"
+            ],
+            [
+              "Krunal Pandya",
+              "lbw b Rashid Khan",
+              1,
+              2,
+              0,
+              0,
+              "50.00"
+            ],
+            [
+              "Tim David",
+              "c Jos Buttler b Arshad Khan",
+              24,
+              17,
+              3,
+              1,
+              "141.18"
+            ],
+            [
+              "Jitesh Sharma",
+              "not out",
+              11,
+              14,
+              1,
+              0,
+              "78.57"
+            ]
+          ],
+          "bowl": [
+            [
+              "Mohammed Siraj",
+              "4",
+              "0",
+              "36",
+              "1",
+              "9.00"
+            ],
+            [
+              "Kagiso Rabada",
+              "3",
+              "0",
+              "44",
+              "1",
+              "14.70"
+            ],
+            [
+              "Jason Holder",
+              "2",
+              "0",
+              "16",
+              "0",
+              "8.00"
+            ],
+            [
+              "Rashid Khan",
+              "4",
+              "0",
+              "25",
+              "2",
+              "6.20"
+            ],
+            [
+              "Arshad Khan",
+              "4",
+              "0",
+              "32",
+              "1",
+              "8.00"
+            ],
+            [
+              "Prasidh Krishna",
+              "1",
+              "0",
+              "7",
+              "0",
+              "7.00"
+            ]
+          ],
+          "score": "161/5 (18 Ov)"
+        }
+      }
     },
     {
       "id": 999,
