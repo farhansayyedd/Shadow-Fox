@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-03T20:57:02.812Z",
+  "generatedAt": "2026-06-03T21:34:31.129Z",
   "seriesName": "Indian Premier League 2026",
   "totalMatches": 74,
   "matches": [
@@ -5078,25 +5078,6 @@
     },
     {
       "id": 999,
-      "apiId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
-      "date": "2026-05-26",
-      "time": "19:30",
-      "t1": "RCB",
-      "t2": "GT",
-      "venue": "Himachal Pradesh Cricket Association Stadium",
-      "city": "Dharamsala",
-      "rcb": true,
-      "started": true,
-      "ended": true,
-      "result": "Royal Challengers Bengaluru won by 92 runs",
-      "winner": "RCB",
-      "t1runs": "254/5",
-      "t1ovs": "20",
-      "t2runs": "67/6",
-      "t2ovs": "9.3"
-    },
-    {
-      "id": 999,
       "apiId": "58ddaae3-9fa7-4110-97f8-c9ae6d80099b",
       "date": "2026-05-27",
       "time": "19:30",
@@ -5113,6 +5094,25 @@
       "t1ovs": "20",
       "t2runs": "87/5",
       "t2ovs": "7.1"
+    },
+    {
+      "id": 999,
+      "apiId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+      "date": "2026-05-26",
+      "time": "19:30",
+      "t1": "RCB",
+      "t2": "GT",
+      "venue": "Himachal Pradesh Cricket Association Stadium",
+      "city": "Dharamsala",
+      "rcb": true,
+      "started": true,
+      "ended": true,
+      "result": "Royal Challengers Bengaluru won by 92 runs",
+      "winner": "RCB",
+      "t1runs": "254/5",
+      "t1ovs": "20",
+      "t2runs": "67/6",
+      "t2ovs": "9.3"
     }
   ]
 }
