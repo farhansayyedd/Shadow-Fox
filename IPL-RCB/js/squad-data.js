@@ -375,7 +375,7 @@ const RCB_SQUADS = {
   2026: {
     captain: "Rajat Patidar",
     coach: "Andy Flower",
-    finish: "Defending Champions — Season Ongoing",
+    finish: "🏆 IPL 2026 Champions",
     players: [
       { name: "Rajat Patidar", role: "Batsman", country: "India", captain: true, image: "https://www.royalchallengers.com/PRRCB01/public/styles/s/public/2026-03/rajat.png?itok=1rBGxE2K" },
       { name: "Virat Kohli", role: "Batsman", country: "India", image: "https://www.royalchallengers.com/PRRCB01/public/styles/s/public/2026-03/virat.png?itok=gLKCBlX6" },

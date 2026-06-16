@@ -29,6 +29,20 @@ var COLORS = {
 function teamColor(t) { return COLORS[t] || '#666'; }
 function teamLogo(t)  { return LOGOS[t] || ''; }
 
+/* ─── Playoff label logic ─── */
+var PLAYOFF_LABELS = {
+  '2026-05-26': 'QUALIFIER 1',
+  '2026-05-27': 'ELIMINATOR',
+  '2026-05-29': 'QUALIFIER 2',
+  '2026-05-31': 'FINAL'
+};
+function matchLabel(m) {
+  if (m.id === 999) {
+    return PLAYOFF_LABELS[m.date] || 'PLAYOFF';
+  }
+  return 'MATCH ' + m.id;
+}
+
 /* ─── DateTime ─── */
 function matchDT(m) {
   return new Date(m.date + 'T' + m.time + ':00+05:30');
@@ -147,7 +161,7 @@ function buildCard(m) {
 
   return '<div class="' + cls + '"' + onclk + '>'
     + '<div class="fx-top-row">'
-    +   '<div class="fx-match-num">MATCH ' + m.id + ' &mdash; IPL 2026</div>'
+    +   '<div class="fx-match-num">' + matchLabel(m) + ' &mdash; IPL 2026</div>'
     +   '<div class="fx-badges">' + badges + '</div>'
     + '</div>'
     + '<div class="fx-body">'
