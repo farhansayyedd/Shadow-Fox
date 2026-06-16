@@ -440,7 +440,7 @@ const SEASON_STANDINGS = [
   { year: 2023, pos: 6, played: 14, won: 7, lost: 7, nrr: "+0.135", result: "League Stage" },
   { year: 2024, pos: 4, played: 16, won: 8, lost: 6, nrr: "+0.387", result: "Playoffs" },
   { year: 2025, pos: 1, played: 17, won: 11, lost: 4, nrr: "+0.921", result: "Champion" },
-  { year: 2026, pos: null, played: 1, won: 1, lost: 0, nrr: "+2.100", result: "Ongoing" }
+  { year: 2026, pos: 1, played: 16, won: 9, lost: 5, nrr: "+0.783", result: "Champion" }
 ];
 
 // Jersey data
